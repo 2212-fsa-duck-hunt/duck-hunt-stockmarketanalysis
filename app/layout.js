@@ -1,4 +1,7 @@
-import './globals.css'
+import './globals.css';
+import { Provider } from 'react';
+
+//this layout applies to EVERYTHING!!! you can add the navbar and stuff here haha
 
 export const metadata = {
   title: 'Create Next App',
@@ -8,7 +11,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <nav>
+          hey im the nav bar!
+        </nav>
+        <Provider store={store}>
+          {children}
+        </Provider>
+      </body>
     </html>
   )
 }
