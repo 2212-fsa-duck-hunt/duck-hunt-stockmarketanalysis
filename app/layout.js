@@ -1,5 +1,6 @@
 import './globals.css';
 // import { Provider } from 'react';
+import Navbar from './navbar';
 
 //this layout applies to EVERYTHING!!! you can add the navbar and stuff here haha
 
@@ -13,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <nav>
-          hey im the nav bar!
+          <Navbar />
         </nav>
         {/* <Provider store={store}> */}
         {children}
