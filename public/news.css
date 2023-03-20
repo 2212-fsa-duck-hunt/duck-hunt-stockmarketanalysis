@@ -1,9 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Poppins:wght@400;800&display=swap" rel="stylesheet');
+
 
 * {
     font-family: 'Poppins', sans-serif;
 }
 
-#newstitle {
+.sec {
+    position: relative;
+    background: #110F20;
     padding: 100px
+}
+
+.sec h2 {
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.sec h3 {
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+.newsbox {
+    display: flex;
+    flex-direction: column;
+}
+
+.sec p {
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+    font-family: "Poppins";
+}
+
+.picture {
+    max-width: 300px;
+    max-height: 200px;
 }

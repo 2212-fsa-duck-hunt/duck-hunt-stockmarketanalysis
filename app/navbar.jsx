@@ -17,10 +17,10 @@ import InputBase from '@mui/material/InputBase';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SearchIcon from '@mui/icons-material/Search';
+import "../public/home.css"
 
-
-const pages = ['Customize', 'Tasks'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['All Stocks', 'S&P 500', 'News', 'About'];
+const settings = ['Profile', 'Account', 'Watchlist', 'Logout'];
 
 function Navbar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
