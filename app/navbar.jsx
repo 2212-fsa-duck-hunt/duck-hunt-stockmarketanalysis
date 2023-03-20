@@ -18,6 +18,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SearchIcon from '@mui/icons-material/Search';
 
+
 const pages = ['Customize', 'Tasks'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -63,13 +64,13 @@ function Navbar() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontFamily: 'Poppins'
     }));
 
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
         color: 'inherit',
         '& .MuiInputBase-input': {
             padding: theme.spacing(1, 1, 1, 0),
-            // vertical padding + font size from searchIcon
             paddingLeft: `calc(1em + ${theme.spacing(4)})`,
             transition: theme.transitions.create('width'),
             width: '100%',
@@ -83,7 +84,7 @@ function Navbar() {
     }));
 
     return (
-        <AppBar position="static" style={{ background: '#231F20' }}>
+        <AppBar position="static" style={{ background: '#282736' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters >
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -95,14 +96,14 @@ function Navbar() {
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
+                            fontFamily: 'Poppins',
+                            fontWeight: 500,
                             letterSpacing: '.3rem',
                             color: 'white',
                             textDecoration: 'none',
                         }}
                     >
-                        DuckHuntSMA
+                        Duckhunt
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -113,6 +114,7 @@ function Navbar() {
                             aria-haspopup="true"
                             onClick={handleOpenNavMenu}
                             color="inherit"
+                            fontFamily='arial'
                         >
                             <MenuIcon />
                         </IconButton>
@@ -151,7 +153,7 @@ function Navbar() {
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
-                            fontFamily: 'monospace',
+                            fontFamily: 'arial',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
@@ -166,7 +168,7 @@ function Navbar() {
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
                             >
                                 {page}
                             </Button>
@@ -179,12 +181,13 @@ function Navbar() {
                         <StyledInputBase
                             placeholder="Search…"
                             inputProps={{ 'aria-label': 'search' }}
+                            fontFamily="Poppins"
                         />
                     </Search>
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt="Remy Sharp" />
                             </IconButton>
                         </Tooltip>
                         <Menu
@@ -205,7 +208,7 @@ function Navbar() {
                         >
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
+                                    <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">{setting}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
