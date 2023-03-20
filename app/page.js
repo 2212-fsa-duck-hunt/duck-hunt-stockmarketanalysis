@@ -17,21 +17,21 @@ export default function Home() {
     let value = window.scrollY;
 
     let text = document.getElementById('text');
-    let leaf = document.getElementById('leaf');
+    // let leaf = document.getElementById('leaf');
     let hill1 = document.getElementById('hill1');
     let hill4 = document.getElementById('hill4');
     let hill5 = document.getElementById('hill5');
 
 
     let hill2 = document.getElementById('hill2');
-    let line = document.getElementById('line');
-    line.style.top = value * -1.5 + 'px';
-    hill2.style.top = value * 1 + 'px'
+    // let line = document.getElementById('line');
+    // line.style.top = value * -1.5 + 'px';
+    // hill2.style.top = value * 1 + 'px'
 
 
     text.style.marginTop = value * 2.5 + 'px';
-    leaf.style.marginTop = value * -1.5 + 'px';
-    leaf.style.left = value * 1.5 + 'px';
+    // leaf.style.marginTop = value * -1.5 + 'px';
+    // leaf.style.left = value * 1.5 + 'px';
 
     hill5.style.left = value * 1.5 + 'px';
     hill4.style.left = value * -1.5 + 'px';
@@ -46,14 +46,14 @@ export default function Home() {
       <div className="lol">
         <section className="parallax">
           <img src="hill1.png" id="hill1"></img>
-          <img src="hill2.png" id="hill2"></img>
+          {/* <img src="hill2.png" id="hill2"></img> */}
           <img src="hill3.png" id="hill3"></img>
           <img src="hill4.png" id="hill4"></img>
           <img src="hill5.png" id="hill5"></img>
           <img src="tree.png" id="tree"></img>
-          <img src="leaf.png" id="leaf"></img>
+          {/* <img src="leaf.png" id="leaf"></img> */}
           <img src="plant.png" id="plant"></img>
-          <img src="line.png" id="line"></img>
+          {/* <img src="line.png" id="line"></img> */}
           {/* <img src="candle.png" id="candle"></img> */}
           <h2 id="text"> Duck Hunt </h2>
         </section>
