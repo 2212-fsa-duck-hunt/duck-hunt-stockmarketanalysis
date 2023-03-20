@@ -1,6 +1,10 @@
+import "../../public/news.css"
+
 export default function News() {
 
     return (<div>
-        <h1> all news for sure. it goes to the route /news </h1>
+        <section>
+            <h1 id="newstitle"> News Site </h1>
+        </section>
     </div>)
 }

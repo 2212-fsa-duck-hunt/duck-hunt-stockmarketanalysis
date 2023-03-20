@@ -12,7 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 export default function AboveBar() {
     return (
         <Box sx={{ height: 20 }}>
-            <AppBar position="static" style={{ background: "#110f20" }}>
+            <AppBar position="static" style={{ background: "#282736" }}>
                 <Toolbar>
                     <Typography component="div" sx={{ flexGrow: 1 }}>
                     </Typography>

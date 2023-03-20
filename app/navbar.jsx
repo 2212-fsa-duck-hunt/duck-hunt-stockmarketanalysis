@@ -84,7 +84,7 @@ function Navbar() {
     }));
 
     return (
-        <AppBar position="static" style={{ background: '#282736' }}>
+        <AppBar position="static" style={{ background: '#110f20' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters >
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -174,7 +174,7 @@ function Navbar() {
                             </Button>
                         ))}
                     </Box>
-                    <Search>
+                    <Search sx={{ margin: 4 }}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
