@@ -17,7 +17,8 @@ import InputBase from '@mui/material/InputBase';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SearchIcon from '@mui/icons-material/Search';
-import "../public/home.css"
+import "../public/home.css";
+import Router, { useRouter } from 'next/navigation';
 
 const pages = ['All Stocks', 'S&P 500', 'News', 'About'];
 const settings = ['Profile', 'Account', 'Watchlist', 'Logout'];
@@ -25,6 +26,7 @@ const settings = ['Profile', 'Account', 'Watchlist', 'Logout'];
 function Navbar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const router = useRouter();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -33,9 +35,26 @@ function Navbar() {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
+    const handleCloseNavMenu = (event) => {
         setAnchorElNav(null);
     };
+
+    const handleCloseNavMenuAllStocks = () => {
+        setAnchorElNav(null);
+        router.push('/stocks')
+    };
+    const handleCloseNavMenuSP500 = () => {
+        setAnchorElNav(null);
+        // router.push('/sp')
+    };
+    const handleCloseNavMenuNews = () => {
+        setAnchorElNav(null);
+        router.push('/news')
+    };
+    const handleCloseNavMenuAbout = () => {
+        setAnchorElNav(null);
+    };
+
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
@@ -164,15 +183,30 @@ function Navbar() {
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
-                            >
-                                {page}
-                            </Button>
-                        ))}
+                        <Button
+                            onClick={handleCloseNavMenuAllStocks}
+                            sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
+                        >
+                            All Stocks
+                        </Button>
+                        <Button
+                            onClick={handleCloseNavMenuSP500}
+                            sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
+                        >
+                            S&P 500
+                        </Button>
+                        <Button
+                            onClick={handleCloseNavMenuNews}
+                            sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
+                        >
+                            News
+                        </Button>
+                        <Button
+                            onClick={handleCloseNavMenuAbout}
+                            sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
+                        >
+                            About
+                        </Button>
                     </Box>
                     <Search sx={{ margin: 4 }}>
                         <SearchIconWrapper>
