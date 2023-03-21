@@ -18,17 +18,34 @@
 }
 
 .lol {
-    background: #110f20;
+    background: #11071A;
     min-height: 100vh;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
-.parallax {
+/* .parallax {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh
+} */
+
+.parallax {
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 80vh
+}
+
+#video {
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 #text {
@@ -40,17 +57,17 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4)
 }
 
-.parallax img {
+/* .parallax img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     pointer-events: none;
-}
+} */
 
 .sec {
     position: relative;
-    background: #110F20;
+    background: #11071A;
     padding: 100px
 }
 
@@ -72,4 +89,84 @@
     color: #fff;
     font-weight: 300;
     font-family: "Poppins";
+}
+
+/* scroller information */
+.scroller {
+    height: 3.6em;
+    line-height: 3.6em;
+    position: relative;
+    overflow: hidden;
+    font-weight: 300;
+    color: #fff;
+}
+
+.scroller>h2>span {
+    position: absolute;
+    top: 0;
+    animation: slide 10s infinite;
+    font-weight: bold;
+
+}
+
+@keyframes slide {
+    0% {
+        top: 0;
+    }
+
+    25% {
+        top: -1.2em;
+    }
+
+    50% {
+        top: -2.4em;
+    }
+
+    75% {
+        top: -3.6em;
+    }
+}
+
+/* scrolling thing */
+
+
+.ticker-title {
+    width: 2500px;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #065b70;
+    position: relative;
+    background-color: #210817;
+}
+
+.ticker-title>* {
+    display: inline-block;
+    margin-right: 50px;
+    animation: title 6s infinite linear;
+}
+
+@keyframes title {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-233px);
+    }
+}
+
+/* box with stuff */
+.boxman {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
