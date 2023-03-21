@@ -12,6 +12,9 @@ import {
   Link
 } from "@mui/material";
 
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+
 import { useState, useEffect } from "react";
 
 // async function getStocks() {
@@ -174,8 +177,14 @@ export default function SP500() {
                   <TableRow key={data.name}>
                     <TableCell>{data.name}</TableCell>
                     <TableCell>{data.symbol}</TableCell>
-                    <TableCell>{data.day}</TableCell>
-                    <TableCell>{data.month}</TableCell>
+                    <TableCell>
+                      <ArrowDropUpIcon color="success" />
+                      {data.day}
+                    </TableCell>
+                    <TableCell>
+                      <ArrowDropDownIcon color="error" />
+                      {data.month}
+                    </TableCell>
                     <TableCell>{data.year}</TableCell>
                     <TableCell>{data.prediction}</TableCell>
                     <TableCell>

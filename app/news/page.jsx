@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { useEffect } from "react";
-import { useState } from "react";
-import "../../public/news.css"
-import NewsElement from "./NewsElement";
+// import { useEffect } from "react";
+// import { useState } from "react";
+// import "../../public/news.css"
+// import NewsElement from "./NewsElement";
 
-export default function News() {
-    const [data, setData] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+// export default function News() {
+//     const [data, setData] = useState(null);
+//     const [isLoading, setIsLoading] = useState(false);
 
     // useEffect(() => {
     //     setIsLoading(true);
@@ -20,25 +20,25 @@ export default function News() {
     // }, [])
     console.log("data is ====>:", data);
 
-    if (!data) {
-        return (<div>
-            <section className="sec">
-                <h3 id> News </h3>
-                <p id>
-                    I'M NULL AND LOADING
-                </p>
-            </section>
-        </div>)
+//     if (!data) {
+//         return (<div>
+//             <section className="sec">
+//                 <h3 id> News </h3>
+//                 <p id>
+//                     I'M NULL AND LOADING
+//                 </p>
+//             </section>
+//         </div>)
 
-    } else
-        return (<div>
-            <section className="sec">
-                <h3 id> News </h3>
-                <p id>
-                    {data.map((singledata) => {
-                        return <NewsElement key={singledata.uuid} data={singledata}></NewsElement>
-                    })}
-                </p>
-            </section>
-        </div>)
-}
+//     } else
+//         return (<div>
+//             <section className="sec">
+//                 <h3 id> News </h3>
+//                 <p id>
+//                     {data.map((singledata) => {
+//                         return <NewsElement key={singledata.uuid} data={singledata}></NewsElement>
+//                     })}
+//                 </p>
+//             </section>
+//         </div>)
+// }
