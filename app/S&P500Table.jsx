@@ -9,6 +9,7 @@ import {
   Paper,
   Box,
   TablePagination,
+  Link
 } from "@mui/material";
 
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
@@ -113,10 +114,16 @@ const dummyData = [
   },
 ];
 
+let tempWatchlist = [];
+
 export default function SP500() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   // const [stock, setStock] = useState({});
+
+  if (localStorage.watchlist) {
+    tempWatchlist = JSON.parse(localStorage.watchlist);
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -180,7 +187,24 @@ export default function SP500() {
                     </TableCell>
                     <TableCell>{data.year}</TableCell>
                     <TableCell>{data.prediction}</TableCell>
-                    <TableCell>Add</TableCell>
+                    <TableCell>
+                      <Link component="button" onClick={() => {
+                        if (tempWatchlist.length > 4) {
+                          alert("Watchlist is full");
+                          return;
+                        }
+                        if (tempWatchlist.includes(data.symbol)) {
+                          alert(`Watchlist already contains ${data.name}`);
+                          return;
+                        }
+                        else {
+                          tempWatchlist.push(data.symbol);
+                          localStorage.watchlist = JSON.stringify(tempWatchlist);
+                        }
+                        }}>
+                        Add
+                      </Link>
+                      </TableCell>
                   </TableRow>
                 );
               })}

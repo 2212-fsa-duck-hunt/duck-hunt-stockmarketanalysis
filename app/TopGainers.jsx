@@ -8,6 +8,7 @@ import {
   Paper,
   TablePagination,
   Box,
+  Link
 } from "@mui/material";
 
 import { useState } from "react";
@@ -109,6 +110,8 @@ const dummyData = [
   },
 ];
 
+let tempWatchlist = [];
+
 export default function TopGainers() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -117,6 +120,10 @@ export default function TopGainers() {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+
+  if (localStorage.watchlist) {
+    tempWatchlist = JSON.parse(localStorage.watchlist);
+  }
 
   // useEffect(() => {
   //   if (!stock.status) {
@@ -170,7 +177,23 @@ export default function TopGainers() {
                     <TableCell>{data.month}</TableCell>
                     <TableCell>{data.year}</TableCell>
                     <TableCell>{data.prediction}</TableCell>
-                    <TableCell>Add</TableCell>
+                    <TableCell>                      
+                      <Link component="button" onClick={() => {
+                        if (tempWatchlist.length > 4) {
+                          alert("Watchlist is full");
+                          return;
+                        }
+                        if (tempWatchlist.includes(data.symbol)) {
+                          alert(`Watchlist already contains ${data.name}`);
+                          return;
+                        }
+                        else {
+                          tempWatchlist.push(data.symbol);
+                          localStorage.watchlist = JSON.stringify(tempWatchlist);
+                        }
+                        }}>
+                        Add
+                      </Link></TableCell>
                   </TableRow>
                 );
               })}
