@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <nav>
-          <AboveBar />
+          {/* <AboveBar /> */}
           <Navbar />
         </nav>
         {/* <Provider store={store}> */}

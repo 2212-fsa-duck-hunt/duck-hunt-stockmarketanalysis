@@ -103,7 +103,7 @@ function Navbar() {
     }));
 
     return (
-        <AppBar position="static" style={{ background: '#110f20' }}>
+        <AppBar position="static" style={{ background: '#11071B' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters >
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
