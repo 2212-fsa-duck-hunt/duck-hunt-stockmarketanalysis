@@ -9,15 +9,15 @@ export default function News() {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        setIsLoading(true);
-        fetch('https://api.marketaux.com/v1/news/all?api_token=HwI5202Keu1pQVePGqGXMunm5suTSsy1chdEVb17')
-            .then((res) => res.json())
-            .then((data) => {
-                setData(data.data)
-                setIsLoading(false)
-            })
-    }, [])
+    // useEffect(() => {
+    //     setIsLoading(true);
+    //     fetch('https://api.marketaux.com/v1/news/all?api_token=HwI5202Keu1pQVePGqGXMunm5suTSsy1chdEVb17')
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             setData(data.data)
+    //             setIsLoading(false)
+    //         })
+    // }, [])
     console.log("data is ====>:", data);
 
     if (!data) {
