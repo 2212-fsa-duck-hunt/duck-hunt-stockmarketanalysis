@@ -1,12 +1,6 @@
-"use client"
-import StockVisualization from '../../StockVisualization';
+export default function SingleStock() {
 
-const AppViz = () => {
-    return (
-      <div>
-        <StockVisualization />
-      </div>
-    );
-  };
-  
-export default AppViz;
+    return (<div>
+        <h1> singlestock </h1>
+    </div>)
+}
