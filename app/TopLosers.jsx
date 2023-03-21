@@ -120,7 +120,7 @@ export default function TopLosers() {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  
+
   if (localStorage.watchlist) {
     tempWatchlist = JSON.parse(localStorage.watchlist);
   }
@@ -179,7 +179,7 @@ export default function TopLosers() {
                     <TableCell>{data.prediction}</TableCell>
                     <TableCell>                      
                       <Link component="button" onClick={() => {
-                        if (tempWatchlist.length > 10) {
+                        if (tempWatchlist.length > 4) {
                           alert("Watchlist is full");
                           return;
                         }

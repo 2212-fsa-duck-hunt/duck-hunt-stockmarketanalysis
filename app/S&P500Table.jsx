@@ -180,7 +180,7 @@ export default function SP500() {
                     <TableCell>{data.prediction}</TableCell>
                     <TableCell>
                       <Link component="button" onClick={() => {
-                        if (tempWatchlist.length > 10) {
+                        if (tempWatchlist.length > 4) {
                           alert("Watchlist is full");
                           return;
                         }
@@ -192,8 +192,6 @@ export default function SP500() {
                           tempWatchlist.push(data.symbol);
                           localStorage.watchlist = JSON.stringify(tempWatchlist);
                         }
-
-
                         }}>
                         Add
                       </Link>

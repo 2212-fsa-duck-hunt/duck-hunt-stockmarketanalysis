@@ -1,6 +1,6 @@
+"use client"
 
-
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
 const columns = [
@@ -13,7 +13,7 @@ const columns = [
   { field: "volume", headerName: "Volume", type: "number", width: 200 },
 ];
 
-const rows = [
+const dummyRows = [
   {
     id: 1,
     symbol: "IBM",
@@ -97,98 +97,79 @@ const rows = [
   },
 ];
 
-// let rows2 = [];
+const APIkeys = [
+  "RZJQXAG8821I0VLQ",
+  "UIM79FIZX37HH3NH",
+  "E126YXAY0QM8RHBW",
+  "UIRU4XA3796E26II",
+  "DJFJZTCD7MV7JUDK",
+  "3JA2XRZXYFT9JAEQ",
+  "ZCBP5TEF90WF7UKZ",
+  "4L2GCTYG7M99S6GB",
+  "Y5EZRQP3F7QMJKN0",
+];
 
-// async function fetchData(symbol) {
-//   const res = await fetch(
-//     `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&apikey=RZJQXAG8821I0VLQ`
-//   );
-
-//   if (!res.ok) {
-//     // This will activate the closest `error.js` Error Boundary
-//     throw new Error("Failed to fetch data");
-//   }
-
-//   return res.json();
-// }
-// async function fetchData2(symbol) {
-//   const res = await fetch(
-//     `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&apikey=UIM79FIZX37HH3NH`
-//   );
-
-//   if (!res.ok) {
-//     // This will activate the closest `error.js` Error Boundary
-//     throw new Error("Failed to fetch data");
-//   }
-
-//   return res.json();
-// }
-
-
+const watchlistSymbols = JSON.parse(localStorage.watchlist);
 
 
 export default function DataTable() {
 
-  // if (!localStorage.watchlist) {
-  //   rows2 = [];
-  // } else {
-  //   const watchlistSymbols = JSON.parse(localStorage.watchlist);
+  const [watchlist, setWatchlist] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  //   watchlistSymbols.map(async (stock, idx) => {
-  //     if (idx > 5) {
-  //       let data = await fetchData(stock);
+  useEffect(() => {
+    if (watchlist.length) {
+      fetchData();
+    }
+  }, [])
 
-  //       let yourDate = new Date();
-  //       yourDate.toISOString().split("T")[0];
-  //       const offset = yourDate.getTimezoneOffset();
-  //       yourDate = new Date(yourDate.getTime() - offset * 60 * 1000);
+  const fetchData = async () => {
+    let tempWatchlist = [];
 
-  //       let stockInfo =
-  //         data["Time Series (Daily)"][yourDate.toISOString().split("T")[0]];
-  //       console.log(data);
-  //       if (stockInfo) {
-  //         stock = {
-  //           id: idx,
-  //           symbol: data["Meta Data"].Symbol,
-  //           open: stockInfo.open,
-  //           high: stockInfo.high,
-  //           low: stockInfo.low,
-  //           close: stockInfo.close,
-  //           volume: stockInfo.volume,
-  //         };
-  //       }
-  //     } else {
-  //       let data = await fetchData2(stock);
+    let yourDate = new Date();
+    yourDate.toISOString().split("T")[0];
+    const offset = yourDate.getTimezoneOffset();
+    yourDate = new Date(yourDate.getTime() - offset * 60 * 1000);
 
-  //       let yourDate = new Date();
-  //       yourDate.toISOString().split("T")[0];
-  //       const offset = yourDate.getTimezoneOffset();
-  //       yourDate = new Date(yourDate.getTime() - offset * 60 * 1000);
+    for (let i = 0; i < watchlistSymbols.length; i++) {
+      await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${watchlistSymbols[i]}&apikey=${APIkeys[i]}`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("data-------", data);
+              let stockInfo =
+                data["Time Series (Daily)"][yourDate.toISOString().split("T")[0]];
+              console.log("stockInfo-----", stockInfo);
+              let stock = {
+                id: i + 1,
+                symbol: data["Meta Data"]["2. Symbol"],
+                open: stockInfo["1. open"],
+                high: stockInfo["2. high"],
+                low: stockInfo["3. low"],
+                close: stockInfo["4. close"],
+                volume: stockInfo["6. volume"],
+              };
+              tempWatchlist.push(stock);
+            })
+    }
+    console.log("watchlist------", tempWatchlist)
+    setWatchlist(tempWatchlist);
+    setIsLoading(false);
+  };
 
-  //       let stockInfo =
-  //         data["Time Series (Daily)"][yourDate.toISOString().split("T")[0]];
-
-  //       stock = {
-  //         id: idx,
-  //         symbol: data["Meta Data"].Symbol,
-  //         open: stockInfo.open,
-  //         high: stockInfo.high,
-  //         low: stockInfo.low,
-  //         close: stockInfo.close,
-  //         volume: stockInfo.volume,
-  //       };
-  //     }
-  //   });
-  // }
-
+  if (isLoading) {
     return (
-      <div style={{ height: 600, width: "100%", margin: "auto" }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          checkboxSelection
-          hideFooterPagination
-        />
-      </div>
-    );
+      <div>Loading...</div>
+    )
+  }
+
+  return (
+    <div style={{ height: 600, width: "100%", margin: "auto" }}>
+      <DataGrid
+        rows={watchlist}
+        columns={columns}
+        checkboxSelection
+        hideFooterPagination
+      />
+    </div>
+  );
 }
