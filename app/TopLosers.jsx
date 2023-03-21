@@ -13,13 +13,17 @@ import {
 import { useState } from "react";
 
 // async function getStocks() {
-//   const res = await fetch("");
+//   const res = await fetch(
+//     "https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2023-01-09/2023-01-09?adjusted=true&sort=asc&limit=120&apiKey=zvIUoDFvdzsmXDT5O433FWNsfmzd5sKD"
+//   );
 
 //   if (!res.ok) {
 //     throw new Error("Failed to fetch data");
 //   }
 
-//   return res.json();
+//   const result = await res.json();
+
+//   return result;
 // }
 
 const dummyData = [
@@ -108,10 +112,22 @@ const dummyData = [
 export default function TopLosers() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  // const [stock, setStock] = useState({});
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+
+  // useEffect(() => {
+  //   if (!stock.status) {
+  //     const fetchStocks = async () => {
+  //       const stocks = await getStocks();
+  //       setStock(stocks);
+  //     };
+  //     fetchStocks();
+  //   }
+  //   console.log("STOCKS:", stock);
+  // }, [stock]);
 
   return (
     <Box>
