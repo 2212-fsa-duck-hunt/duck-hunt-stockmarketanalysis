@@ -121,9 +121,12 @@ export default function SP500() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   // const [stock, setStock] = useState({});
 
-  if (localStorage.watchlist) {
-    tempWatchlist = JSON.parse(localStorage.watchlist);
+  if (typeof window !== 'undefined') {
+    if (localStorage.watchlist) {
+      tempWatchlist = JSON.parse(localStorage.watchlist);
+    }
   }
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -198,8 +201,13 @@ export default function SP500() {
                           return;
                         }
                         else {
-                          tempWatchlist.push(data.symbol);
-                          localStorage.watchlist = JSON.stringify(tempWatchlist);
+                          if (typeof window !== "undefined") {
+                            tempWatchlist.push(data.symbol);
+                            localStorage.watchlist = JSON.stringify(tempWatchlist);
+                          } else {
+                            alert("localStorage is undefined")
+                          }
+                          
                         }
                         }}>
                         Add

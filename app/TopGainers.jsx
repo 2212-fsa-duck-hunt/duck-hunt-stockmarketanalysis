@@ -121,8 +121,10 @@ export default function TopGainers() {
     setPage(newPage);
   };
 
-  if (localStorage.watchlist) {
-    tempWatchlist = JSON.parse(localStorage.watchlist);
+  if (typeof window !== 'undefined') {
+    if (localStorage.watchlist) {
+      tempWatchlist = JSON.parse(localStorage.watchlist);
+    }
   }
 
   // useEffect(() => {
@@ -188,8 +190,11 @@ export default function TopGainers() {
                           return;
                         }
                         else {
-                          tempWatchlist.push(data.symbol);
-                          localStorage.watchlist = JSON.stringify(tempWatchlist);
+                          
+                          if (typeof window !== "undefined") {
+                            tempWatchlist.push(data.symbol);
+                            localStorage.watchlist = JSON.stringify(tempWatchlist);
+                          }
                         }
                         }}>
                         Add
