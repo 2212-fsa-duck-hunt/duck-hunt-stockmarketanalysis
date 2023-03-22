@@ -4,10 +4,8 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import Button from "@mui/material/Button";
 import Router, { useRouter } from "next/navigation";
-// import { initializeApp } from "firebase/app";
 
 export default function Auth() {
-  // const app = initializeApp(firebaseConfig);
   const [authUser, setAuthUser] = useState(null);
   const router = useRouter();
 
