@@ -3,14 +3,13 @@ import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAxbRx4XOlMVG54WJd6e_4wEiokkvDBNwA",
-  authDomain: "duck-hunt-e1cbd.firebaseapp.com",
-  projectId: "duck-hunt-e1cbd",
-  storageBucket: "duck-hunt-e1cbd.appspot.com",
-  messagingSenderId: "843955394220",
-  appId: "1:843955394220:web:d4a8b1c85b9acf6259b109",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECTID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
