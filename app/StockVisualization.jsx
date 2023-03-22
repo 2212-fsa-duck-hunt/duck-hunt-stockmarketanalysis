@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Chart from 'react-apexcharts';
+import dynamic from 'next/dynamic'
+
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const StockVisualization = () => {
-  const symbol = 'AMZN';
+  const symbol = 'AAPL';
   const [stockData, setStockData] = useState([]);
 
   useEffect(() => {
