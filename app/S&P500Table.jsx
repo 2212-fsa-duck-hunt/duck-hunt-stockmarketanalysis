@@ -9,7 +9,7 @@ import {
   Paper,
   Box,
   TablePagination,
-  Link
+  Link,
 } from "@mui/material";
 
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
@@ -17,131 +17,58 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 import { useState, useEffect } from "react";
 
-// async function getStocks() {
-//   const res = await fetch(
-//     "https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2023-01-09/2023-01-09?adjusted=true&sort=asc&limit=120&apiKey=zvIUoDFvdzsmXDT5O433FWNsfmzd5sKD"
-//   );
+async function getStocks() {
+  const res = await fetch(
+    "https://api.polygon.io/v1/summaries?ticker.any_of=AAPL,MSFT,AMZN,NVDA,GOOGL,BRK.B,GOOG,TSLA,UNH,META,XOM,JNJ,JPM,V,PG,HD,MA,ABBV,CVX,AVGO&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+    {
+      method: "GET",
+      headers: {
+        "X-Polygon-Edge-ID": "sample_edge_id",
+        "X-Polygon-Edge-IP-Address": "8.8.8.8",
+      },
+    }
+  );
 
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch data");
-//   }
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
 
-//   const result = await res.json();
+  const result = await res.json();
 
-//   return result;
-// }
-
-const dummyData = [
-  {
-    name: "Apple Inc.",
-    symbol: "AAPL",
-    day: "1.5%",
-    month: "-1.5%",
-    year: "3.0%",
-    prediction: "Up",
-  },
-  {
-    name: "Microsoft Corporation",
-    symbol: "MSFT",
-    day: "3.0%",
-    month: "-2.0%",
-    year: "5.0%",
-    prediction: "Down",
-  },
-  {
-    name: "Amazon.com Inc.",
-    symbol: "AMZN",
-    day: "0.5%",
-    month: "-0.5%",
-    year: "2.0%",
-    prediction: "Up",
-  },
-  {
-    name: "NVIDIA Corporation",
-    symbol: "NVDA",
-    day: "0.5%",
-    month: "-5.0%",
-    year: "1.0%",
-    prediction: "Down",
-  },
-  {
-    name: "Alphabet Inc. Class A",
-    symbol: "GOOGL",
-    day: "4.0%",
-    month: "-3.0%",
-    year: "10.0%",
-    prediction: "Up",
-  },
-  {
-    name: "Berkshire Hathaway Inc. Class B",
-    symbol: "BRK.B",
-    day: "1.0%",
-    month: "-1.0%",
-    year: "7.0%",
-    prediction: "Down",
-  },
-  {
-    name: "Alphabet Inc. Class C",
-    symbol: "GOOG",
-    day: "0.5%",
-    month: "-0.5%",
-    year: "3.0%",
-    prediction: "Up",
-  },
-  {
-    name: "Tesla Inc.",
-    symbol: "TSLA",
-    day: "4.0%",
-    month: "-10.0%",
-    year: "12.0%",
-    prediction: "Down",
-  },
-  {
-    name: "Meta Platforms Inc. Class A",
-    symbol: "META",
-    day: "1.5%",
-    month: "-1.5%",
-    year: "3.0%",
-    prediction: "Up",
-  },
-  {
-    name: "UnitedHealth Group Incorporated",
-    symbol: "UNH",
-    day: "1.5%",
-    month: "-3.0%",
-    year: "3.0%",
-    prediction: "Down",
-  },
-];
+  return result;
+}
 
 let tempWatchlist = [];
 
 export default function SP500() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  // const [stock, setStock] = useState({});
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [stock, setStock] = useState({});
 
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     if (localStorage.watchlist) {
       tempWatchlist = JSON.parse(localStorage.watchlist);
     }
   }
 
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  // useEffect(() => {
-  //   if (!stock.status) {
-  //     const fetchStocks = async () => {
-  //       const stocks = await getStocks();
-  //       setStock(stocks);
-  //     };
-  //     fetchStocks();
-  //   }
-  //   console.log("STOCKS:", stock);
-  // }, [stock]);
+  useEffect(() => {
+    if (!stock.status) {
+      const fetchStocks = async () => {
+        const stocks = await getStocks();
+        setStock(stocks);
+      };
+      fetchStocks();
+    }
+    console.log("STOCKS:", stock);
+  }, [stock]);
+
+  if (!stock.status) {
+    return <h1>Loading</h1>;
+  }
 
   return (
     <Box>
@@ -150,22 +77,22 @@ export default function SP500() {
           <TableHead>
             <TableRow>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Stock Name / Symbol
+                Stock Name
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Symbol
+                Ticker
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                1D CHG%
+                Price
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                1M CHG%
+                Previous Close
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                1Y CHG%
+                Total Change
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                1M Prediction
+                Change %
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
                 Add To Watch List
@@ -173,46 +100,48 @@ export default function SP500() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {dummyData
+            {stock.results
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data) => {
                 return (
                   <TableRow key={data.name}>
                     <TableCell>{data.name}</TableCell>
-                    <TableCell>{data.symbol}</TableCell>
+                    <TableCell>{data.ticker}</TableCell>
                     <TableCell>
                       <ArrowDropUpIcon color="success" />
-                      {data.day}
+                      {data.price}
                     </TableCell>
                     <TableCell>
                       <ArrowDropDownIcon color="error" />
-                      {data.month}
+                      {data.session.previous_close}
                     </TableCell>
-                    <TableCell>{data.year}</TableCell>
-                    <TableCell>{data.prediction}</TableCell>
+                    <TableCell>{data.session.change}</TableCell>
+                    <TableCell>{data.session.change_percent}</TableCell>
                     <TableCell>
-                      <Link component="button" onClick={() => {
-                        if (tempWatchlist.length > 4) {
-                          alert("Watchlist is full");
-                          return;
-                        }
-                        if (tempWatchlist.includes(data.symbol)) {
-                          alert(`Watchlist already contains ${data.name}`);
-                          return;
-                        }
-                        else {
-                          if (typeof window !== "undefined") {
-                            tempWatchlist.push(data.symbol);
-                            localStorage.watchlist = JSON.stringify(tempWatchlist);
-                          } else {
-                            alert("localStorage is undefined")
+                      <Link
+                        component="button"
+                        onClick={() => {
+                          if (tempWatchlist.length > 4) {
+                            alert("Watchlist is full");
+                            return;
                           }
-                          
-                        }
-                        }}>
+                          if (tempWatchlist.includes(data.symbol)) {
+                            alert(`Watchlist already contains ${data.name}`);
+                            return;
+                          } else {
+                            if (typeof window !== "undefined") {
+                              tempWatchlist.push(data.symbol);
+                              localStorage.watchlist =
+                                JSON.stringify(tempWatchlist);
+                            } else {
+                              alert("localStorage is undefined");
+                            }
+                          }
+                        }}
+                      >
                         Add
                       </Link>
-                      </TableCell>
+                    </TableCell>
                   </TableRow>
                 );
               })}
@@ -220,7 +149,7 @@ export default function SP500() {
         </Table>
         <TablePagination
           component={"div"}
-          count={10}
+          count={20}
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
