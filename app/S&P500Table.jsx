@@ -121,16 +121,17 @@ export default function SP500() {
                       <Link
                         component="button"
                         onClick={() => {
+                          if (tempWatchlist.includes(data.ticker)) {
+                            alert(`Watchlist already contains ${data.name}`);
+                            return;
+                          }
                           if (tempWatchlist.length > 4) {
                             alert("Watchlist is full");
                             return;
                           }
-                          if (tempWatchlist.includes(data.symbol)) {
-                            alert(`Watchlist already contains ${data.name}`);
-                            return;
-                          } else {
+                           else {
                             if (typeof window !== "undefined") {
-                              tempWatchlist.push(data.symbol);
+                              tempWatchlist.push(data.ticker);
                               localStorage.watchlist =
                                 JSON.stringify(tempWatchlist);
                             } else {

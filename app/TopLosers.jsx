@@ -180,21 +180,25 @@ export default function TopLosers() {
                     <TableCell>{data.year}</TableCell>
                     <TableCell>{data.prediction}</TableCell>
                     <TableCell>                      
-                      <Link component="button" onClick={() => {
-                        if (tempWatchlist.length > 4) {
-                          alert("Watchlist is full");
-                          return;
-                        }
-                        if (tempWatchlist.includes(data.symbol)) {
-                          alert(`Watchlist already contains ${data.name}`);
-                          return;
-                        }
-                        else {
-                          if (typeof window !== "undefined") {
-                            tempWatchlist.push(data.symbol);
-                            localStorage.watchlist = JSON.stringify(tempWatchlist);
+                      <Link component="button"                         
+                        onClick={() => {
+                          if (tempWatchlist.includes(data.ticker)) {
+                            alert(`Watchlist already contains ${data.name}`);
+                            return;
                           }
-                        }
+                          if (tempWatchlist.length > 4) {
+                            alert("Watchlist is full");
+                            return;
+                          }
+                           else {
+                            if (typeof window !== "undefined") {
+                              tempWatchlist.push(data.ticker);
+                              localStorage.watchlist =
+                                JSON.stringify(tempWatchlist);
+                            } else {
+                              alert("localStorage is undefined");
+                            }
+                          }
                         }}>
                         Add
                       </Link></TableCell>
