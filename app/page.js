@@ -12,31 +12,32 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
+  if (typeof window !== 'undefined') {
+    window.addEventListener("scroll", () => {
+      let value = window.scrollY;
 
-  window.addEventListener('scroll', () => {
-    let value = window.scrollY;
+      // let text = document.getElementById('text');
+      // let leaf = document.getElementById('leaf');
+      // let hill1 = document.getElementById('hill1');
+      // let hill4 = document.getElementById('hill4');
+      // let hill5 = document.getElementById('hill5');
+      // text.style.marginTop = value * 2.5 + 'px';
+      // text.style.left = value * 2.5 + 'px';
+      // leaf.style.marginTop = value * -1.5 + 'px';
+      // leaf.style.left = value * 1.5 + 'px';
+      // hill5.style.left = value * 1.5 + 'px';
+      // hill4.style.left = value * -1.5 + 'px';
+      // hill1.style.top = value * 1 + 'px';
+    });
+  }
 
-    // let text = document.getElementById('text');
-    // let leaf = document.getElementById('leaf');
-    // let hill1 = document.getElementById('hill1');
-    // let hill4 = document.getElementById('hill4');
-    // let hill5 = document.getElementById('hill5');
-    // text.style.marginTop = value * 2.5 + 'px';
-    // text.style.left = value * 2.5 + 'px';
-    // leaf.style.marginTop = value * -1.5 + 'px';
-    // leaf.style.left = value * 1.5 + 'px';
-    // hill5.style.left = value * 1.5 + 'px';
-    // hill4.style.left = value * -1.5 + 'px';
-    // hill1.style.top = value * 1 + 'px';
-
-  })
 
 
   return (
     <main>
       <div className="lol">
         <section className="parallax">
-          <video autoplay="autoplay" loop="true" muted id="video">
+          <video autoPlay="autoplay" loop="true" muted id="video">
             <source src="herocover9.mp4" type="video/mp4"></source>
           </video>
           {/* <img src="hill1.png" id="hill1"></img>
