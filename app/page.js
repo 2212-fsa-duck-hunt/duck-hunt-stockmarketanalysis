@@ -15,38 +15,24 @@ export default function Home() {
   if (typeof window !== 'undefined') {
     window.addEventListener("scroll", () => {
       let value = window.scrollY;
-
-      // let text = document.getElementById('text');
-      // let leaf = document.getElementById('leaf');
-      // let hill1 = document.getElementById('hill1');
-      // let hill4 = document.getElementById('hill4');
-      // let hill5 = document.getElementById('hill5');
-      // text.style.marginTop = value * 2.5 + 'px';
-      // text.style.left = value * 2.5 + 'px';
-      // leaf.style.marginTop = value * -1.5 + 'px';
-      // leaf.style.left = value * 1.5 + 'px';
-      // hill5.style.left = value * 1.5 + 'px';
-      // hill4.style.left = value * -1.5 + 'px';
-      // hill1.style.top = value * 1 + 'px';
     });
   }
 
-
+  // document.getElementById('video').playbackRate = 0.75;
 
   return (
     <main>
       <div className="lol">
-        <section className="parallax">
-          <video autoPlay="autoplay" loop="true" muted id="video">
+        <section className="hero">
+          <div className="headerbox">
+            <p id="abovetext"><strong>The Future of Prediction is Here</strong></p>
+            <p id="text"> Duckhunt </p>
+            <p id="belowtext"> Build your finances with our commission-free proprietary prediction and analysis tool. I'm trying to push
+              the video down so it's not behind the words, but as you can see, I haven't done it yet.</p>
+          </div>
+          <video autoPlay="autoplay" loop={true} muted id="video">
             <source src="herocover9.mp4" type="video/mp4"></source>
           </video>
-          {/* <img src="hill1.png" id="hill1"></img>
-          <img src="hill3.png" id="hill3"></img>
-          <img src="hill4.png" id="hill4"></img>
-          <img src="hill5.png" id="hill5"></img>
-          <img src="tree.png" id="tree"></img>
-          <img src="plant.png" id="plant"></img> */}
-          <h3 id="text"> Duck Hunt </h3>
         </section>
         <section>
           <div class="ticker-title">
