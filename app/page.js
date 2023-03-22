@@ -25,7 +25,7 @@ export default function Home() {
       <div className="lol">
         <section className="hero">
           <div className="headerbox">
-            <p id="abovetext"><strong>The Future of Prediction is Here</strong></p>
+            <p id="abovetext"><strong>The Future of Prediction is Here. It's Polygon.io.</strong></p>
             <p id="text"> Duckhunt </p>
             <p id="belowtext"> Build your finances with our commission-free proprietary prediction and analysis tool. I'm trying to push
               the video down so it's not behind the words, but as you can see, I haven't done it yet.</p>
