@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
@@ -108,16 +108,13 @@ const APIkeys = [
   "4L2GCTYG7M99S6GB",
   "Y5EZRQP3F7QMJKN0",
 ];
+
 let watchlistSymbols = [];
 typeof window !== "undefined"
   ? (watchlistSymbols = JSON.parse(localStorage.watchlist))
   : (watchlistSymbols = []);
 
-
-
-
 export default function DataTable() {
-
   const [watchlist, setWatchlist] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -125,45 +122,71 @@ export default function DataTable() {
     if (!watchlist.length) {
       fetchData();
     }
-  }, [])
+  }, []);
 
   const fetchData = async () => {
     let tempWatchlist = [];
 
     let yourDate = new Date();
-    yourDate.toISOString().split("T")[0];
-    const offset = yourDate.getTimezoneOffset();
-    yourDate = new Date(yourDate.getTime() - offset * 60 * 1000);
-
-    for (let i = 0; i < watchlistSymbols.length; i++) {
-      await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${watchlistSymbols[i]}&apikey=${APIkeys[i]}`)
-            .then((response) => response.json())
-            .then((data) => {
-              console.log("data-------", data);
-              let stockInfo =
-                data["Time Series (Daily)"][yourDate.toISOString().split("T")[0]];
-              console.log("stockInfo-----", stockInfo);
-              let stock = {
-                id: i + 1,
-                symbol: data["Meta Data"]["2. Symbol"],
-                open: stockInfo["1. open"],
-                high: stockInfo["2. high"],
-                low: stockInfo["3. low"],
-                close: stockInfo["4. close"],
-                volume: stockInfo["6. volume"],
-              };
-              tempWatchlist.push(stock);
-            })
+    if (yourDate.getHours() > 13) {
+      yourDate.toISOString().split("T")[0];
+      const offset = yourDate.getTimezoneOffset();
+      yourDate = new Date(yourDate.getTime() - offset * 60 * 1000);
+      console.log("today-----", yourDate);
+    } else {
+      let yesterday = new Date(yourDate);
+      yesterday.setDate(yesterday.getDate() - 1);
+      yesterday.toISOString().split("T")[0];
+      const offset = yesterday.getTimezoneOffset();
+      yourDate = new Date(yesterday.getTime() - offset * 60 * 1000);
+      console.log("yesterday-----", yourDate);
     }
-    console.log("tempWatchlist------", tempWatchlist)
+  // async headers() {
+  //   return [
+  //     {
+  //       source: "/watchlist",
+  //       headers: [
+  //         {
+  //           key: "X-Polygon-Edge-ID",
+  //           value: "sample_edge_id",
+  //         },
+  //         {
+  //           key: "X-Polygon-Edge-IP-Address",
+  //           value: "8.8.8.8",
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // }
+    for (let i = 0; i < watchlistSymbols.length; i++) {
+      await fetch(
+        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${watchlistSymbols[i]}&apikey=${APIkeys[i]}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("data-------", data);
+          let stockInfo =
+            data["Time Series (Daily)"][yourDate.toISOString().split("T")[0]];
+          console.log("stockInfo-----", stockInfo);
+          let stock = {
+            id: i + 1,
+            symbol: data["Meta Data"]["2. Symbol"],
+            open: stockInfo["1. open"],
+            high: stockInfo["2. high"],
+            low: stockInfo["3. low"],
+            close: stockInfo["4. close"],
+            volume: stockInfo["6. volume"],
+          };
+          tempWatchlist.push(stock);
+        });
+    }
+    console.log("tempWatchlist------", tempWatchlist);
     setWatchlist(tempWatchlist);
     setIsLoading(false);
   };
 
   if (isLoading) {
-    return (
-      <div>Loading...</div>
-    )
+    return <div>Loading...</div>;
   }
 
   return (
