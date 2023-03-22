@@ -108,8 +108,12 @@ const APIkeys = [
   "4L2GCTYG7M99S6GB",
   "Y5EZRQP3F7QMJKN0",
 ];
+let watchlistSymbols = [];
+typeof window !== "undefined"
+  ? (watchlistSymbols = JSON.parse(localStorage.watchlist))
+  : (watchlistSymbols = []);
 
-const watchlistSymbols = JSON.parse(localStorage.watchlist);
+
 
 
 export default function DataTable() {
@@ -118,7 +122,7 @@ export default function DataTable() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (watchlist.length) {
+    if (!watchlist.length) {
       fetchData();
     }
   }, [])
@@ -151,7 +155,7 @@ export default function DataTable() {
               tempWatchlist.push(stock);
             })
     }
-    console.log("watchlist------", tempWatchlist)
+    console.log("tempWatchlist------", tempWatchlist)
     setWatchlist(tempWatchlist);
     setIsLoading(false);
   };
