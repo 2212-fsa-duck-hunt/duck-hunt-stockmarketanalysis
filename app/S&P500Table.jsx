@@ -19,7 +19,7 @@ import { useState, useEffect } from "react";
 
 async function getStocks() {
   const res = await fetch(
-    "https://api.polygon.io/v1/summaries?ticker.any_of=AAPL,MSFT,AMZN,NVDA,GOOGL,BRK.B,GOOG,TSLA,UNH,META,XOM,JNJ,JPM,V,PG,HD,MA,ABBV,CVX,AVGO&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+    "https://api.polygon.io/v1/summaries?ticker.any_of=AAPL,MSFT,AMZN,NVDA,GOOGL,BRK.B,GOOG,TSLA,UNH,META,XOM,JNJ,JPM,V,PG,HD,MA,ABBV,CVX,AVGO,MRK,LLY,PEP,KO,PFE,COST,TMO,CSCO,MCD,WMT,BAC,CRM,DIS,ABT,LIN,ADBE,TXN,DHR,ACN,VZ,AMD,CMCSA,NKE,NEE,PM,BMY,RTX,WFC,QCOM,NFLX&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
     {
       method: "GET",
       headers: {
@@ -107,16 +107,24 @@ export default function SP500() {
                   <TableRow key={data.name}>
                     <TableCell>{data.name}</TableCell>
                     <TableCell>{data.ticker}</TableCell>
+                    <TableCell>{data.price}</TableCell>
+                    <TableCell>{data.session.previous_close}</TableCell>
                     <TableCell>
-                      <ArrowDropUpIcon color="success" />
-                      {data.price}
+                      {data.session.change < 0 ? (
+                        <ArrowDropDownIcon color="error" />
+                      ) : (
+                        <ArrowDropUpIcon color="success" />
+                      )}
+                      {data.session.change}
                     </TableCell>
                     <TableCell>
-                      <ArrowDropDownIcon color="error" />
-                      {data.session.previous_close}
+                      {data.session.change_percent < 0 ? (
+                        <ArrowDropDownIcon color="error" />
+                      ) : (
+                        <ArrowDropUpIcon color="success" />
+                      )}
+                      {data.session.change_percent}
                     </TableCell>
-                    <TableCell>{data.session.change}</TableCell>
-                    <TableCell>{data.session.change_percent}</TableCell>
                     <TableCell>
                       <Link
                         component="button"
@@ -149,7 +157,7 @@ export default function SP500() {
         </Table>
         <TablePagination
           component={"div"}
-          count={20}
+          count={50}
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
