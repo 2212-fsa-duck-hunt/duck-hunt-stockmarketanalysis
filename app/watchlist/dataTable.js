@@ -2,7 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Avatar, Button } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Box,
+  TablePagination,
+  Link,
+} from "@mui/material";
 
 
 
@@ -22,6 +33,7 @@ const columns = [
   //   headerName: '',
   //   renderCell: RenderImage,
   // },
+  { field: "name", headerName: "Name", type: "number", width: 200 },
   { field: "symbol", headerName: "Symbol", type: "number", width: 200 },
   { field: "open", headerName: "Open", type: "number", width: 200 },
   { field: "high", headerName: "High", type: "number", width: 200 },
@@ -141,9 +153,6 @@ if (typeof window !== "undefined") {
 export default function DataTable() {
   const [watchlist, setWatchlist] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedStock, setSelectedStock] = useState([]);
-  const [stockList, setStockList] = useState([]);
-  const [buttonVisible, setButtonVisible] = useState(false)
 
   useEffect(() => {
     if (!watchlist.length) {
@@ -174,6 +183,7 @@ export default function DataTable() {
       console.log("yesterday-----", yourDate);
     }
 
+
     for (let i = 0; i < watchlistSymbols.length; i++) {
       await fetch(
         `https://api.polygon.io/v1/summaries?ticker.any_of=${watchlistSymbols[i]}&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
@@ -192,9 +202,7 @@ export default function DataTable() {
             console.log("data.results[0]-------", data.results[0]);
             let stock = {
               id: i + 1,
-              iconUrl:
-                stockInfo.branding.icon_url +
-                "?apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+              name: stockInfo.name,
               symbol: stockInfo.ticker,
               open: stockInfo.session.open,
               high: stockInfo.session.high,
@@ -214,41 +222,88 @@ export default function DataTable() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  if (buttonVisible) {
-    return (
-      <div style={{ height: 400, width: "100%", margin: "auto" }}>
-        <Button variant="contained">Remove Selected</Button>
-        <DataGrid
-          rows={watchlist}
-          columns={columns}
-          hideFooterPagination={true}
-          checkboxSelection
-          // onSelectionModelChange={({ selectionModel }) => {
-          //   setButtonVisible(true);
-          //   setSelectedStock(selectionModel);
-          // }}
-        />
-      </div>
-    );
-  } else {
-    return (
-      <div style={{ height: 400, width: "100%", margin: "auto" }}>
-        <Button variant="contained" disabled>
-          Remove Selected
-        </Button>
-        <DataGrid
-          rows={watchlist}
-          columns={columns}
-          hideFooterPagination={true}
-          checkboxSelection
-          // onRowSelectionModelChange={(selectionModel) => {
-          //   console.log(selectionModel);
-          //   setButtonVisible(true);
-          //   setSelectedStock(selectionModel);
-          // }}
-        />
-      </div>
-    );
-  }
+    // return (
+    //   <div style={{ height: 400, width: "100%", margin: "auto" }}>
+    //     <DataGrid
+    //       rows={watchlist}
+    //       columns={columns}
+    //       hideFooterPagination={true}
+    //       checkboxSelection
+    //       onRowSelectionModelChange={(selectionModel) => {
+    //         console.log(selectionModel);
+    //         setButtonVisible(true);
+    //         setSelectedStock(selectionModel);
+    //         console.log(selectedStock);
+    //       }}
+    //     />
+    //   </div>
+    // );
 
+    return (
+      <Box>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }}>
+            <TableHead>
+              <TableRow>
+                <TableCell style={{ backgroundColor: "#11071B", color: "#ffffff" }}>
+                  ID
+                </TableCell>
+                <TableCell style={{ backgroundColor: "#11071B", color: "#ffffff" }}>
+                  Name
+                </TableCell>
+                <TableCell style={{ backgroundColor: "#11071B", color: "#ffffff" }}>
+                  Symbol
+                </TableCell>
+                <TableCell style={{ backgroundColor: "#11071B", color: "#ffffff" }}>
+                  Open
+                </TableCell>
+                <TableCell style={{ backgroundColor: "#11071B", color: "#ffffff" }}>
+                  High
+                </TableCell>
+                <TableCell style={{ backgroundColor: "#11071B", color: "#ffffff" }}>
+                  Low
+                </TableCell>
+                <TableCell style={{ backgroundColor: "#11071B", color: "#ffffff" }}>
+                  Close
+                </TableCell>
+                <TableCell style={{ backgroundColor: "#11071B", color: "#ffffff" }}>
+                  Volume
+                </TableCell>
+                <TableCell style={{ backgroundColor: "#11071B", color: "#ffffff" }}>
+                  Remove from watchlist
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {watchlist.map((data) => {
+                return (
+                  <TableRow key={data.id}>
+                    <TableCell>{data.id}</TableCell>
+                    <TableCell>{data.name}</TableCell>
+                    <TableCell>{data.symbol}</TableCell>
+                    <TableCell>{data.open}</TableCell>
+                    <TableCell>{data.high}</TableCell>
+                    <TableCell>{data.low}</TableCell>
+                    <TableCell>{data.close}</TableCell>
+                    <TableCell>{data.volume}</TableCell>
+                    <TableCell>
+                      <Link component="button" onClick={() => {
+                        let tempWatchlist = [];
+                        tempWatchlist = watchlist.filter((stock) => stock.id !== data.id);
+                        setWatchlist(tempWatchlist);
+                        localStorage.watchlist = JSON.stringify(tempWatchlist.map((stock) => stock = stock.symbol));
+                      }}>
+                        Remove
+                      </Link>
+
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+    )
 }
+
