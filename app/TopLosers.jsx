@@ -91,13 +91,20 @@ export default function TopLosers() {
             {sortedStock
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data) => {
+                let change = () => {
+                  if (data.session.change > 0) return { color: "green" };
+                  else {
+                    return { color: "red" };
+                  }
+                };
+
                 return (
                   <TableRow key={data.name}>
                     <TableCell>{data.name}</TableCell>
                     <TableCell>{data.ticker}</TableCell>
                     <TableCell>{data.price}</TableCell>
                     <TableCell>{data.session.previous_close}</TableCell>
-                    <TableCell>
+                    <TableCell style={change()}>
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
@@ -105,13 +112,13 @@ export default function TopLosers() {
                       )}
                       {data.session.change}
                     </TableCell>
-                    <TableCell>
+                    <TableCell style={change()}>
                       {data.session.change_percent < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
                         <ArrowDropUpIcon color="success" />
                       )}
-                      {data.session.change_percent}
+                      {data.session.change_percent}%
                     </TableCell>
                     <TableCell>
                       <Link
