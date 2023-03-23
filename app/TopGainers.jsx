@@ -1,3 +1,4 @@
+"use client";
 import {
   Table,
   TableBody,
@@ -6,137 +7,56 @@ import {
   TableHead,
   TableRow,
   Paper,
-  TablePagination,
   Box,
-  Link
+  TablePagination,
+  Link,
 } from "@mui/material";
 
-import { useState } from "react";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
-// async function getStocks() {
-//   const res = await fetch(
-//     "https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2023-01-09/2023-01-09?adjusted=true&sort=asc&limit=120&apiKey=zvIUoDFvdzsmXDT5O433FWNsfmzd5sKD"
-//   );
-
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch data");
-//   }
-
-//   const result = await res.json();
-
-//   return result;
-// }
-
-const dummyData = [
-  {
-    name: "Top Gainers",
-    symbol: "AAPL",
-    day: "1.5%",
-    month: "-1.5%",
-    year: "3.0%",
-    prediction: "Up",
-  },
-  {
-    name: "Microsoft Corporation",
-    symbol: "MSFT",
-    day: "3.0%",
-    month: "-2.0%",
-    year: "5.0%",
-    prediction: "Down",
-  },
-  {
-    name: "Amazon.com Inc.",
-    symbol: "AMZN",
-    day: "0.5%",
-    month: "-0.5%",
-    year: "2.0%",
-    prediction: "Up",
-  },
-  {
-    name: "NVIDIA Corporation",
-    symbol: "NVDA",
-    day: "0.5%",
-    month: "-5.0%",
-    year: "1.0%",
-    prediction: "Down",
-  },
-  {
-    name: "Alphabet Inc. Class A",
-    symbol: "GOOGL",
-    day: "4.0%",
-    month: "-3.0%",
-    year: "10.0%",
-    prediction: "Up",
-  },
-  {
-    name: "Berkshire Hathaway Inc. Class B",
-    symbol: "BRK.B",
-    day: "1.0%",
-    month: "-1.0%",
-    year: "7.0%",
-    prediction: "Down",
-  },
-  {
-    name: "Alphabet Inc. Class C",
-    symbol: "GOOG",
-    day: "0.5%",
-    month: "-0.5%",
-    year: "3.0%",
-    prediction: "Up",
-  },
-  {
-    name: "Tesla Inc.",
-    symbol: "TSLA",
-    day: "4.0%",
-    month: "-10.0%",
-    year: "12.0%",
-    prediction: "Down",
-  },
-  {
-    name: "Meta Platforms Inc. Class A",
-    symbol: "META",
-    day: "1.5%",
-    month: "-1.5%",
-    year: "3.0%",
-    prediction: "Up",
-  },
-  {
-    name: "UnitedHealth Group Incorporated",
-    symbol: "UNH",
-    day: "1.5%",
-    month: "-3.0%",
-    year: "3.0%",
-    prediction: "Down",
-  },
-];
+import { useState, useEffect } from "react";
 
 let tempWatchlist = [];
 
 export default function TopGainers() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  // const [stock, setStock] = useState({});
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [stock, setStock] = useState({});
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     if (localStorage.watchlist) {
       tempWatchlist = JSON.parse(localStorage.watchlist);
     }
   }
 
-  // useEffect(() => {
-  //   if (!stock.status) {
-  //     const fetchStocks = async () => {
-  //       const stocks = await getStocks();
-  //       setStock(stocks);
-  //     };
-  //     fetchStocks();
-  //   }
-  //   console.log("STOCKS:", stock);
-  // }, [stock]);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  useEffect(() => {
+    fetch(
+      "https://api.polygon.io/v1/summaries?ticker.any_of=AAPL,MSFT,AMZN,NVDA,GOOGL,BRK.B,GOOG,TSLA,UNH,META,XOM,JNJ,JPM,V,PG,HD,MA,ABBV,CVX,AVGO,MRK,LLY,PEP,KO,PFE,COST,TMO,CSCO,MCD,WMT,BAC,CRM,DIS,ABT,LIN,ADBE,TXN,DHR,ACN,VZ,AMD,CMCSA,NKE,NEE,PM,BMY,RTX,WFC,QCOM,NFLX&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      {
+        method: "GET",
+        headers: {
+          "X-Polygon-Edge-ID": "sample_edge_id",
+          "X-Polygon-Edge-IP-Address": "8.8.8.8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setStock(data));
+  }, []);
+
+  if (!stock.status) {
+    return <h1>Loading</h1>;
+  }
+
+  const sortedStock = stock.results.sort(
+    (firstItem, secondItem) =>
+      secondItem.session.change_percent - firstItem.session.change_percent
+  );
 
   return (
     <Box>
@@ -145,22 +65,22 @@ export default function TopGainers() {
           <TableHead>
             <TableRow>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Stock Name / Symbol
+                Stock Name
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Symbol
+                Ticker
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                1D CHG%
+                Price
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                1M CHG%
+                Previous Close
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                1Y CHG%
+                Total Change
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                1M Prediction
+                Change %
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
                 Add To Watch List
@@ -168,19 +88,34 @@ export default function TopGainers() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {dummyData
+            {sortedStock
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data) => {
                 return (
                   <TableRow key={data.name}>
                     <TableCell>{data.name}</TableCell>
-                    <TableCell>{data.symbol}</TableCell>
-                    <TableCell>{data.day}</TableCell>
-                    <TableCell>{data.month}</TableCell>
-                    <TableCell>{data.year}</TableCell>
-                    <TableCell>{data.prediction}</TableCell>
-                    <TableCell>                      
-                      <Link component="button"                         
+                    <TableCell>{data.ticker}</TableCell>
+                    <TableCell>{data.price}</TableCell>
+                    <TableCell>{data.session.previous_close}</TableCell>
+                    <TableCell>
+                      {data.session.change < 0 ? (
+                        <ArrowDropDownIcon color="error" />
+                      ) : (
+                        <ArrowDropUpIcon color="success" />
+                      )}
+                      {data.session.change}
+                    </TableCell>
+                    <TableCell>
+                      {data.session.change_percent < 0 ? (
+                        <ArrowDropDownIcon color="error" />
+                      ) : (
+                        <ArrowDropUpIcon color="success" />
+                      )}
+                      {data.session.change_percent}
+                    </TableCell>
+                    <TableCell>
+                      <Link
+                        component="button"
                         onClick={() => {
                           if (tempWatchlist.includes(data.ticker)) {
                             alert(`Watchlist already contains ${data.name}`);
@@ -189,8 +124,7 @@ export default function TopGainers() {
                           if (tempWatchlist.length > 4) {
                             alert("Watchlist is full");
                             return;
-                          }
-                           else {
+                          } else {
                             if (typeof window !== "undefined") {
                               tempWatchlist.push(data.ticker);
                               localStorage.watchlist =
@@ -199,9 +133,11 @@ export default function TopGainers() {
                               alert("localStorage is undefined");
                             }
                           }
-                        }}>
+                        }}
+                      >
                         Add
-                      </Link></TableCell>
+                      </Link>
+                    </TableCell>
                   </TableRow>
                 );
               })}
@@ -209,7 +145,7 @@ export default function TopGainers() {
         </Table>
         <TablePagination
           component={"div"}
-          count={10}
+          count={50}
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
