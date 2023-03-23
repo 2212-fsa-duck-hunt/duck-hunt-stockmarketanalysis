@@ -17,27 +17,6 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 import { useState, useEffect } from "react";
 
-// async function getStocks() {
-//   const res = await fetch(
-//     "https://api.polygon.io/v1/summaries?ticker.any_of=AAPL,MSFT,AMZN,NVDA,GOOGL,BRK.B,GOOG,TSLA,UNH,META,XOM,JNJ,JPM,V,PG,HD,MA,ABBV,CVX,AVGO,MRK,LLY,PEP,KO,PFE,COST,TMO,CSCO,MCD,WMT,BAC,CRM,DIS,ABT,LIN,ADBE,TXN,DHR,ACN,VZ,AMD,CMCSA,NKE,NEE,PM,BMY,RTX,WFC,QCOM,NFLX&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
-//     {
-//       method: "GET",
-//       headers: {
-//         "X-Polygon-Edge-ID": "sample_edge_id",
-//         "X-Polygon-Edge-IP-Address": "8.8.8.8",
-//       },
-//     }
-//   );
-
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch data");
-//   }
-
-//   const result = await res.json();
-
-//   return result;
-// }
-
 let tempWatchlist = [];
 
 export default function SP500() {
@@ -54,17 +33,6 @@ export default function SP500() {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
-  // useEffect(() => {
-  //   if (!stock.status) {
-  //     const fetchStocks = async () => {
-  //       const stocks = await getStocks();
-  //       setStock(stocks);
-  //     };
-  //     fetchStocks();
-  //   }
-  //   console.log("STOCKS:", stock);
-  // }, [stock]);
 
   useEffect(() => {
     fetch(

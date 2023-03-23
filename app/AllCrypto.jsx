@@ -86,7 +86,6 @@ export default function Crypto() {
             {stock.results
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data) => {
-                console.log("DATTTTA:", data);
                 return (
                   <TableRow key={data.name}>
                     <TableCell>{data.name}</TableCell>
