@@ -97,15 +97,15 @@ export default function SP500() {
                   <TableRow key={data.name}>
                     <TableCell>{data.name}</TableCell>
                     <TableCell>{data.ticker}</TableCell>
-                    <TableCell>{data.price}</TableCell>
-                    <TableCell>{data.session.previous_close}</TableCell>
+                    <TableCell>${data.price}</TableCell>
+                    <TableCell>${data.session.previous_close}</TableCell>
                     <TableCell style={change()}>
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
                         <ArrowDropUpIcon color="success" />
                       )}
-                      {data.session.change}
+                      ${data.session.change}
                     </TableCell>
                     <TableCell style={change()}>
                       {data.session.change_percent < 0 ? (

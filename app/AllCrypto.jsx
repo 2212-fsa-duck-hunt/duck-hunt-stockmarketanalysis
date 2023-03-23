@@ -36,7 +36,7 @@ export default function Crypto() {
 
   useEffect(() => {
     fetch(
-      "https://api.polygon.io/v1/summaries?ticker.any_of=X:BTCUSD,X:ETHUSD,X:USDTUSD,X:USDCUSD,X:XRPUSD,X:ADAUSD,X:DOGEUSD,X:MATICUSD,X:SOLUSD,X:DOTUSD,X:LTCUSD,X:SHIBUSD,X:TRXUSD,X:AVAXUSD,X:DAIUSD,X:UNIUSD,X:BTCUSD,X:LINKUSD,X:ATOMUSD,X:CHZUSD,X:ETCUSD,X:XMRUSD,X:SANDUSD,X:ZECUSD,X:BCHUSD,X:XLMUSD,X:FILUSD,X:MASKUSD,X:MKRUSD,X:HBARUSD&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      "https://api.polygon.io/v1/summaries?ticker.any_of=X:BTCUSD,X:ETHUSD,X:USDTUSD,X:USDCUSD,X:XRPUSD,X:ADAUSD,X:DOGEUSD,X:MATICUSD,X:SOLUSD,X:DOTUSD,X:LTCUSD,X:SHIBUSD,X:TRXUSD,X:AVAXUSD,X:DAIUSD,X:UNIUSD,X:NEARUSD,X:LINKUSD,X:ATOMUSD,X:CHZUSD,X:ETCUSD,X:XMRUSD,X:SANDUSD,X:ZECUSD,X:BCHUSD,X:XLMUSD,X:FILUSD,X:MASKUSD,X:MKRUSD,X:HBARUSD&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
       {
         method: "GET",
         headers: {
@@ -92,20 +92,23 @@ export default function Crypto() {
                     return { color: "red" };
                   }
                 };
+                let dollarUSLocale = Intl.NumberFormat("en-US");
 
                 return (
                   <TableRow key={data.name}>
-                    <TableCell>{data.name}</TableCell>
-                    <TableCell>{data.ticker}</TableCell>
-                    <TableCell>{data.price}</TableCell>
-                    <TableCell>{data.session.previous_close}</TableCell>
+                    <TableCell>{data.name.slice(0, -23)}</TableCell>
+                    <TableCell>{data.ticker.slice(2, -3)}</TableCell>
+                    <TableCell>${dollarUSLocale.format(data.price)}</TableCell>
+                    <TableCell>
+                      ${dollarUSLocale.format(data.session.previous_close)}
+                    </TableCell>
                     <TableCell style={change()}>
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
                         <ArrowDropUpIcon color="success" />
                       )}
-                      {data.session.change}
+                      ${data.session.change}
                     </TableCell>
                     <TableCell style={change()}>
                       {data.session.change_percent < 0 ? (
