@@ -2,9 +2,26 @@
 
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import { Avatar, Button } from "@mui/material";
+
+
+
+// const RenderImage = (value) => {
+//   console.log("value.row.iconUrl--------",value.row.iconUrl)
+//   return (
+//     <>
+//       <Avatar src={value.row.iconUrl} />
+//     </>
+//   );
+// };
 
 const columns = [
   { field: "id", headerName: "ID", type: "number", width: 70 },
+  // {
+  //   field: 'icon',
+  //   headerName: '',
+  //   renderCell: RenderImage,
+  // },
   { field: "symbol", headerName: "Symbol", type: "number", width: 200 },
   { field: "open", headerName: "Open", type: "number", width: 200 },
   { field: "high", headerName: "High", type: "number", width: 200 },
@@ -110,19 +127,34 @@ const APIkeys = [
 ];
 
 let watchlistSymbols = [];
-typeof window !== "undefined"
-  ? (watchlistSymbols = JSON.parse(localStorage.watchlist))
-  : (watchlistSymbols = []);
+
+if (typeof window !== "undefined") {
+  if (localStorage.watchlist) {
+    watchlistSymbols = JSON.parse(localStorage.watchlist);
+  } else {
+    watchlistSymbols = [];
+    localStorage.watchlist = watchlistSymbols;
+  }
+}
+
 
 export default function DataTable() {
   const [watchlist, setWatchlist] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedStock, setSelectedStock] = useState([]);
+  const [stockList, setStockList] = useState([]);
+  const [buttonVisible, setButtonVisible] = useState(false)
 
   useEffect(() => {
     if (!watchlist.length) {
       fetchData();
     }
   }, []);
+
+  const deleteSelected = () => {
+    const filteredWatchlist = watchlist.filter((item) => !selectedStock.includes(item));
+    setStockList(filteredWatchlist);
+  }
 
   const fetchData = async () => {
     let tempWatchlist = [];
@@ -141,43 +173,37 @@ export default function DataTable() {
       yourDate = new Date(yesterday.getTime() - offset * 60 * 1000);
       console.log("yesterday-----", yourDate);
     }
-  // async headers() {
-  //   return [
-  //     {
-  //       source: "/watchlist",
-  //       headers: [
-  //         {
-  //           key: "X-Polygon-Edge-ID",
-  //           value: "sample_edge_id",
-  //         },
-  //         {
-  //           key: "X-Polygon-Edge-IP-Address",
-  //           value: "8.8.8.8",
-  //         },
-  //       ],
-  //     },
-  //   ];
-  // }
+
     for (let i = 0; i < watchlistSymbols.length; i++) {
       await fetch(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${watchlistSymbols[i]}&apikey=${APIkeys[i]}`
+        `https://api.polygon.io/v1/summaries?ticker.any_of=${watchlistSymbols[i]}&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
+        {
+          method: "GET",
+          headers: {
+            "X-Polygon-Edge-ID": "cool-big-id",
+            "X-Polygon-Edge-IP-Address": "8.8.4.4",
+          },
+        }
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log("data-------", data);
-          let stockInfo =
-            data["Time Series (Daily)"][yourDate.toISOString().split("T")[0]];
-          console.log("stockInfo-----", stockInfo);
-          let stock = {
-            id: i + 1,
-            symbol: data["Meta Data"]["2. Symbol"],
-            open: stockInfo["1. open"],
-            high: stockInfo["2. high"],
-            low: stockInfo["3. low"],
-            close: stockInfo["4. close"],
-            volume: stockInfo["6. volume"],
-          };
-          tempWatchlist.push(stock);
+          if (data.status === "OK") {
+            let stockInfo = data.results[0];
+            console.log("data.results[0]-------", data.results[0]);
+            let stock = {
+              id: i + 1,
+              iconUrl:
+                stockInfo.branding.icon_url +
+                "?apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+              symbol: stockInfo.ticker,
+              open: stockInfo.session.open,
+              high: stockInfo.session.high,
+              low: stockInfo.session.low,
+              close: stockInfo.session.close,
+              volume: stockInfo.session.volume,
+            };
+            tempWatchlist.push(stock);
+          }
         });
     }
     console.log("tempWatchlist------", tempWatchlist);
@@ -188,15 +214,41 @@ export default function DataTable() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+  if (buttonVisible) {
+    return (
+      <div style={{ height: 400, width: "100%", margin: "auto" }}>
+        <Button variant="contained">Remove Selected</Button>
+        <DataGrid
+          rows={watchlist}
+          columns={columns}
+          hideFooterPagination={true}
+          checkboxSelection
+          // onSelectionModelChange={({ selectionModel }) => {
+          //   setButtonVisible(true);
+          //   setSelectedStock(selectionModel);
+          // }}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div style={{ height: 400, width: "100%", margin: "auto" }}>
+        <Button variant="contained" disabled>
+          Remove Selected
+        </Button>
+        <DataGrid
+          rows={watchlist}
+          columns={columns}
+          hideFooterPagination={true}
+          checkboxSelection
+          // onRowSelectionModelChange={(selectionModel) => {
+          //   console.log(selectionModel);
+          //   setButtonVisible(true);
+          //   setSelectedStock(selectionModel);
+          // }}
+        />
+      </div>
+    );
+  }
 
-  return (
-    <div style={{ height: 600, width: "100%", margin: "auto" }}>
-      <DataGrid
-        rows={watchlist}
-        columns={columns}
-        checkboxSelection
-        hideFooterPagination
-      />
-    </div>
-  );
 }
