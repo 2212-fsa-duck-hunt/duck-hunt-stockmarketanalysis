@@ -1,0 +1,122 @@
+[
+    {
+        "Name": "Bitcoin",
+        "Symbol": "BTC"
+    },
+    {
+        "Name": "Ethereum",
+        "Symbol": "ETH"
+    },
+    {
+        "Name": "Tether",
+        "Symbol": "USDT"
+    },
+    {
+        "Name": "BNB",
+        "Symbol": "BNB"
+    },
+    {
+        "Name": "USD Coin",
+        "Symbol": "USDC"
+    },
+    {
+        "Name": "XRP",
+        "Symbol": "XRP"
+    },
+    {
+        "Name": "HEX",
+        "Symbol": "Hex"
+    },
+    {
+        "Name": "Cardano",
+        "Symbol": "ADA"
+    },
+    {
+        "Name": "Lido Staked ETH",
+        "Symbol": "STETH"
+    },
+    {
+        "Name": "Dogecoin",
+        "Symbol": "DOGE"
+    },
+    {
+        "Name": "MATIC",
+        "Symbol": "MATIC"
+    },
+    {
+        "Name": "Solana",
+        "Symbol": "SOL"
+    },
+    {
+        "Name": "Binance",
+        "Symbol": "BUSD"
+    },
+    {
+        "Name": "Polkadot",
+        "Symbol": "DOT"
+    },
+    {
+        "Name": "LTC",
+        "Symbol": "LTC"
+    },
+    {
+        "Name": "Wrapped TRON",
+        "Symbol": "WTRX"
+    },
+    {
+        "Name": "Shiba Inu",
+        "Symbol": "SHIB"
+    },
+    {
+        "Name": "TRON",
+        "Symbol": "TRX"
+    },
+    {
+        "Name": "Avalanche",
+        "Symbol": "AVAX"
+    },
+    {
+        "Name": "Dai",
+        "Symbol": "DAI"
+    },
+    {
+        "Name": "Uniswap",
+        "Symbol": "UNI7083"
+    },
+    {
+        "Name": "Wrapped Bitcoin",
+        "Symbol": "WBTC"
+    },
+    {
+        "Name": "Link",
+        "Symbol": "LINK"
+    },
+    {
+        "Name": "T-mac",
+        "Symbol": "TMG"
+    },
+    {
+        "Name": "Cosmos",
+        "Symbol": "ATOM"
+    },
+    {
+        "Name": "Leo",
+        "Symbol": "LEO"
+    },
+    {
+        "Name": "Ethereum Classic",
+        "Symbol": "ETC"
+    },
+    {
+        "Name": "Monero",
+        "Symbol": "XMR"
+    },
+    {
+        "Name": "OKB",
+        "Symbol": "OKB"
+    },
+    {
+        "Name": "Toncoin",
+        "Symbol": "TON11419"
+    }
+]

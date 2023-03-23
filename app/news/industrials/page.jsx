@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import "../../../public/news.css"
+import "../../../public/news.css";
+import Link from 'next/link';
 
 const listOfStocks = require('../../listOfStocks.JSON');
 
@@ -38,7 +39,8 @@ export default function Industrials() {
                     <h3 id> Industrials News </h3>
                     {data.map(stock =>
                         <div className='newsbox'>
-                            <h4> {stock.results[0].title}</h4>
+                            <h4><Link href={stock.results[0].article_url}>{stock.results[0].title}</Link>
+                            </h4>
                             <img className="picture" src={stock.results[0].image_url} />
                             <div className="description"> {stock.results[0].description}</div>
                         </div>
