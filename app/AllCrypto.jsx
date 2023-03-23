@@ -17,30 +17,9 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 import { useState, useEffect } from "react";
 
-// async function getStocks() {
-//   const res = await fetch(
-//     "https://api.polygon.io/v1/summaries?ticker.any_of=AAPL,MSFT,AMZN,NVDA,GOOGL,BRK.B,GOOG,TSLA,UNH,META,XOM,JNJ,JPM,V,PG,HD,MA,ABBV,CVX,AVGO,MRK,LLY,PEP,KO,PFE,COST,TMO,CSCO,MCD,WMT,BAC,CRM,DIS,ABT,LIN,ADBE,TXN,DHR,ACN,VZ,AMD,CMCSA,NKE,NEE,PM,BMY,RTX,WFC,QCOM,NFLX&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
-//     {
-//       method: "GET",
-//       headers: {
-//         "X-Polygon-Edge-ID": "sample_edge_id",
-//         "X-Polygon-Edge-IP-Address": "8.8.8.8",
-//       },
-//     }
-//   );
-
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch data");
-//   }
-
-//   const result = await res.json();
-
-//   return result;
-// }
-
 let tempWatchlist = [];
 
-export default function SP500() {
+export default function Crypto() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [stock, setStock] = useState({});
@@ -55,20 +34,9 @@ export default function SP500() {
     setPage(newPage);
   };
 
-  // useEffect(() => {
-  //   if (!stock.status) {
-  //     const fetchStocks = async () => {
-  //       const stocks = await getStocks();
-  //       setStock(stocks);
-  //     };
-  //     fetchStocks();
-  //   }
-  //   console.log("STOCKS:", stock);
-  // }, [stock]);
-
   useEffect(() => {
     fetch(
-      "https://api.polygon.io/v1/summaries?ticker.any_of=AAPL,MSFT,AMZN,NVDA,GOOGL,BRK.B,GOOG,TSLA,UNH,META,XOM,JNJ,JPM,V,PG,HD,MA,ABBV,CVX,AVGO,MRK,LLY,PEP,KO,PFE,COST,TMO,CSCO,MCD,WMT,BAC,CRM,DIS,ABT,LIN,ADBE,TXN,DHR,ACN,VZ,AMD,CMCSA,NKE,NEE,PM,BMY,RTX,WFC,QCOM,NFLX&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      "https://api.polygon.io/v1/summaries?ticker.any_of=X:BTCUSD,X:ETHUSD,X:USDTUSD,X:USDCUSD,X:XRPUSD,X:ADAUSD,X:DOGEUSD,X:MATICUSD,X:SOLUSD,X:DOTUSD,X:LTCUSD,X:SHIBUSD,X:TRXUSD,X:AVAXUSD,X:DAIUSD,X:UNIUSD,X:BTCUSD,X:LINKUSD,X:ATOMUSD,X:CHZUSD,X:ETCUSD,X:XMRUSD,X:SANDUSD,X:ZECUSD,X:BCHUSD,X:XLMUSD,X:FILUSD,X:MASKUSD,X:MKRUSD,X:HBARUSD&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
       {
         method: "GET",
         headers: {
@@ -92,7 +60,7 @@ export default function SP500() {
           <TableHead>
             <TableRow>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Stock Name
+                Crypto Name
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
                 Ticker
@@ -118,6 +86,7 @@ export default function SP500() {
             {stock.results
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data) => {
+                console.log("DATTTTA:", data);
                 return (
                   <TableRow key={data.name}>
                     <TableCell>{data.name}</TableCell>
@@ -172,7 +141,7 @@ export default function SP500() {
         </Table>
         <TablePagination
           component={"div"}
-          count={50}
+          count={30}
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
