@@ -4,18 +4,18 @@ import { useEffect, useState } from 'react';
 import "../../../public/news.css";
 import Link from 'next/link';
 
-const listOfStocks = require('../../listOfStocks.JSON');
+const listOfCrypto = require('../../listOfTopCrypto.JSON');
 
 
-export default function Utilities() {
+export default function Crypto() {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const utilitiesList = listOfStocks.filter((element) => { return element.Sector === 'Utilities' });
-    const ilSymbols = utilitiesList.map(element => element.Symbol);
+
+    const cryptoSymbols = listOfCrypto.map(element => element.Symbol);
 
     useEffect(() => {
         setIsLoading(true);
-        const promises = ilSymbols.map(symbol =>
+        const promises = cryptoSymbols.map(symbol =>
             fetch(`https://api.polygon.io/v2/reference/news?ticker=${symbol}&limit=1&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`, {
                 method: "GET",
                 headers: {
@@ -36,15 +36,19 @@ export default function Utilities() {
         return (
             <div>
                 <section className="sec">
-                    <h3 id> Utilities </h3>
-                    {data.map(stock =>
-                        <div className='newsbox'>
-                            <img className="picture" src={stock.results[0].image_url} />
-                            <div className="description"> {stock.results[0].description}</div>
-                            {/* <Button className="readmore"> Read More</Button> */}
-                            <h4><Link href={stock.results[0].article_url}>{stock.results[0].title}</Link>
-                            </h4>
-                        </div>
+                    <h3 id> Crypto News </h3>
+                    {data.map(crypto => {
+                        if (crypto.results.length > 0) {
+                            return (
+                                <div className='newsbox'>
+                                    <h4><Link href={crypto.results[0].article_url}>{crypto.results[0].title}</Link>
+                                    </h4>
+                                    <img className="picture" src={crypto.results[0].image_url} />
+                                    <div className="description"> {crypto.results[0].description}</div>
+                                </div>
+                            )
+                        }
+                    }
                     )}
                 </section>
             </div>

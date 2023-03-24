@@ -22,6 +22,9 @@ export default function RootLayout({ children }) {
         {/* <Provider store={store}> */}
         {children}
         {/* </Provider> */}
+        <footer>
+          <div> hey </div>
+        </footer>
       </body>
     </html>
   )

@@ -190,12 +190,21 @@ function Navbar() {
                         >
                             Stocks
                         </Button>
-                        <Button
-                            onClick={handleCloseNavMenuCrypto}
-                            sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
-                        >
-                            Crypto
-                        </Button>
+                        <div className="dropdown">
+
+                            <Button
+                                onClick={handleCloseNavMenuCrypto}
+                                sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
+                            >
+                                Crypto
+                            </Button>
+                            <div className="dropdown-content">
+                                <Link href="/crypto/news">News</Link>
+                                <Link href="/crypto">Stocks</Link>
+                            </div>
+                        </div>
+
+
 
 
 
