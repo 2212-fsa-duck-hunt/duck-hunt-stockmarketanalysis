@@ -8,7 +8,7 @@ import DataTable from './dataTable';
 
 export default function Watchlist() {
   if (typeof document !== 'undefined') {
-    document.body.style = 'background: #212021';
+    document.body.style = 'background: #11071B';
   }
 
   return (
