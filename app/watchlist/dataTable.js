@@ -10,13 +10,13 @@ import {
   TableRow,
   Paper,
   Box,
-  TablePagination,
-  Link,
-  Avatar,
+  Button,
 } from "@mui/material";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 
 let watchlistSymbols = [];
+
 
 if (typeof window !== "undefined") {
   if (localStorage.watchlist) {
@@ -43,6 +43,7 @@ export default function DataTable() {
   const fetchData = () => {
     let tempWatchlist = [];
 
+    //date conversion to yyyy-mm-dd and also if time is before stock market closes, use yesterday's data
     let yourDate = new Date();
     if (yourDate.getHours() > 13) {
       yourDate.toISOString().split("T")[0];
@@ -104,78 +105,85 @@ export default function DataTable() {
           <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }}>
             <TableHead>
               <TableRow>
-                <TableCell style={{ backgroundColor: "#11071B", color: '#ffffff' }}>
+                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff' }}>
                   ID
                 </TableCell>
-                {/* <TableCell style={{ backgroundColor: "#11071B" }}>
-                  .
-                </TableCell> */}
-                <TableCell style={{ backgroundColor: "#11071B", color: '#ffffff'  }}>
+                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
                   Name
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#11071B", color: '#ffffff'  }}>
+                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
                   Symbol
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#11071B", color: '#ffffff'  }}>
+                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
                   Open
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#11071B", color: '#ffffff'  }}>
+                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
                   High
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#11071B", color: '#ffffff'  }}>
+                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
                   Low
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#11071B", color: '#ffffff'  }}>
+                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
                   Close
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#11071B", color: '#ffffff'  }}>
+                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
                   Volume
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#11071B", color: '#ffffff'  }}>
+                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
                   Remove from watchlist
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {watchlist.map((data) => {
-
-
                 return (
                   <TableRow key={data.id}>
-                    <TableCell style={{ backgroundColor: "#190840", color: '#ffffff' }}>
+                    <TableCell
+                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    >
                       {data.id}
                     </TableCell>
-                    {/* <TableCell>
-                      {
-                        await fetch(
-                          `${data.icon}?apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
-                          {
-                            method: "GET",
-                            headers: {
-                              "X-Polygon-Edge-ID": "cool-big-id",
-                              "X-Polygon-Edge-IP-Address": "8.8.4.4",
-                            },
-                          }
-                        )
-                        .then((res) => {
-                          return (
-                            <>
-                            <img src={res.body} />
-                            </>
-                          )
-                        })
-                      }
-                    </TableCell> */}
-                    <TableCell style={{ backgroundColor: "#190840", color: '#ffffff' }}>{data.name}</TableCell>
-                    <TableCell style={{ backgroundColor: "#190840", color: '#ffffff' }}>{data.symbol}</TableCell>
-                    <TableCell style={{ backgroundColor: "#190840", color: '#ffffff' }}>{data.open}</TableCell>
-                    <TableCell style={{ backgroundColor: "#190840", color: '#ffffff' }}>{data.high}</TableCell>
-                    <TableCell style={{ backgroundColor: "#190840", color: '#ffffff' }}>{data.low}</TableCell>
-                    <TableCell style={{ backgroundColor: "#190840", color: '#ffffff' }}>{data.close}</TableCell>
-                    <TableCell style={{ backgroundColor: "#190840", color: '#ffffff' }}>{data.volume}</TableCell>
-                    <TableCell style={{ backgroundColor: "#190840", color: '#ffffff' }}>
-                      <Link
-                        style={{ color: '#16addb'}}
+                    <TableCell
+                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    >
+                      {data.name}
+                    </TableCell>
+                    <TableCell
+                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    >
+                      {data.symbol}
+                    </TableCell>
+                    <TableCell
+                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    >
+                      {data.open}
+                    </TableCell>
+                    <TableCell
+                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    >
+                      {data.high}
+                    </TableCell>
+                    <TableCell
+                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    >
+                      {data.low}
+                    </TableCell>
+                    <TableCell
+                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    >
+                      {data.close}
+                    </TableCell>
+                    <TableCell
+                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    >
+                      {data.volume}
+                    </TableCell>
+                    <TableCell
+                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    >
+                      <Button
+                        color="error"
+                        variant="outlined"
                         component="button"
                         onClick={() => {
                           let tempWatchlist = [];
@@ -188,8 +196,8 @@ export default function DataTable() {
                           );
                         }}
                       >
-                        Remove
-                      </Link>
+                        <RemoveIcon />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 );
