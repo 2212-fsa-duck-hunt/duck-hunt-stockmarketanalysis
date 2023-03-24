@@ -3,7 +3,6 @@ import { useState } from "react";
 import SP500 from "../S&P500Table";
 import TopGainers from "../TopGainers";
 import TopLosers from "../TopLosers";
-import Crypto from "../AllCrypto";
 import { Stack, Button } from "@mui/material";
 
 export default function Stocks() {
@@ -22,30 +21,21 @@ export default function Stocks() {
         <Button
           variant="outlined"
           color="inherit"
-          onClick={() => setTableView("Crypto")}
-        >
-          Crypto
-        </Button>
-        <Button
-          variant="outlined"
-          color="inherit"
           onClick={() => setTableView("TopGainers")}
         >
-          Top Gainers
+          Gainers
         </Button>
         <Button
           variant="outlined"
           color="inherit"
           onClick={() => setTableView("TopLosers")}
         >
-          Top Losers
+          Losers
         </Button>
       </Stack>
       <div>
         {tableView === "S&P500" ? (
           <SP500 />
-        ) : tableView === "Crypto" ? (
-          <Crypto />
         ) : tableView === "TopGainers" ? (
           <TopGainers />
         ) : (

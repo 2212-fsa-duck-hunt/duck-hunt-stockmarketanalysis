@@ -21,7 +21,7 @@ import { useState, useEffect } from "react";
 
 let tempWatchlist = [];
 
-export default function TopGainers() {
+export default function CryptoGainers() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [stock, setStock] = useState({});
@@ -38,7 +38,7 @@ export default function TopGainers() {
 
   useEffect(() => {
     fetch(
-      "https://api.polygon.io/v1/summaries?ticker.any_of=AAPL,MSFT,AMZN,NVDA,GOOGL,BRK.B,GOOG,TSLA,UNH,META,XOM,JNJ,JPM,V,PG,HD,MA,ABBV,CVX,AVGO,MRK,LLY,PEP,KO,PFE,COST,TMO,CSCO,MCD,WMT,BAC,CRM,DIS,ABT,LIN,ADBE,TXN,DHR,ACN,VZ,AMD,CMCSA,NKE,NEE,PM,BMY,RTX,WFC,QCOM,NFLX&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      "https://api.polygon.io/v1/summaries?ticker.any_of=X:BTCUSD,X:ETHUSD,X:USDTUSD,X:USDCUSD,X:XRPUSD,X:ADAUSD,X:DOGEUSD,X:MATICUSD,X:SOLUSD,X:DOTUSD,X:LTCUSD,X:SHIBUSD,X:TRXUSD,X:AVAXUSD,X:DAIUSD,X:UNIUSD,X:NEARUSD,X:LINKUSD,X:ATOMUSD,X:CHZUSD,X:ETCUSD,X:XMRUSD,X:SANDUSD,X:ZECUSD,X:BCHUSD,X:XLMUSD,X:FILUSD,X:MASKUSD,X:MKRUSD,X:HBARUSD&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
       {
         method: "GET",
         headers: {
@@ -101,12 +101,13 @@ export default function TopGainers() {
                     return { color: "red" };
                   }
                 };
+                let dollarUSLocale = Intl.NumberFormat("en-US");
 
                 return (
                   <TableRow key={data.name}>
-                    <TableCell>{data.name}</TableCell>
-                    <TableCell>{data.ticker}</TableCell>
-                    <TableCell>${data.price}</TableCell>
+                    <TableCell>{data.name.slice(0, -23)}</TableCell>
+                    <TableCell>{data.ticker.slice(2, -3)}</TableCell>
+                    <TableCell>${dollarUSLocale.format(data.price)}</TableCell>
                     <TableCell>${data.session.previous_close}</TableCell>
                     <TableCell style={change()}>
                       {data.session.change < 0 ? (

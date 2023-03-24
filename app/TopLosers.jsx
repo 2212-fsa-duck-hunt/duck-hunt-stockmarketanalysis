@@ -55,10 +55,12 @@ export default function TopLosers() {
     return <h1>Loading</h1>;
   }
 
-  const sortedStock = stock.results.sort(
-    (firstItem, secondItem) =>
-      firstItem.session.change_percent - secondItem.session.change_percent
-  );
+  const sortedStock = stock.results
+    .sort(
+      (firstItem, secondItem) =>
+        firstItem.session.change_percent - secondItem.session.change_percent
+    )
+    .filter((elem) => elem.session.change_percent < 0);
 
   return (
     <Box>
@@ -156,7 +158,7 @@ export default function TopLosers() {
         </Table>
         <TablePagination
           component={"div"}
-          count={50}
+          count={sortedStock.length}
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
