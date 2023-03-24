@@ -19,8 +19,9 @@ import AdbIcon from '@mui/icons-material/Adb';
 import SearchIcon from '@mui/icons-material/Search';
 import "../public/home.css";
 import Router, { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-const pages = ['All Stocks', 'S&P 500', 'News', 'About'];
+const pages = ['Stocks', 'Crypto', 'News', 'About Polygon.io'];
 const settings = ['Profile', 'Account', 'Watchlist', 'Logout'];
 
 function Navbar() {
@@ -39,13 +40,13 @@ function Navbar() {
         setAnchorElNav(null);
     };
 
-    const handleCloseNavMenuAllStocks = () => {
+    const handleCloseNavMenuStocks = () => {
         setAnchorElNav(null);
         router.push('/stocks')
     };
-    const handleCloseNavMenuSP500 = () => {
+    const handleCloseNavMenuCrypto = () => {
         setAnchorElNav(null);
-        // router.push('/sp')
+        router.push('/crypto')
     };
     const handleCloseNavMenuNews = () => {
         setAnchorElNav(null);
@@ -184,23 +185,45 @@ function Navbar() {
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         <Button
-                            onClick={handleCloseNavMenuAllStocks}
+                            onClick={handleCloseNavMenuStocks}
                             sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
                         >
-                            All Stocks
+                            Stocks
                         </Button>
                         <Button
-                            onClick={handleCloseNavMenuSP500}
+                            onClick={handleCloseNavMenuCrypto}
                             sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
                         >
-                            S&P 500
+                            Crypto
                         </Button>
-                        <Button
-                            onClick={handleCloseNavMenuNews}
-                            sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
-                        >
-                            News
-                        </Button>
+
+
+
+                        <div className="dropdown">
+                            <Button
+                                onClick={handleCloseNavMenuNews}
+                                sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
+                            > News
+                            </Button>
+                            <div className="dropdown-content">
+                                <Link href="/news">General</Link>
+                                <Link href="/news/communicationservices">Communication Services</Link>
+                                <Link href="/newsconsumerdiscretionary">
+                                    Consumer Discretionary
+                                </Link>
+                                <Link href="/news/consumerstaples">ConsumerStaples</Link>
+                                <Link href="/news/financials">Financials</Link>
+                                <Link href="/news/healthcare">Healthcare</Link>
+                                <Link href="/news/industrials">Industrials</Link>
+                                <Link href="/news/informationtechnology">Information Technology</Link>
+                                <Link href="/news/materials">Materials</Link>
+                                <Link href="/news/realestate">Real Estate</Link>
+                                <Link href="/news/utilities">Utilities</Link>
+
+                            </div>
+                        </div>
+
+
                         <Button
                             onClick={handleCloseNavMenuAbout}
                             sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Poppins', fontWeight: 100 }}
