@@ -10,7 +10,9 @@ import {
   Box,
   TablePagination,
   Link,
+  Button,
 } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -116,8 +118,10 @@ export default function SP500() {
                       {data.session.change_percent}%
                     </TableCell>
                     <TableCell>
-                      <Link
+                      <Button
                         component="button"
+                        variant="outlined"
+                        color="success"
                         onClick={() => {
                           if (tempWatchlist.includes(data.ticker)) {
                             alert(`Watchlist already contains ${data.name}`);
@@ -137,8 +141,8 @@ export default function SP500() {
                           }
                         }}
                       >
-                        Add
-                      </Link>
+                        <AddIcon />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 );

@@ -10,7 +10,9 @@ import {
   Box,
   TablePagination,
   Link,
+  Button,
 } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -119,7 +121,9 @@ export default function Crypto() {
                       {data.session.change_percent}%
                     </TableCell>
                     <TableCell>
-                      <Link
+                      <Button
+                        color="success"
+                        variant="outlined"
                         component="button"
                         onClick={() => {
                           if (tempWatchlist.includes(data.ticker)) {
@@ -140,8 +144,8 @@ export default function Crypto() {
                           }
                         }}
                       >
-                        Add
-                      </Link>
+                        <AddIcon />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 );
