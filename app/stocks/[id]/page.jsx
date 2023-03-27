@@ -1,10 +1,14 @@
 "use client"
 import StockVisualization from '../../StockVisualization';
+import StockChart from '../../StockChart';
+import LinearModelVisualization from '../../LinearModelVisualization';
 
 const AppViz = () => {
     return (
       <div style={{ width: '70%', margin: '0 auto' }}>
-        <StockVisualization />
+        {/* <StockVisualization /> */}
+        <StockChart />
+        <LinearModelVisualization />
       </div>
     );
 };
