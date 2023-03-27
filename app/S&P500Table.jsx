@@ -221,7 +221,7 @@ export default function SP500() {
           <TableHead>
             <TableRow>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Stock Name
+                Company
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
                 Ticker
@@ -233,10 +233,10 @@ export default function SP500() {
                 Previous Close
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Total Change
+                Change
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Change %
+                % Change
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
                 Add To Watch List
@@ -258,23 +258,20 @@ export default function SP500() {
                   <TableRow key={data.name}>
                     <TableCell>{data.name}</TableCell>
                     <TableCell>{data.ticker}</TableCell>
-                    <TableCell>${data.price}</TableCell>
-                    <TableCell>${data.session.previous_close}</TableCell>
-                    <TableCell style={change()}>
+                    <TableCell>
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
                         <ArrowDropUpIcon color="success" />
                       )}
+                      ${data.price}
+                    </TableCell>
+                    <TableCell>${data.session.previous_close}</TableCell>
+                    <TableCell style={change()}>
                       ${data.session.change}
                     </TableCell>
                     <TableCell style={change()}>
-                      {data.session.change_percent < 0 ? (
-                        <ArrowDropDownIcon color="error" />
-                      ) : (
-                        <ArrowDropUpIcon color="success" />
-                      )}
-                      {data.session.change_percent}%
+                      ({data.session.change_percent}%)
                     </TableCell>
                     <TableCell>
                       <Button
