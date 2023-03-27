@@ -1,5 +1,5 @@
+// 'use client';
 import './globals.css';
-// import { Provider } from 'react';
 import Navbar from './navbar';
 import AboveBar from './abovebar';
 import "../public/home.css"
@@ -19,13 +19,11 @@ export default function RootLayout({ children }) {
           {/* <AboveBar /> */}
           <Navbar />
         </nav>
-        {/* <Provider store={store}> */}
-        {children}
-        {/* </Provider> */}
+          {children}
         <footer>
           <div> hey </div>
         </footer>
       </body>
     </html>
-  )
+  );
 }
