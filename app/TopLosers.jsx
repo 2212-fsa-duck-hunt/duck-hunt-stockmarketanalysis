@@ -17,6 +17,9 @@ import AddIcon from "@mui/icons-material/Add";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase';
+
 import { useState, useEffect } from "react";
 
 let tempWatchlist = [];
@@ -168,6 +171,20 @@ export default function TopLosers() {
       .then((data) => setStockTen(data.results));
   }, []);
 
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user)=>{
+      if(user){
+          //do your logged in user crap here
+          console.log("Logged in ", user)
+          setLoggedIn(true);
+      }else{
+          console.log("Logged out");
+      }
+    })
+  }, [])
+
+
   const allStocks = [
     ...stock,
     ...stockTwo,
@@ -187,6 +204,7 @@ export default function TopLosers() {
 
   const sortedStock = allStocks
     .filter((elem) => elem.session.change_percent < 0)
+
     .sort(
       (firstItem, secondItem) =>
         firstItem.session.change_percent - secondItem.session.change_percent
@@ -260,6 +278,10 @@ export default function TopLosers() {
                         variant="outlined"
                         color="success"
                         onClick={() => {
+                          if (!loggedIn) {
+                            alert('Must be logged in to add to watchlist');
+                            return;
+                          }
                           if (tempWatchlist.includes(data.ticker)) {
                             alert(`Watchlist already contains ${data.name}`);
                             return;

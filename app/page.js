@@ -35,7 +35,7 @@ export default function Home() {
           </video>
         </section>
         <section>
-          <div class="ticker-title">
+          <div className="ticker-title">
             <span>S&P 500</span>
             <span>Dow</span>
             <span>Nasdaq</span>
