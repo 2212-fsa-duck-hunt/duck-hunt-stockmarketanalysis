@@ -11,14 +11,15 @@ import {
   TablePagination,
   Link,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './firebase';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
 
 import { useState, useEffect } from "react";
 
@@ -37,6 +38,8 @@ export default function TopLosers() {
   const [stockEight, setStockEight] = useState([]);
   const [stockNine, setStockNine] = useState([]);
   const [stockTen, setStockTen] = useState([]);
+
+  const [loggedIn, setLoggedIn] = useState(false);
 
   if (typeof window !== "undefined") {
     if (localStorage.watchlist) {
@@ -171,19 +174,17 @@ export default function TopLosers() {
       .then((data) => setStockTen(data.results));
   }, []);
 
-
   useEffect(() => {
-    onAuthStateChanged(auth, async (user)=>{
-      if(user){
-          //do your logged in user crap here
-          console.log("Logged in ", user)
-          setLoggedIn(true);
-      }else{
-          console.log("Logged out");
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        //do your logged in user crap here
+        console.log("Logged in ", user);
+        setLoggedIn(true);
+      } else {
+        console.log("Logged out");
       }
-    })
-  }, [])
-
+    });
+  }, []);
 
   const allStocks = [
     ...stock,
@@ -199,7 +200,17 @@ export default function TopLosers() {
   ];
 
   if (allStocks.length < 500) {
-    return <h1>Fetching the latest market data</h1>;
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        flexDirection="column"
+      >
+        <h1>Fetching the latest market data</h1>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   const sortedStock = allStocks
@@ -279,7 +290,7 @@ export default function TopLosers() {
                         color="success"
                         onClick={() => {
                           if (!loggedIn) {
-                            alert('Must be logged in to add to watchlist');
+                            alert("Must be logged in to add to watchlist");
                             return;
                           }
                           if (tempWatchlist.includes(data.ticker)) {

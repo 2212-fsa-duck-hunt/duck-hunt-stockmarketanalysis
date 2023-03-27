@@ -11,6 +11,7 @@ import {
   TablePagination,
   Link,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -52,7 +53,17 @@ export default function CryptoLosers() {
   }, []);
 
   if (!stock.status) {
-    return <h1>Loading</h1>;
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        flexDirection="column"
+      >
+        <h1>Fetching the latest market data</h1>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   const sortedStock = stock.results
