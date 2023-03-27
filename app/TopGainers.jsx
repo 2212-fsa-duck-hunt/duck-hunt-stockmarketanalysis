@@ -182,15 +182,15 @@ export default function TopGainers() {
   ];
 
   if (allStocks.length < 500) {
-    return <h1>Loading</h1>;
+    return <h1>Fetching the latest market data</h1>;
   }
 
   const sortedStock = allStocks
+    .filter((elem) => elem.session.change_percent > 0)
     .sort(
       (firstItem, secondItem) =>
         secondItem.session.change_percent - firstItem.session.change_percent
-    )
-    .filter((elem) => elem.session.change_percent > 0);
+    );
 
   return (
     <Box>
