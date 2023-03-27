@@ -50,75 +50,75 @@ export default function Michelle() {
         });
     }, []);
 
-    //THIS IS FOR THE GRAPH
-    const [series, setSeries] = useState([{
-        data: []
-    }]);
+    // //THIS IS FOR THE GRAPH
+    // const [series, setSeries] = useState([{
+    //     data: []
+    // }]);
 
-    useEffect(() => {
-        fetch(`https://api.polygon.io/v2/aggs/ticker/AAPL/range/10/minute/2023-03-27/2023-03-27?adjusted=true&sort=asc&limit=120&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj
-        `, {
-            method: "GET",
-            headers: {
-                "X-Polygon-Edge-ID": "sample_edge_id",
-                "X-Polygon-Edge-IP-Address": "8.8.8.8",
-            },
-        })
-            .then(res => res.json())
-            .then(data => setData(data.results));
-        if (data === null) {
-            console.log("loading")
-        } else {
-            let prices = data.map((timestamp) =>
-            (
-                {
-                    x: new Date(timestamp.t),
-                    y: [timestamp.o, timestamp.h, timestamp.l, timestamp.c]
-                }
-            ))
-            setSeries(
-                [{
-                    data: prices
-                }]
-            )
-            console.log("what are the series", series)
-        }
-    }, [data])
+    // useEffect(() => {
+    //     fetch(`https://api.polygon.io/v2/aggs/ticker/AAPL/range/10/minute/2023-03-27/2023-03-27?adjusted=true&sort=asc&limit=120&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj
+    //     `, {
+    //         method: "GET",
+    //         headers: {
+    //             "X-Polygon-Edge-ID": "sample_edge_id",
+    //             "X-Polygon-Edge-IP-Address": "8.8.8.8",
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => setData(data.results));
+    //     if (data === null) {
+    //         console.log("loading")
+    //     } else {
+    //         let prices = data.map((timestamp) =>
+    //         (
+    //             {
+    //                 x: new Date(timestamp.t),
+    //                 y: [timestamp.o, timestamp.h, timestamp.l, timestamp.c]
+    //             }
+    //         ))
+    //         setSeries(
+    //             [{
+    //                 data: prices
+    //             }]
+    //         )
+    //         console.log("what are the series", series)
+    //     }
+    // }, [data])
 
-    const chart = {
-        options: {
-            chart: {
-                type: 'candlestick',
-                height: 350
-            },
-            title: {
-                text: 'Stock Chart',
-                align: 'left'
-            },
-            xaxis: {
-                type: 'datetime'
-            },
-            yaxis: {
-                tooltip: {
-                    enabled: true
-                }
-            }
-        },
+    // const chart = {
+    //     options: {
+    //         chart: {
+    //             type: 'candlestick',
+    //             height: 350
+    //         },
+    //         title: {
+    //             text: 'Stock Chart',
+    //             align: 'left'
+    //         },
+    //         xaxis: {
+    //             type: 'datetime'
+    //         },
+    //         yaxis: {
+    //             tooltip: {
+    //                 enabled: true
+    //             }
+    //         }
+    //     },
 
-        //this is open high low close
-        series: [{
-            data: [{
-                x: new Date(1538778600000),
-                y: [6629.81, 6650.5, 6623.04, 6633.33]
-            },
-            {
-                x: new Date(1538780400000),
-                y: [6632.01, 6643.59, 6620, 6630.11]
-            }
-            ]
-        }],
+    //     //this is open high low close
+    //     series: [{
+    //         data: [{
+    //             x: new Date(1538778600000),
+    //             y: [6629.81, 6650.5, 6623.04, 6633.33]
+    //         },
+    //         {
+    //             x: new Date(1538780400000),
+    //             y: [6632.01, 6643.59, 6620, 6630.11]
+    //         }
+    //         ]
+    //     }],
 
-    };
+    // };
 
     if (stock === null) {
         return (
@@ -131,7 +131,7 @@ export default function Michelle() {
                 {emojis[direction]}
             </div>
             <div id="candlestick">
-                <Chart options={chart.options} series={series} type="candlestick" width="50%" height="50%" />
+                {/* <Chart options={chart.options} series={series} type="candlestick" width="50%" height="50%" /> */}
             </div>
         </div>)
 } 
