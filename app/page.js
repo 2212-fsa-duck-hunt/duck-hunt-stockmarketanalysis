@@ -49,6 +49,7 @@ export default function Home() {
             <span>Poop</span>
             <span>Poopie</span>
             <span>Wah</span>
+            {/* </marquee> */}
           </div>
         </section>
         <section className="sec">
