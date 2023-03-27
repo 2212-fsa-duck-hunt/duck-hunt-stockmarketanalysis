@@ -180,9 +180,9 @@ export default function SP500() {
     ...stockNine,
     ...stockTen,
   ];
-  console.log("ALLLLL:", allStocks);
+
   if (allStocks.length < 500) {
-    return <h1>Loading</h1>;
+    return <h1>Fetching the latest market data</h1>;
   }
 
   return (
