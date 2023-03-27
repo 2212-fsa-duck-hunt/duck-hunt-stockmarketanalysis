@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
 
-const StockChart = () => {
+const StockChart = (props) => {
   const [chartData, setChartData] = useState({ series: [], options: {} });
   const [timeSpan, setTimeSpan] = useState('year');
+  const symbol = props.symbol;
 
   const getTimeSpan = (timeSpan) => {
     const today = new Date();
@@ -30,7 +31,7 @@ const StockChart = () => {
   };
 
   const fetchData = async () => {
-    const stocksTicker = 'AAPL';
+    const stocksTicker = symbol;
     const multiplier = 1;
     const timespan = 'day';
     const { from, to, limit } = getTimeSpan(timeSpan);
@@ -93,32 +94,32 @@ const StockChart = () => {
         },
       },
     });
-    
+
   };
   useEffect(() => {
     fetchData();
-    }, [timeSpan]);
-  
+  }, [timeSpan]);
+
   const handleTimeSpanChange = (event) => {
     setTimeSpan(event.target.value);
-    };
-    
-    return (
-      <div>
+  };
+
+  return (
+    <div>
       <select value={timeSpan} onChange={handleTimeSpanChange}>
-      <option value="month">Last Month</option>
-      <option value="year">Last Year</option>
-      <option value="3years">Last 3 Years</option>
+        <option value="month">Last Month</option>
+        <option value="year">Last Year</option>
+        <option value="3years">Last 3 Years</option>
       </select>
       <Chart
-           options={chartData.options}
-           series={chartData.series}
-           type="candlestick"
-           width="100%"
-           height="450"
-         />
-      </div>
-      );      
+        options={chartData.options}
+        series={chartData.series}
+        type="candlestick"
+        width="100%"
+        height="450"
+      />
+    </div>
+  );
 };
-    
+
 export default StockChart;
