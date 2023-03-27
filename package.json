@@ -19,6 +19,7 @@
     "apexcharts": "^3.37.2",
     "axios": "^1.3.4",
     "buffer": "^6.0.3",
+    "chart.js": "^4.2.1",
     "encoding": "^0.1.13",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
@@ -27,6 +28,7 @@
     "protobufjs": "^7.2.2",
     "react": "18.2.0",
     "react-apexcharts": "^1.4.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {

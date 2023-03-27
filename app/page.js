@@ -36,6 +36,7 @@ export default function Home() {
         </section>
         <section>
           <div class="ticker-title">
+            {/* <marquee direction="left"> */}
             <span>S&P 500</span>
             <span>Dow</span>
             <span>Nasdaq</span>
@@ -49,6 +50,7 @@ export default function Home() {
             <span>Poop</span>
             <span>Poopie</span>
             <span>Wah</span>
+            {/* </marquee> */}
           </div>
         </section>
         <section className="sec">
