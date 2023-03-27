@@ -24,7 +24,16 @@ let tempWatchlist = [];
 export default function TopGainers() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [stock, setStock] = useState({});
+  const [stock, setStock] = useState([]);
+  const [stockTwo, setStockTwo] = useState([]);
+  const [stockThree, setStockThree] = useState([]);
+  const [stockFour, setStockFour] = useState([]);
+  const [stockFive, setStockFive] = useState([]);
+  const [stockSix, setStockSix] = useState([]);
+  const [stockSeven, setStockSeven] = useState([]);
+  const [stockEight, setStockEight] = useState([]);
+  const [stockNine, setStockNine] = useState([]);
+  const [stockTen, setStockTen] = useState([]);
 
   if (typeof window !== "undefined") {
     if (localStorage.watchlist) {
@@ -38,7 +47,7 @@ export default function TopGainers() {
 
   useEffect(() => {
     fetch(
-      "https://api.polygon.io/v1/summaries?ticker.any_of=AAPL,MSFT,AMZN,NVDA,GOOGL,BRK.B,GOOG,TSLA,UNH,META,XOM,JNJ,JPM,V,PG,HD,MA,ABBV,CVX,AVGO,MRK,LLY,PEP,KO,PFE,COST,TMO,CSCO,MCD,WMT,BAC,CRM,DIS,ABT,LIN,ADBE,TXN,DHR,ACN,VZ,AMD,CMCSA,NKE,NEE,PM,BMY,RTX,WFC,QCOM,NFLX&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      "https://api.polygon.io/v1/summaries?ticker.any_of=MMM,AOS,ABT,ABBV,ABMD,ACN,ATVI,ADM,ADBE,AAP,AMD,AES,AFL,A,APD,AKAM,ALK,ALB,ARE,ALGN,ALLE,LNT,ALL,GOOGL,GOOG,MO,AMZN,AMCR,AEE,AAL,AEP,AXP,AIG,AMT,AWK,AMP,ABC,AME,AMGN,APH,ADI,ANSS,ELV,AON,APA,AAPL,AMAT,APTV,ANET,AJG&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
       {
         method: "GET",
         headers: {
@@ -48,14 +57,135 @@ export default function TopGainers() {
       }
     )
       .then((res) => res.json())
-      .then((data) => setStock(data));
+      .then((data) => setStock(data.results));
+    fetch(
+      "https://api.polygon.io/v1/summaries?ticker.any_of=AIZ,T,ATO,ADSK,ADP,AZO,AVB,AVY,BKR,BALL,BAC,BBWI,BAX,BDX,BRK.B,BBY,BIO,TECH,BIIB,BLK,BK,BA,BKNG,BWA,BXP,BSX,BMY,AVGO,BR,BRO,BF.B,CHRW,CDNS,CZR,CPB,COF,CAH,KMX,CCL,CARR,CTLT,CAT,CBOE,CBRE,CDW,CE,CNC,CNP,CDAY,ORCL&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      {
+        method: "GET",
+        headers: {
+          "X-Polygon-Edge-ID": "sample_edge_id",
+          "X-Polygon-Edge-IP-Address": "8.8.8.8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setStockTwo(data.results));
+    fetch(
+      "https://api.polygon.io/v1/summaries?ticker.any_of=CF,CRL,SCHW,CHTR,CVX,CMG,CB,CHD,CI,CINF,CTAS,CSCO,C,CFG,YUM,CLX,CME,CMS,KO,CTSH,CL,CMCSA,CMA,CAG,COP,ED,STZ,CPRT,GLW,CTVA,COST,CTRA,CCI,CSX,CMI,CVS,DHI,DHR,DRI,DVA,DE,DAL,XRAY,DVN,DXCM,FANG,DLR,DFS,DISA,WBD&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      {
+        method: "GET",
+        headers: {
+          "X-Polygon-Edge-ID": "sample_edge_id",
+          "X-Polygon-Edge-IP-Address": "8.8.8.8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setStockThree(data.results));
+    fetch(
+      "https://api.polygon.io/v1/summaries?ticker.any_of=DISH,DG,DLTR,D,DPZ,DOV,DOW,DTE,DUK,ZBRA,DD,DXC,EMN,ETN,EBAY,ECL,EIX,EW,EA,LLY,EMR,ENPH,ETR,EOG,EFX,EQIX,EQR,ESS,EL,ETSY,RE,EVRG,ES,EXC,EXPE,EXPD,EXR,XOM,FFIV,META,FAST,FRT,FDX,FIS,FITB,FRC,FE,FISV,FLT,FMC&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      {
+        method: "GET",
+        headers: {
+          "X-Polygon-Edge-ID": "sample_edge_id",
+          "X-Polygon-Edge-IP-Address": "8.8.8.8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setStockFour(data.results));
+    fetch(
+      "https://api.polygon.io/v1/summaries?ticker.any_of=F,FTNT,FTV,FBHS,FOXA,FOX,BEN,FCX,GPS,GRMN,IT,GNRC,GD,GE,GIS,GM,GPC,GILD,GPN,GL,GS,HAL,HBI,HAS,HCA,PEAK,HSIC,HES,HPE,HLT,HOLX,HD,HON,HRL,HST,HWM,HPQ,HUM,HBAN,HII,IBM,IEX,IDXX,ZBH,ITW,ILMN,INCY,IR,INTC,ICE&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      {
+        method: "GET",
+        headers: {
+          "X-Polygon-Edge-ID": "sample_edge_id",
+          "X-Polygon-Edge-IP-Address": "8.8.8.8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setStockFive(data.results));
+    fetch(
+      "https://api.polygon.io/v1/summaries?ticker.any_of=FF,IP,IPG,INTU,ISRG,IVZ,IPGP,IQV,IRM,JBHT,JKHY,J,SJM,JNJ,JCI,JPM,JNPR,ZION,K,KEY,KEYS,KMB,KIM,KMI,KLAC,KHC,KR,LHX,LH,LRCX,LW,LVS,LEG,LDOS,LEN,LNC,LIN,LYV,LKQ,LMT,L,LOW,LUMN,LYB,MTB,MRO,MPC,MKTX,MAR,MMC&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      {
+        method: "GET",
+        headers: {
+          "X-Polygon-Edge-ID": "sample_edge_id",
+          "X-Polygon-Edge-IP-Address": "8.8.8.8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setStockSix(data.results));
+    fetch(
+      "https://api.polygon.io/v1/summaries?ticker.any_of=MLM,MAS,MA,MTCH,MKC,MCD,MCK,MDT,MRK,MET,MTD,MGM,MCHP,MU,MSFT,MAA,MRNA,MHK,TAP,MDLZ,MPWR,MNST,MCO,MS,MSI,MSCI,NDAQ,NTAP,NFLX,NWL,NEM,NWSA,NWS,NEE,ZTS,NKE,NI,NSC,NTRS,NOC,GEN,NCLH,NRG,NUE,NVDA,NVR,NXPI,ORLY,OXY,ODFL&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      {
+        method: "GET",
+        headers: {
+          "X-Polygon-Edge-ID": "sample_edge_id",
+          "X-Polygon-Edge-IP-Address": "8.8.8.8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setStockSeven(data.results));
+    fetch(
+      "https://api.polygon.io/v1/summaries?ticker.any_of=OMC,OKE,ORCL,OGN,OTIS,PCAR,PKG,PH,PAYX,PAYC,PYPL,PENN,PNR,MTB,PEP,PKI,PFE,PM,PSX,PNW,PXD,PNC,POOL,PPG,PPL,PFG,PG,PGR,PLD,PRU,PTC,PEG,PSA,PHM,PVH,QRVO,QCOM,PWR,DGX,RL,RJF,RTX,O,REG,REGN,RF,RSG,RMD,RHI,ROK&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      {
+        method: "GET",
+        headers: {
+          "X-Polygon-Edge-ID": "sample_edge_id",
+          "X-Polygon-Edge-IP-Address": "8.8.8.8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setStockEight(data.results));
+    fetch(
+      "https://api.polygon.io/v1/summaries?ticker.any_of=ROL,ROP,ROST,RCL,SPGI,CRM,SBAC,SLB,STX,SEE,SRE,NOW,SHW,SPG,SWKS,SNA,SO,LUV,SWK,SBUX,STT,STE,SYK,SIVB,SYF,SNPS,SYY,TMUS,TROW,TTWO,TPR,TGT,TEL,TDY,TFX,TER,TSLA,TXN,TXT,COO,HIG,HSY,MOS,TRV,DIS,TMO,TJX,TSCO,TT,TDG&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      {
+        method: "GET",
+        headers: {
+          "X-Polygon-Edge-ID": "sample_edge_id",
+          "X-Polygon-Edge-IP-Address": "8.8.8.8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setStockNine(data.results));
+    fetch(
+      "https://api.polygon.io/v1/summaries?ticker.any_of=TRMB,TFC,CSGP,TYL,TSN,USB,UDR,ULTA,UAA,UA,UNP,UAL,UPS,URI,UNH,UHS,VLO,VTR,VRSN,VRSK,VZ,VRTX,VFC,INVH,VTRS,V,VNO,VMC,WRB,GWW,WAB,WBA,WMT,WM,WAT,WEC,WFC,WELL,WST,WDC,WU,WRK,WY,WHR,WMB,AMD,WYNN,XEL,APEI,XYL&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      {
+        method: "GET",
+        headers: {
+          "X-Polygon-Edge-ID": "sample_edge_id",
+          "X-Polygon-Edge-IP-Address": "8.8.8.8",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setStockTen(data.results));
   }, []);
 
-  if (!stock.status) {
+  const allStocks = [
+    ...stock,
+    ...stockTwo,
+    ...stockThree,
+    ...stockFour,
+    ...stockFive,
+    ...stockSix,
+    ...stockSeven,
+    ...stockEight,
+    ...stockNine,
+    ...stockTen,
+  ];
+
+  if (allStocks.length < 500) {
     return <h1>Loading</h1>;
   }
 
-  const sortedStock = stock.results
+  const sortedStock = allStocks
     .sort(
       (firstItem, secondItem) =>
         secondItem.session.change_percent - firstItem.session.change_percent
