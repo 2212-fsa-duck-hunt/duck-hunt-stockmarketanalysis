@@ -6,6 +6,7 @@ import styles from './page.module.css';
 import { Box, Button, styled, Typography } from '@mui/material';
 import "../public/home.css"
 import { textAlign } from '@mui/system';
+import { useRouter } from "next/navigation"
 
 // DONT LOOK AT THIS DONT LOOK AT THIS PLEASE DONT LOOK AT THIS!!!!
 const inter = Inter({ subsets: ['latin'] })
@@ -16,7 +17,9 @@ export default function Home() {
     window.addEventListener("scroll", () => {
       let value = window.scrollY;
     });
-  }
+  };
+
+  const router = useRouter();
 
   // document.getElementById('video').playbackRate = 0.75;
 
@@ -30,17 +33,94 @@ export default function Home() {
           <div className="headerbox">
             {/* <p id="abovetext"><strong>The Future of Prediction is Here. It's Polygon.io.</strong></p> */}
             <p id="text"> Duckhunt </p>
-            <p id="belowtext"> Build your finances with our commission-free proprietary prediction and analysis tool. I'm trying to push
-              the video down so it's not behind the words, but as you can see, I haven't done it yet.</p>
+            <p id="belowtext"> Build your finances with our commission-free visualization and analysis tool.</p>
           </div>
         </section>
-        <section>
+
+
+        {/* <section>
           <div className='ticker-div' >
             <span className="ticker1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;S&P 500 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dow &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nasdaq &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VIX &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Amzn &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; meta &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TSLA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AAPL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AMD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; COIN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MSFT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NVDA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NKE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BABA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ROKU &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XOM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CVX &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UNH &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WMT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; KO &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TXN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CCL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PYPL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MU &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTC &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NFLX</span>
             <span className="ticker2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;S&P 500 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dow &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nasdaq &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VIX &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Amzn &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; meta &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TSLA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AAPL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AMD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; COIN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MSFT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NVDA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NKE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BABA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ROKU &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XOM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CVX &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UNH &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WMT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; KO &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TXN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CCL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PYPL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MU &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INTC &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NFLX</span>
-            {/* </marquee> */}
           </div>
-        </section>
+        </section> */}
+
+        <div class="container">
+          <div class="marquee-wrapper" style={{ background: "linear-gradient(#782089, #214090);" }}>
+            <div class="marquee">
+              <div class="marquee-group"> <a href='/stocks/amazon' class="marquee-tag-wrapper">
+                <div class="marquee-tag-container"> <span class="marquee-tag">Amazon</span> </div>
+              </a> <a href='/stocks/msft' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">MSFT</span> </div>
+                </a> <a href='/stocks/meta' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"><span class="marquee-tag">META</span> </div>
+                </a> <a href='/stocks/aapl' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">AAPL</span> </div>
+                </a> <a href='/stocks/tsla' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">TSLA</span> </div>
+                </a> <a href='/stocks/googl' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">GOOGL</span> </div>
+                </a> <a href='/stocks/nvda' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container">  <span class="marquee-tag">NVDA</span> </div>
+                </a> <a href='/stocks/unh' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">UNH</span> </div>
+                </a> <a href='/stocks/NFLX' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">NFLX</span> </div>
+                </a> <a href='/stocks/nke' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container">  <span class="marquee-tag">NKE</span> </div>
+                </a> <a href='/stocks/jnj' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"><span class="marquee-tag">JNJ</span> </div>
+                </a>
+                <a href='/stocks/pypl' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"><span class="marquee-tag">PYPL</span> </div>
+                </a>
+                <a href='/stocks/jpm' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"><span class="marquee-tag">JPM</span> </div>
+                </a>
+                <a href='/stocks/v' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"><span class="marquee-tag">V</span> </div>
+                </a>
+              </div>
+              <div aria-hidden="true" class="marquee-group"> <a href='/stocks/amazon' class="marquee-tag-wrapper">
+                <div class="marquee-tag-container"> <span class="marquee-tag">Amazon</span> </div>
+              </a> <a href='/stocks/msft' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container">  <span class="marquee-tag">MSFT</span> </div>
+                </a> <a href='/stocks/meta' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">META</span> </div>
+                </a> <a href='/stocks/aapl' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">AAPL</span> </div>
+                </a> <a href='/stocks/tsla' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">TSLA</span> </div>
+                </a> <a href='/stocks/googl' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">GOOGL</span> </div>
+                </a> <a href='/stocks/nvda' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container">  <span class="marquee-tag">NVDA</span> </div>
+                </a> <a href='/stocks/unh' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">UNH</span> </div>
+                </a> <a href='/stocks/roku' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">NFLX</span> </div>
+                </a> <a href='/stocks/NFLX' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"> <span class="marquee-tag">NKE</span> </div>
+                </a> <a href='/stocks/jnj' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container">  <span class="marquee-tag">JNJ</span> </div>
+                </a>
+                <a href='/stocks/pypl' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"><span class="marquee-tag">PYPL</span> </div>
+                </a>
+                <a href='/stocks/jpm' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"><span class="marquee-tag">JPM</span> </div>
+                </a>
+                <a href='/stocks/v' class="marquee-tag-wrapper">
+                  <div class="marquee-tag-container"><span class="marquee-tag">V</span> </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
         <section className="sec">
           {/* <h2 id> This person is very cool: </h2>
           <div className="scroller"><h2>
@@ -77,6 +157,7 @@ export default function Home() {
             that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
           </p> */}
         </section>
+
 
       </div>
 
