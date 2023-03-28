@@ -28,18 +28,6 @@ const db = getFirestore(app);
 let watchlistSymbols = [];
 
 
-// if (typeof window !== "undefined") {
-//   if (localStorage.watchlist) {
-//     watchlistSymbols = JSON.parse(localStorage.watchlist);
-//   } else {
-//     watchlistSymbols = [];
-//     localStorage.watchlist = watchlistSymbols;
-//   }
-// }
-
-
-
-
 
 export default function DataTable() {
   const [watchlist, setWatchlist] = useState([]);
@@ -83,8 +71,6 @@ export default function DataTable() {
       console.log(err);
     }
   };
-
-  
 
   const fetchData = () => {
 
@@ -141,7 +127,7 @@ export default function DataTable() {
       });
     }
 
-  if (isLoading && watchlist.length > 0) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
