@@ -9,11 +9,11 @@ import {
   Paper,
   Box,
   TablePagination,
-  Link,
   Button,
   CircularProgress,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import Link from "next/link";
 
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -85,16 +85,28 @@ export default function CryptoGainers() {
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
                 Ticker
               </TableCell>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{ backgroundColor: "black", color: "white" }}
+                align="right"
+              >
                 Price
               </TableCell>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{ backgroundColor: "black", color: "white" }}
+                align="right"
+              >
                 Previous Close
               </TableCell>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{ backgroundColor: "black", color: "white" }}
+                align="right"
+              >
                 Change
               </TableCell>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{ backgroundColor: "black", color: "white" }}
+                align="right"
+              >
                 % Change
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
@@ -116,9 +128,17 @@ export default function CryptoGainers() {
 
                 return (
                   <TableRow key={data.name}>
-                    <TableCell>{data.name.slice(0, -23)}</TableCell>
-                    <TableCell>{data.ticker.slice(2, -3)}</TableCell>
                     <TableCell>
+                      <Link href={`/stocks/${data.ticker}`}>
+                        {data.name.slice(0, -23)}
+                      </Link>
+                    </TableCell>
+                    <TableCell>
+                      <Link href={`/stocks/${data.ticker}`}>
+                        {data.ticker.slice(2, -3)}
+                      </Link>
+                    </TableCell>
+                    <TableCell align="right">
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
@@ -126,13 +146,13 @@ export default function CryptoGainers() {
                       )}
                       ${dollarUSLocale.format(data.price.toFixed(2))}
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="right">
                       ${data.session.previous_close.toFixed(2)}
                     </TableCell>
-                    <TableCell style={change()}>
+                    <TableCell style={change()} align="right">
                       ${data.session.change.toFixed(2)}
                     </TableCell>
-                    <TableCell style={change()}>
+                    <TableCell style={change()} align="right">
                       ({data.session.change_percent.toFixed(2)}%)
                     </TableCell>
                     <TableCell>

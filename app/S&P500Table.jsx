@@ -9,35 +9,30 @@ import {
   Paper,
   Box,
   TablePagination,
-  Link,
   Button,
   CircularProgress,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import Link from "next/link";
 
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
-
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth, firebaseConfig } from './firebase';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, firebaseConfig } from "./firebase";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 import { useState, useEffect } from "react";
 
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
 let currentWatchlist = [];
-
 
 export default function SP500() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
 
   const [stock, setStock] = useState([]);
   const [stockTwo, setStockTwo] = useState([]);
@@ -50,11 +45,8 @@ export default function SP500() {
   const [stockNine, setStockNine] = useState([]);
   const [stockTen, setStockTen] = useState([]);
 
-
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
-
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -184,31 +176,27 @@ export default function SP500() {
   }, []);
 
   useEffect(() => {
-
-    onAuthStateChanged(auth, async (loggedInUser)=>{
-      if(loggedInUser){
-          //do your logged in user crap here
-          console.log("Logged in ", loggedInUser)
-          setLoggedIn(true);
-          setUser(loggedInUser);
-          if (user.uid) {
-            const watchlistRef = doc(db, "watchlist", user.uid);
-            console.log("watchlistRef-------", watchlistRef);
-            getDoc(watchlistRef)
-            .then((e) => {
-              console.log(e.data())
-              if (e.data()) {
-                currentWatchlist = e.data().symbols
-              }
-            }) 
-          }
-      }else{
-          console.log("Logged out");
+    onAuthStateChanged(auth, async (loggedInUser) => {
+      if (loggedInUser) {
+        //do your logged in user crap here
+        console.log("Logged in ", loggedInUser);
+        setLoggedIn(true);
+        setUser(loggedInUser);
+        if (user.uid) {
+          const watchlistRef = doc(db, "watchlist", user.uid);
+          console.log("watchlistRef-------", watchlistRef);
+          getDoc(watchlistRef).then((e) => {
+            console.log(e.data());
+            if (e.data()) {
+              currentWatchlist = e.data().symbols;
+            }
+          });
+        }
+      } else {
+        console.log("Logged out");
       }
-    })
-  }, [user])
-
-
+    });
+  }, [user]);
 
   const allStocks = [
     ...stock,
@@ -249,16 +237,28 @@ export default function SP500() {
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
                 Ticker
               </TableCell>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{ backgroundColor: "black", color: "white" }}
+                align="right"
+              >
                 Price
               </TableCell>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{ backgroundColor: "black", color: "white" }}
+                align="right"
+              >
                 Previous Close
               </TableCell>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{ backgroundColor: "black", color: "white" }}
+                align="right"
+              >
                 Change
               </TableCell>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{ backgroundColor: "black", color: "white" }}
+                align="right"
+              >
                 % Change
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
@@ -279,9 +279,13 @@ export default function SP500() {
 
                 return (
                   <TableRow key={data.name}>
-                    <TableCell>{data.name}</TableCell>
-                    <TableCell>{data.ticker}</TableCell>
                     <TableCell>
+                      <Link href={`/stocks/${data.ticker}`}>{data.name}</Link>
+                    </TableCell>
+                    <TableCell>
+                      <Link href={`/stocks/${data.ticker}`}>{data.ticker}</Link>
+                    </TableCell>
+                    <TableCell align="right">
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
@@ -289,13 +293,13 @@ export default function SP500() {
                       )}
                       ${data.price.toFixed(2)}
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="right">
                       ${data.session.previous_close.toFixed(2)}
                     </TableCell>
-                    <TableCell style={change()}>
+                    <TableCell style={change()} align="right">
                       ${data.session.change.toFixed(2)}
                     </TableCell>
-                    <TableCell style={change()}>
+                    <TableCell style={change()} align="right">
                       ({data.session.change_percent.toFixed(2)}%)
                     </TableCell>
                     <TableCell>
@@ -317,22 +321,25 @@ export default function SP500() {
                             return;
                           } else {
                             if (typeof window !== "undefined") {
-
-                              
-                              const watchlistRef = doc(db, 'watchlist', user.uid)
-                              console.log('watchlistRef-------', watchlistRef);
+                              const watchlistRef = doc(
+                                db,
+                                "watchlist",
+                                user.uid
+                              );
+                              console.log("watchlistRef-------", watchlistRef);
 
                               currentWatchlist.push(data.ticker);
                               setDoc(watchlistRef, {
-                                symbols: currentWatchlist
+                                symbols: currentWatchlist,
                               })
-                              .then(() => {
-                                console.log("Document has been added successfully");
-                              })
-                              .catch(error => {
-                                console.log(error);
-                              })
-
+                                .then(() => {
+                                  console.log(
+                                    "Document has been added successfully"
+                                  );
+                                })
+                                .catch((error) => {
+                                  console.log(error);
+                                });
                             } else {
                               alert("localStorage is undefined");
                             }
