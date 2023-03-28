@@ -6,8 +6,9 @@ import "../../public/stocks.css";
 import Chart from 'react-apexcharts'
 
 //we dont have access to buffer in our environment, so a polyfill will give us buffer that we can use. it's like using fetch in node.
-export default function Michelle() {
+export default function Michelle(props) {
 
+    // const symbol = props.symbol;
     function formatPrice(price) {
         return `$${price.toFixed(2)}`
     }
