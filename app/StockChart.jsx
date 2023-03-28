@@ -4,6 +4,7 @@ import Chart from 'react-apexcharts';
 
 const StockChart = (props) => {
   const [chartData, setChartData] = useState({ series: [], options: {} });
+  const [predictedData, setPredictedData] = useState([]);
   const [timeSpan, setTimeSpan] = useState('year');
   const symbol = props.symbol;
 
@@ -96,9 +97,39 @@ const StockChart = (props) => {
     });
 
   };
+
+  const fetchPredictions = async () => {
+    console.log(chartData.series[0].data);
+    const response = await axios.post('http://localhost:5000/predict', { dataset: chartData.series[0].data });
+    setPredictedData(response.data);
+  };
+
+  const updateChartDataWithPredictions = () => {
+    if (predictedData.length > 0) {
+      const seriesData = chartData.series[0].data.map((data, index) => ({
+        x: data.x,
+        y: [predictedData[index], data.y[1], data.y[2], data.y[3]],
+      }));
+
+      setChartData({
+        ...chartData,
+        series: [{ data: seriesData }],
+      });
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, [timeSpan]);
+
+  useEffect(() => {
+    fetchPredictions();
+  }, [chartData]);
+
+  useEffect(() => {
+    updateChartDataWithPredictions();
+  }, [predictedData]);
+
 
   const handleTimeSpanChange = (event) => {
     setTimeSpan(event.target.value);
