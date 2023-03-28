@@ -33,9 +33,14 @@
     height: 80vh
 }
 
+.videodiv {
+    margin-top: 300px;
+}
+
 .headerbox {
+    top: 80px;
     position: absolute;
-    right: 1000px;
+    left: 6%;
     font-family: 'Poppins', sans-serif;
     color: white;
     margin: 100px;
@@ -44,11 +49,18 @@
 }
 
 #text {
-    position: relative;
+    position: absolute;
     font-size: 5em;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     display: block;
     line-height: 0;
+}
+
+#belowtext {
+    top: 120px;
+    display: block;
+    position: absolute;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 #abovetext {
@@ -128,11 +140,13 @@
 /* scrolling thing */
 
 
-.ticker-title {
+.ticker-div {
     width: 2500px;
     margin-top: 10px;
-    padding-bottom: 5px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     color: white;
+    white-space: nowrap;
     font-size: 20px;
     text-transform: uppercase;
     text-shadow: 0 0 2px #065b70;
@@ -140,19 +154,60 @@
     background-image: linear-gradient(to right, #782089, #214090);
 }
 
-.ticker-title>* {
+.ticker1 {
     display: inline-block;
-    margin-right: 50px;
-    animation: title 6s infinite linear;
+    -webkit-animation: tickerframes1 30s linear infinite;
+    animation: tickerframes1 30s linear infinite;
 }
 
-@keyframes title {
+.ticker2 {
+    display: inline-block;
+    -webkit-animation: tickerframes2 30s linear infinite;
+    animation: tickerframes2 30s linear infinite;
+    animation-delay: 15s;
+}
+
+@keyframes tickerframes1 {
     0% {
-        transform: translateX(0);
+        transform: translateX(100%);
+        -webkit-transform: translateX(100%);
     }
 
     100% {
-        transform: translateX(-233px);
+        transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+    }
+}
+
+@keyframes tickerframes2 {
+    0% {
+        transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-200%);
+        -webkit-transform: translateX(-200%);
+    }
+}
+
+@-webkit-keyframes tickerframes1 {
+    0% {
+        -webkit-transform: translateX(100%);
+    }
+
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes tickerframes2 {
+    0% {
+        -webkit-transform: translateX(0%);
+    }
+
+    100% {
+        -webkit-transform: translateX(-200%);
     }
 }
 
@@ -170,11 +225,19 @@
     margin: 0;
 }
 
-.boxman div {
-    width: 200px;
+.boxsection {
+    width: 300px;
     height: 200px;
-    margin: 5px;
-    position: relative
+    margin: 56px 44px 0;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.boxsection img {
+    width: 48px;
+    height: 48px;
 }
 
 /* dropdown */
