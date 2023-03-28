@@ -18,11 +18,16 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './firebase';
+import { auth, firebaseConfig } from './firebase';
+import { initializeApp } from "firebase/app";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 import { useState, useEffect } from "react";
 
-let tempWatchlist = [];
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let currentWatchlist = [];
 
 export default function TopLosers() {
   const [page, setPage] = useState(0);
@@ -38,11 +43,9 @@ export default function TopLosers() {
   const [stockNine, setStockNine] = useState([]);
   const [stockTen, setStockTen] = useState([]);
 
-  if (typeof window !== "undefined") {
-    if (localStorage.watchlist) {
-      tempWatchlist = JSON.parse(localStorage.watchlist);
-    }
-  }
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -173,16 +176,26 @@ export default function TopLosers() {
 
 
   useEffect(() => {
-    onAuthStateChanged(auth, async (user)=>{
-      if(user){
+    onAuthStateChanged(auth, async (loggedInUser)=>{
+      if(loggedInUser){
           //do your logged in user crap here
-          console.log("Logged in ", user)
+          console.log("Logged in ", loggedInUser)
           setLoggedIn(true);
+          setUser(loggedInUser);
+          if (user.uid) {
+            const watchlistRef = doc(db, "watchlist", user.uid);
+            getDoc(watchlistRef)
+            .then((e) => {
+              if (e.data()) {
+                currentWatchlist = e.data().symbols
+              }
+            }) 
+          }
       }else{
           console.log("Logged out");
       }
     })
-  }, [])
+  }, [user])
 
 
   const allStocks = [
@@ -282,18 +295,30 @@ export default function TopLosers() {
                             alert('Must be logged in to add to watchlist');
                             return;
                           }
-                          if (tempWatchlist.includes(data.ticker)) {
+                          if (currentWatchlist.includes(data.ticker)) {
                             alert(`Watchlist already contains ${data.name}`);
                             return;
                           }
-                          if (tempWatchlist.length > 4) {
+                          if (currentWatchlist.length > 4) {
                             alert("Watchlist is full");
                             return;
                           } else {
                             if (typeof window !== "undefined") {
-                              tempWatchlist.push(data.ticker);
-                              localStorage.watchlist =
-                                JSON.stringify(tempWatchlist);
+                              
+                              const watchlistRef = doc(db, 'watchlist', user.uid)
+                              console.log('watchlistRef-------', watchlistRef);
+
+                              currentWatchlist.push(data.ticker);
+                              setDoc(watchlistRef, {
+                                symbols: currentWatchlist
+                              })
+                              .then(() => {
+                                console.log("Document has been added successfully");
+                              })
+                              .catch(error => {
+                                console.log(error);
+                              })
+
                             } else {
                               alert("localStorage is undefined");
                             }

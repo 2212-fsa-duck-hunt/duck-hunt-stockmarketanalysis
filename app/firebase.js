@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -19,10 +20,27 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 export const auth = getAuth(app);
 
-// const db = getFirestore();
+
+const db = getFirestore(app);
+
+
+// onAuthStateChanged(auth, async (user) => {
+//   if (user) {
+//     //do your logged in user crap here
+//     console.log("Logged in ", user);
+//     const currentUser = user;
+//     const dbRef = doc(db, "watchlist", currentUser.uid);
+//   } else {
+//     console.log("Logged out");
+//   }
+// });
+
+
 
 // // collection ref
 // const colRef = collection(db, "watchlist");
+
+
 
 // // get collection data
 // let watchlists = [];
