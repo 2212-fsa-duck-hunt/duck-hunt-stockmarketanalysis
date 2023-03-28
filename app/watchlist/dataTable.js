@@ -13,33 +13,81 @@ import {
   Button,
 } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, firebaseConfig } from "../firebase";
+import { initializeApp } from "firebase/app";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+
+
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 
 
 let watchlistSymbols = [];
 
 
-if (typeof window !== "undefined") {
-  if (localStorage.watchlist) {
-    watchlistSymbols = JSON.parse(localStorage.watchlist);
-  } else {
-    watchlistSymbols = [];
-    localStorage.watchlist = watchlistSymbols;
-  }
-}
+// if (typeof window !== "undefined") {
+//   if (localStorage.watchlist) {
+//     watchlistSymbols = JSON.parse(localStorage.watchlist);
+//   } else {
+//     watchlistSymbols = [];
+//     localStorage.watchlist = watchlistSymbols;
+//   }
+// }
+
+
+
 
 
 export default function DataTable() {
   const [watchlist, setWatchlist] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
+  const [watchlistSymbols, setWatchlistSymbols] = useState([]);
+  
   useEffect(() => {
     if (!watchlist.length) {
       fetchData();
+      getWatchlist();
     }
-  }, []);
+  }, [watchlist]);
 
+  useEffect(() => {
+    onAuthStateChanged(auth, async (loggedInUser) => {
+      if (loggedInUser) {
+        //do your logged in user crap here
+        console.log("Logged in ", loggedInUser);
+        setLoggedIn(true);
+        setUser(loggedInUser);
+        
+      } else {
+        console.log("Logged out");
+      }
+    });
+  }, [user]);
+
+  const getWatchlist = () => {
+    try {
+      console.log('watchlist-------', watchlist);
+      if (user.uid) {
+        const watchlistRef = doc(db, "watchlist", user.uid);
+        getDoc(watchlistRef)
+        .then((e) => {
+          setWatchlistSymbols(e.data().symbols)
+        })
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  
 
   const fetchData = () => {
+
     let tempWatchlist = [];
 
     //date conversion to yyyy-mm-dd and also if time is before stock market closes, use yesterday's data
@@ -69,14 +117,13 @@ export default function DataTable() {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log("new data-------", data);
         if (data.status === 'OK') {
+          // console.log("data------", data);
           for (let i = 0; i < data.results.length; i++) {
             let stockInfo = data.results[i];
             console.log("data.results[i]", data.results[i]);
             let stock = {
               id: i + 1,
-              icon: stockInfo.branding.icon_url,
               name: stockInfo.name,
               symbol: stockInfo.ticker,
               open: stockInfo.session.open,
@@ -88,13 +135,13 @@ export default function DataTable() {
             tempWatchlist.push(stock)
           }
         }
-        console.log("tempWatchlist------", tempWatchlist);
+        // console.log("tempWatchlist------", tempWatchlist);
         setWatchlist(tempWatchlist);
         setIsLoading(false);
       });
     }
 
-  if (isLoading) {
+  if (isLoading && watchlist.length > 0) {
     return <div>Loading...</div>;
   }
 
@@ -185,14 +232,31 @@ export default function DataTable() {
                         variant="outlined"
                         component="button"
                         onClick={() => {
-                          let tempWatchlist = [];
-                          tempWatchlist = watchlist.filter(
-                            (stock) => stock.id !== data.id
-                          );
-                          setWatchlist(tempWatchlist);
-                          localStorage.watchlist = JSON.stringify(
-                            tempWatchlist.map((stock) => (stock = stock.symbol))
-                          );
+                          const watchlistRef = doc(db, "watchlist", user.uid);
+                          
+                          let newWatchlist = watchlist.filter((stock) => stock.id !== data.id);
+                          console.log("new watch list -------", newWatchlist)
+                          
+                          setWatchlist(newWatchlist);
+                          let symbols = newWatchlist.map((e) => e = e.symbol);
+                          
+                          let tempWatchlistSymbols = symbols
+                          setWatchlistSymbols(tempWatchlistSymbols);
+                          console.log("symbols------", symbols);
+                          console.log("tempwatchlistsymbols---------", tempWatchlistSymbols);
+                          console.log("watchlistsymbols------", watchlistSymbols);
+                          
+                          setDoc(watchlistRef, {
+                            symbols: tempWatchlistSymbols,
+                          })
+                            .then(() => {
+                              console.log(
+                                "Document has been deleted successfully"
+                              );
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                            });
                         }}
                       >
                         <RemoveIcon />
