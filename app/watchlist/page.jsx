@@ -25,20 +25,20 @@ export default function Watchlist() {
   }, [])
 
 
-  if (typeof document !== 'undefined') {
-    document.body.style = 'background: #11071B';
-  }
+  // if (typeof document !== 'undefined') {
+  //   document.body.style = 'background: #11071B';
+  // }
   if (!loggedIn) {
     return (
     <div>
-      <h1 style={{ color: '#ffffff' }}>Not logged in</h1>
-      <h2 style={{ color: '#ffffff' }}>Login <a href='/login'>here</a> or sign up <a href='/signup'>here</a></h2>
+      <h1 style={{ color: '#000000' }}>Not logged in</h1>
+      <h2 style={{ color: '#000000' }}>Login <a href='/login'>here</a> or sign up <a href='/signup'>here</a></h2>
     </div>
     )
   } else
   return (
     <div>
-        <h1 style={{ color: '#ffffff' }}> watchlist heh </h1>
+        <h1 style={{ color: '#000000' }}> watchlist heh </h1>
         <DataTable />
     </div>
   )
