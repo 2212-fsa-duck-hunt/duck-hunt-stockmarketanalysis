@@ -5,7 +5,9 @@ import { auth } from "../firebase";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { Typography } from "@mui/material";
 import Router, { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -35,7 +37,6 @@ export default function SignIn() {
     <div id="home-container">
       <div id="home-icon-container4">
         <div>
-          <h1>Login</h1>
           <Box
             component="form"
             sx={{
@@ -44,28 +45,40 @@ export default function SignIn() {
             noValidate
             autoComplete="off"
             onSubmit={signIn}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            flexDirection="column"
           >
-            <div>
-              <TextField
-                required
-                id="standard-required"
-                label="Email"
-                defaultValue={email}
-                onChange={(e) => setEmail(e.target.value)}
-                variant="standard"
-              />
-              <TextField
-                id="standard-password-input"
-                label="Password"
-                type="password"
-                defaultValue={password}
-                onChange={(e) => setPassword(e.target.value)}
-                variant="standard"
-              />
-            </div>
-            <Button type="submit" variant="text">
+            <Typography variant="h3" marginBottom={1} marginTop={10}>
+              Login
+            </Typography>
+            <TextField
+              required
+              id="standard-required"
+              label="Email"
+              defaultValue={email}
+              onChange={(e) => setEmail(e.target.value)}
+              variant="outlined"
+            />
+            <TextField
+              id="standard-password-input"
+              label="Password"
+              type="password"
+              defaultValue={password}
+              onChange={(e) => setPassword(e.target.value)}
+              variant="outlined"
+            />
+            <Button
+              type="submit"
+              variant="outlined"
+              sx={{ color: "black", borderColor: "black" }}
+            >
               Login
             </Button>
+            <Typography marginTop={2}>
+              Don't have an account? <Link href="/signup">Signup</Link>
+            </Typography>
             <>{signUpMsg}</>
           </Box>
         </div>
