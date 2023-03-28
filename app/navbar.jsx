@@ -217,7 +217,7 @@ function Navbar() {
                             <div className="dropdown-content">
                                 <Link href="/news">General</Link>
                                 <Link href="/news/communicationservices">Communication Services</Link>
-                                <Link href="/newsconsumerdiscretionary">
+                                <Link href="/news/consumerdiscretionary">
                                     Consumer Discretionary
                                 </Link>
                                 <Link href="/news/consumerstaples">ConsumerStaples</Link>

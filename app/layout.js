@@ -19,9 +19,9 @@ export default function RootLayout({ children }) {
           {/* <AboveBar /> */}
           <Navbar />
         </nav>
-          {children}
+        {children}
         <footer>
-          <div> hey </div>
+          <div> Powered By Polygon.io </div>
         </footer>
       </body>
     </html>
