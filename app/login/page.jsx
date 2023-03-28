@@ -77,7 +77,7 @@ export default function SignIn() {
               Login
             </Button>
             <Typography marginTop={2}>
-              Don't have an account? <Link href="/signup">Signup</Link>
+              Need an account? <Link href="/signup">Signup</Link>
             </Typography>
             <>{signUpMsg}</>
           </Box>

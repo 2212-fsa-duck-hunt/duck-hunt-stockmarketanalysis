@@ -124,14 +124,16 @@ export default function CryptoLosers() {
                       ) : (
                         <ArrowDropUpIcon color="success" />
                       )}
-                      ${dollarUSLocale.format(data.price)}
+                      ${dollarUSLocale.format(data.price.toFixed(2))}
                     </TableCell>
-                    <TableCell>${data.session.previous_close}</TableCell>
-                    <TableCell style={change()}>
-                      ${data.session.change}
+                    <TableCell>
+                      ${data.session.previous_close.toFixed(2)}
                     </TableCell>
                     <TableCell style={change()}>
-                      ({data.session.change_percent}%)
+                      ${data.session.change.toFixed(2)}
+                    </TableCell>
+                    <TableCell style={change()}>
+                      ({data.session.change_percent.toFixed(2)}%)
                     </TableCell>
                     <TableCell>
                       <Button

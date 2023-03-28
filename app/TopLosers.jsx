@@ -166,7 +166,7 @@ export default function TopLosers() {
       .then((res) => res.json())
       .then((data) => setStockNine(data.results));
     fetch(
-      "https://api.polygon.io/v1/summaries?ticker.any_of=TRMB,TFC,CSGP,TYL,TSN,USB,UDR,ULTA,UAA,UA,UNP,UAL,UPS,URI,UNH,UHS,VLO,VTR,VRSN,VRSK,VZ,VRTX,VFC,INVH,VTRS,V,VNO,VMC,WRB,GWW,WAB,WBA,WMT,WM,WAT,WEC,WFC,WELL,WST,WDC,WU,WRK,WY,WHR,WMB,AMD,WYNN,XEL,APEI,XYL&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      "https://api.polygon.io/v1/summaries?ticker.any_of=TRMB,TFC,CSGP,TYL,TSN,USB,UDR,ULTA,UAA,UA,UNP,UAL,UPS,URI,UNH,UHS,VLO,VTR,VRSN,VRSK,VZ,VRTX,VFC,INVH,VTRS,V,VNO,VMC,WRB,GWW,WAB,WBA,WMT,WM,WAT,WEC,WFC,WELL,WST,WDC,WU,WRK,WY,WHR,WMB,GME,WYNN,XEL,APEI,XYL&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
       {
         method: "GET",
         headers: {
@@ -289,14 +289,16 @@ export default function TopLosers() {
                       ) : (
                         <ArrowDropUpIcon color="success" />
                       )}
-                      ${data.price}
+                      ${data.price.toFixed(2)}
                     </TableCell>
-                    <TableCell>${data.session.previous_close}</TableCell>
-                    <TableCell style={change()}>
-                      ${data.session.change}
+                    <TableCell>
+                      ${data.session.previous_close.toFixed(2)}
                     </TableCell>
                     <TableCell style={change()}>
-                      ({data.session.change_percent}%)
+                      ${data.session.change.toFixed(2)}
+                    </TableCell>
+                    <TableCell style={change()}>
+                      ({data.session.change_percent.toFixed(2)}%)
                     </TableCell>
                     <TableCell>
                       <Button

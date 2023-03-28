@@ -117,16 +117,19 @@ export default function Crypto() {
                       ) : (
                         <ArrowDropUpIcon color="success" />
                       )}
-                      ${dollarUSLocale.format(data.price)}
+                      ${dollarUSLocale.format(data.price.toFixed(2))}
                     </TableCell>
                     <TableCell>
-                      ${dollarUSLocale.format(data.session.previous_close)}
+                      $
+                      {dollarUSLocale.format(
+                        data.session.previous_close.toFixed(2)
+                      )}
                     </TableCell>
                     <TableCell style={change()}>
-                      ${data.session.change}
+                      ${data.session.change.toFixed(2)}
                     </TableCell>
                     <TableCell style={change()}>
-                      ({data.session.change_percent}%)
+                      ({data.session.change_percent.toFixed(2)}%)
                     </TableCell>
                     <TableCell>
                       <Button
