@@ -73,19 +73,19 @@ function Navbar() {
     const handleCloseLogout = () => {
         setAnchorUser(null);
         userSignOut();
-        
+
     }
 
     const userSignOut = () => {
         signOut(auth)
-        .then(() => {
-            setLoggedIn(false);
-            setUser({});
-            console.log("signedout");
-            router.push("/");
-        })
-        .catch((error) => console.log(error));
-    };    
+            .then(() => {
+                setLoggedIn(false);
+                setUser({});
+                console.log("signedout");
+                router.push("/");
+            })
+            .catch((error) => console.log(error));
+    };
 
     const handleCloseUserMenu = () => {
         setAnchorUser(null);
@@ -134,17 +134,17 @@ function Navbar() {
     }));
 
     useEffect(() => {
-    onAuthStateChanged(auth, async (loggedInUser) => {
-      if (loggedInUser) {
-        //do your logged in user crap here
-        console.log("Logged in ", loggedInUser);
-        setLoggedIn(true);
-        setUser(loggedInUser);
-      } else {
-        console.log("Logged out");
-      }
-    });
-  }, [user]);
+        onAuthStateChanged(auth, async (loggedInUser) => {
+            if (loggedInUser) {
+                //do your logged in user crap here
+                console.log("Logged in ", loggedInUser);
+                setLoggedIn(true);
+                setUser(loggedInUser);
+            } else {
+                console.log("Logged out");
+            }
+        });
+    }, [user]);
 
     return (
         <AppBar position="static" style={{ background: '#11071B' }}>
@@ -315,18 +315,18 @@ function Navbar() {
                             open={Boolean(anchorUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {loggedIn ? 
-                            <>
-                                <MenuItem onClick={handleCloseWatchlist}>
-                                    <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Watchlist</Typography>
+                            {loggedIn ?
+                                <>
+                                    <MenuItem onClick={handleCloseWatchlist}>
+                                        <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Watchlist</Typography>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleCloseLogout}>
+                                        <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Log out</Typography>
+                                    </MenuItem>
+                                </> :
+                                <MenuItem onClick={handleCloseLogin}>
+                                    <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Log in</Typography>
                                 </MenuItem>
-                                <MenuItem onClick={handleCloseLogout}>
-                                    <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Log out</Typography>
-                                </MenuItem>
-                            </> : 
-                            <MenuItem onClick={handleCloseLogin}>
-                                <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Log in</Typography>
-                            </MenuItem> 
                             }
                         </Menu>
                     </Box>

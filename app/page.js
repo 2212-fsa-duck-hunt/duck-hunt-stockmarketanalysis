@@ -118,9 +118,6 @@ export default function Home() {
           </div>
         </div>
 
-
-
-
         <section className="sec">
           {/* <h2 id> This person is very cool: </h2>
           <div className="scroller"><h2>
@@ -136,20 +133,20 @@ export default function Home() {
           <section className="boxman">
             <div className="boxsection">
               <img src="https://cdn-icons-png.flaticon.com/512/2942/2942247.png" />
-              <h4> whats up 1 </h4>
-              <span> I have a lot to say but i really dont have much to put in here blah blah</span>
-              hey whats up </div>
+              <h4> Comprehensive Stock/Crypto News</h4>
+              <span> Stay up to date with the latest, breaking news on the market.</span>
+            </div>
             <div className="boxsection">
               <img src="https://cdn-icons-png.flaticon.com/512/1556/1556579.png" />
-              <h4> whats up 1 </h4>
-              <span> I have a lot to say but i really dont have much to put in here blah blah</span>
-              hey whats up </div>
+              <h4> Watchlist Functionality </h4>
+              <span> Keep track of your favorite stocks with our watchlist function. </span>
+            </div>
             <div className="boxsection">
               <img src="https://cdn-icons-png.flaticon.com/512/7038/7038131.png" />
 
-              <h4> whats up 1 </h4>
-              <span> I have a lot to say but i really dont have much to put in here blah blah</span>
-              hey whats up </div>
+              <h4> Data Made Easy </h4>
+              <span> Navigate through data visualization to make accurate predictions on your investments. </span>
+            </div>
           </section>
           {/* <p id>Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br></br> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             Sed ut perspiciatis unde omnis iste natus error <br></br> sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
@@ -157,11 +154,7 @@ export default function Home() {
             that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
           </p> */}
         </section>
-
-
       </div>
-
-
     </main>
   )
 }
