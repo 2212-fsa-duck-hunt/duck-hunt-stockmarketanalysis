@@ -11,6 +11,7 @@ import {
   TablePagination,
   Link,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -52,7 +53,17 @@ export default function Crypto() {
   }, []);
 
   if (!stock.status) {
-    return <h1>Loading</h1>;
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        flexDirection="column"
+      >
+        <h1>Fetching the latest market data</h1>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (
@@ -62,7 +73,7 @@ export default function Crypto() {
           <TableHead>
             <TableRow>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Crypto Name
+                Crypto
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
                 Ticker
@@ -74,10 +85,10 @@ export default function Crypto() {
                 Previous Close
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Total Change
+                Change
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Change %
+                % Change
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
                 Add To Watch List
@@ -100,25 +111,22 @@ export default function Crypto() {
                   <TableRow key={data.name}>
                     <TableCell>{data.name.slice(0, -23)}</TableCell>
                     <TableCell>{data.ticker.slice(2, -3)}</TableCell>
-                    <TableCell>${dollarUSLocale.format(data.price)}</TableCell>
                     <TableCell>
-                      ${dollarUSLocale.format(data.session.previous_close)}
-                    </TableCell>
-                    <TableCell style={change()}>
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
                         <ArrowDropUpIcon color="success" />
                       )}
+                      ${dollarUSLocale.format(data.price)}
+                    </TableCell>
+                    <TableCell>
+                      ${dollarUSLocale.format(data.session.previous_close)}
+                    </TableCell>
+                    <TableCell style={change()}>
                       ${data.session.change}
                     </TableCell>
                     <TableCell style={change()}>
-                      {data.session.change_percent < 0 ? (
-                        <ArrowDropDownIcon color="error" />
-                      ) : (
-                        <ArrowDropUpIcon color="success" />
-                      )}
-                      {data.session.change_percent}%
+                      ({data.session.change_percent}%)
                     </TableCell>
                     <TableCell>
                       <Button

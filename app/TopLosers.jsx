@@ -11,16 +11,19 @@ import {
   TablePagination,
   Link,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
+
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, firebaseConfig } from './firebase';
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+
 
 import { useState, useEffect } from "react";
 
@@ -44,7 +47,9 @@ export default function TopLosers() {
   const [stockTen, setStockTen] = useState([]);
 
   const [loggedIn, setLoggedIn] = useState(false);
+
   const [user, setUser] = useState({});
+
 
 
   const handleChangePage = (event, newPage) => {
@@ -174,8 +179,8 @@ export default function TopLosers() {
       .then((data) => setStockTen(data.results));
   }, []);
 
-
   useEffect(() => {
+
     onAuthStateChanged(auth, async (loggedInUser)=>{
       if(loggedInUser){
           //do your logged in user crap here
@@ -198,6 +203,7 @@ export default function TopLosers() {
   }, [user])
 
 
+
   const allStocks = [
     ...stock,
     ...stockTwo,
@@ -212,7 +218,17 @@ export default function TopLosers() {
   ];
 
   if (allStocks.length < 500) {
-    return <h1>Fetching the latest market data</h1>;
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        flexDirection="column"
+      >
+        <h1>Fetching the latest market data</h1>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   const sortedStock = allStocks
@@ -230,7 +246,7 @@ export default function TopLosers() {
           <TableHead>
             <TableRow>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Stock Name
+                Company
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
                 Ticker
@@ -242,10 +258,10 @@ export default function TopLosers() {
                 Previous Close
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Total Change
+                Change
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
-                Change %
+                % Change
               </TableCell>
               <TableCell style={{ backgroundColor: "black", color: "white" }}>
                 Add To Watch List
@@ -267,23 +283,20 @@ export default function TopLosers() {
                   <TableRow key={data.name}>
                     <TableCell>{data.name}</TableCell>
                     <TableCell>{data.ticker}</TableCell>
-                    <TableCell>${data.price}</TableCell>
-                    <TableCell>${data.session.previous_close}</TableCell>
-                    <TableCell style={change()}>
+                    <TableCell>
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
                         <ArrowDropUpIcon color="success" />
                       )}
+                      ${data.price}
+                    </TableCell>
+                    <TableCell>${data.session.previous_close}</TableCell>
+                    <TableCell style={change()}>
                       ${data.session.change}
                     </TableCell>
                     <TableCell style={change()}>
-                      {data.session.change_percent < 0 ? (
-                        <ArrowDropDownIcon color="error" />
-                      ) : (
-                        <ArrowDropUpIcon color="success" />
-                      )}
-                      {data.session.change_percent}%
+                      ({data.session.change_percent}%)
                     </TableCell>
                     <TableCell>
                       <Button
@@ -292,7 +305,7 @@ export default function TopLosers() {
                         color="success"
                         onClick={() => {
                           if (!loggedIn) {
-                            alert('Must be logged in to add to watchlist');
+                            alert("Must be logged in to add to watchlist");
                             return;
                           }
                           if (currentWatchlist.includes(data.ticker)) {
