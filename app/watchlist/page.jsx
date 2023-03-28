@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase';
+import './styles.css'
 
 
 
@@ -23,7 +24,6 @@ export default function Watchlist() {
       }
     })
   }, [])
-
 
   // if (typeof document !== 'undefined') {
   //   document.body.style = 'background: #11071B';
