@@ -31,16 +31,22 @@ export default function Crypto() {
     }, []);
 
     if (!data) {
-        return <div> im loading .__.</div>
+        return (
+            <div>
+                <section className="sec1">
+                    <h3>  Crypto News </h3>
+                </section>
+            </div>
+        );
     } else {
         return (
             <div>
                 <section className="sec">
-                    <h3 id> Crypto News </h3>
+                    <h3> Crypto News </h3>
                     {data.map(crypto => {
                         if (crypto.results.length > 0) {
                             return (
-                                <div className='newsbox'>
+                                <div key={crypto.results[0].title} className='newsbox'>
                                     <h4><Link href={crypto.results[0].article_url}>{crypto.results[0].title}</Link>
                                     </h4>
                                     <img className="picture" src={crypto.results[0].image_url} />

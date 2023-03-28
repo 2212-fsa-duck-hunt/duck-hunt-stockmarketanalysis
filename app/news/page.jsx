@@ -20,14 +20,12 @@ export default function News() {
         setIsLoading(false);
       });
   }, []);
-  console.log("data is ====>:", data);
 
   if (!data) {
     return (
       <div>
-        <section className="sec">
-          <h3 id> News </h3>
-          <p id>I'M NULL AND LOADING</p>
+        <section className="sec1">
+          <h3> News </h3>
         </section>
       </div>
     );
@@ -35,7 +33,7 @@ export default function News() {
     return (
       <div>
         <section className="sec">
-          <h3 id> News </h3>
+          <h3> News </h3>
           <div>
             {data.map((singledata) => {
               return (
