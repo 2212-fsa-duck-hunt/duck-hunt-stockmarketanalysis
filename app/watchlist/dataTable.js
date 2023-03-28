@@ -17,6 +17,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, firebaseConfig } from "../firebase";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import './styles.css'
 
 
 
@@ -35,6 +38,8 @@ export default function DataTable() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const [watchlistSymbols, setWatchlistSymbols] = useState([]);
+
+  const router = useRouter();
   
   useEffect(() => {
     if (!watchlist.length) {
@@ -137,36 +142,54 @@ export default function DataTable() {
           <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }}>
             <TableHead>
               <TableRow>
-                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff' }}>
+                <TableCell
+                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                >
                   ID
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
-                  Name
+                <TableCell
+                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                >
+                    Name
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
+                <TableCell
+                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                >
                   Symbol
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
+                <TableCell
+                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                >
                   Open
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
+                <TableCell
+                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                >
                   High
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
+                <TableCell
+                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                >
                   Low
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
+                <TableCell
+                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                >
                   Close
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
+                <TableCell
+                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                >
                   Volume
                 </TableCell>
-                <TableCell style={{ backgroundColor: "#000000", color: '#ffffff'  }}>
+                <TableCell
+                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                >
                   Remove from watchlist
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className="table">
               {watchlist.map((data) => {
                 return (
                   <TableRow key={data.id}>
@@ -178,12 +201,12 @@ export default function DataTable() {
                     <TableCell
                       style={{ backgroundColor: "#212021", color: "#ffffff" }}
                     >
-                      {data.name}
+                      <Link href={`/stocks/${data.symbol}`}>{data.name}</Link>
                     </TableCell>
                     <TableCell
                       style={{ backgroundColor: "#212021", color: "#ffffff" }}
                     >
-                      {data.symbol}
+                      <Link href={`/stocks/${data.symbol}`}>{data.symbol}</Link>
                     </TableCell>
                     <TableCell
                       style={{ backgroundColor: "#212021", color: "#ffffff" }}
@@ -219,19 +242,27 @@ export default function DataTable() {
                         component="button"
                         onClick={() => {
                           const watchlistRef = doc(db, "watchlist", user.uid);
-                          
-                          let newWatchlist = watchlist.filter((stock) => stock.id !== data.id);
-                          console.log("new watch list -------", newWatchlist)
-                          
+
+                          let newWatchlist = watchlist.filter(
+                            (stock) => stock.id !== data.id
+                          );
+                          console.log("new watch list -------", newWatchlist);
+
                           setWatchlist(newWatchlist);
-                          let symbols = newWatchlist.map((e) => e = e.symbol);
-                          
-                          let tempWatchlistSymbols = symbols
+                          let symbols = newWatchlist.map((e) => (e = e.symbol));
+
+                          let tempWatchlistSymbols = symbols;
                           setWatchlistSymbols(tempWatchlistSymbols);
                           console.log("symbols------", symbols);
-                          console.log("tempwatchlistsymbols---------", tempWatchlistSymbols);
-                          console.log("watchlistsymbols------", watchlistSymbols);
-                          
+                          console.log(
+                            "tempwatchlistsymbols---------",
+                            tempWatchlistSymbols
+                          );
+                          console.log(
+                            "watchlistsymbols------",
+                            watchlistSymbols
+                          );
+
                           setDoc(watchlistRef, {
                             symbols: tempWatchlistSymbols,
                           })
@@ -250,12 +281,11 @@ export default function DataTable() {
                     </TableCell>
                   </TableRow>
                 );
-              })
-              }
+              })}
             </TableBody>
           </Table>
         </TableContainer>
       </Box>
-    )
+    );
 }
 

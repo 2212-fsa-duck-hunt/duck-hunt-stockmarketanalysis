@@ -13,21 +13,31 @@ export default function Stocks() {
       <Stack spacing={7} direction="row" margin={5} justifyContent="center">
         <Button
           variant="outlined"
-          color="inherit"
+          style={{
+            color: "black"
+          }
+          }
           onClick={() => setTableView("S&P500")}
         >
           {"S&P 500"}
         </Button>
         <Button
           variant="outlined"
-          color="inherit"
+          
+          style={{
+            color: "black"
+          }
+          }
           onClick={() => setTableView("TopGainers")}
         >
           Gainers
         </Button>
         <Button
           variant="outlined"
-          color="inherit"
+          style={{
+            color: "black"
+          }
+          }
           onClick={() => setTableView("TopLosers")}
         >
           Losers

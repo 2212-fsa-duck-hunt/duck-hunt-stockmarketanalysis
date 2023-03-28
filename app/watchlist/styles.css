@@ -1,0 +1,10 @@
+.table a:visited {
+  color: #c73bff;
+  text-decoration: none
+}
+
+.table a:link {
+  color: #1ebefc;
+  text-decoration: none;
+}
+
