@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -20,45 +20,75 @@ import SearchIcon from '@mui/icons-material/Search';
 import "../public/home.css";
 import Router, { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
 
 const pages = ['Stocks', 'Crypto', 'News', 'About Polygon.io'];
 const settings = ['Profile', 'Account', 'Watchlist', 'Logout'];
 
 function Navbar() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorNav, setAnchorNav] = React.useState(null);
+    const [anchorUser, setAnchorUser] = React.useState(null);
+    const [loggedIn, setLoggedIn] = React.useState(false);
+    const [user, setUser] = useState({});
     const router = useRouter();
 
     const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
+        setAnchorNav(event.currentTarget);
     };
     const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
+        setAnchorUser(event.currentTarget);
     };
 
     const handleCloseNavMenu = (event) => {
-        setAnchorElNav(null);
+        setAnchorNav(null);
     };
 
     const handleCloseNavMenuStocks = () => {
-        setAnchorElNav(null);
+        setAnchorNav(null);
         router.push('/stocks')
     };
     const handleCloseNavMenuCrypto = () => {
-        setAnchorElNav(null);
+        setAnchorNav(null);
         router.push('/crypto')
     };
     const handleCloseNavMenuNews = () => {
-        setAnchorElNav(null);
+        setAnchorNav(null);
         router.push('/news')
     };
     const handleCloseNavMenuAbout = () => {
-        setAnchorElNav(null);
+        setAnchorNav(null);
     };
 
+    const handleCloseWatchlist = () => {
+        setAnchorUser(null);
+        router.push('/watchlist');
+    }
+
+    const handleCloseLogin = () => {
+        setAnchorUser(null);
+        router.push('/login');
+    }
+
+    const handleCloseLogout = () => {
+        setAnchorUser(null);
+        userSignOut();
+        
+    }
+
+    const userSignOut = () => {
+        signOut(auth)
+        .then(() => {
+            setLoggedIn(false);
+            setUser({});
+            console.log("signedout");
+            router.push("/");
+        })
+        .catch((error) => console.log(error));
+    };    
 
     const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
+        setAnchorUser(null);
     };
 
     const Search = styled('div')(({ theme }) => ({
@@ -103,11 +133,24 @@ function Navbar() {
         },
     }));
 
+    useEffect(() => {
+    onAuthStateChanged(auth, async (loggedInUser) => {
+      if (loggedInUser) {
+        //do your logged in user crap here
+        console.log("Logged in ", loggedInUser);
+        setLoggedIn(true);
+        setUser(loggedInUser);
+      } else {
+        console.log("Logged out");
+      }
+    });
+  }, [user]);
+
     return (
         <AppBar position="static" style={{ background: '#11071B' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters >
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
                         noWrap
@@ -140,7 +183,7 @@ function Navbar() {
                         </IconButton>
                         <Menu
                             id="menu-appbar"
-                            anchorEl={anchorElNav}
+                            anchorEl={anchorNav}
                             anchorOrigin={{
                                 vertical: 'bottom',
                                 horizontal: 'left',
@@ -150,7 +193,7 @@ function Navbar() {
                                 vertical: 'top',
                                 horizontal: 'left',
                             }}
-                            open={Boolean(anchorElNav)}
+                            open={Boolean(anchorNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
                                 display: { xs: 'block', md: 'none' },
@@ -259,7 +302,7 @@ function Navbar() {
                         <Menu
                             sx={{ mt: '45px' }}
                             id="menu-appbar"
-                            anchorEl={anchorElUser}
+                            anchorEl={anchorUser}
                             anchorOrigin={{
                                 vertical: 'top',
                                 horizontal: 'right',
@@ -269,14 +312,22 @@ function Navbar() {
                                 vertical: 'top',
                                 horizontal: 'right',
                             }}
-                            open={Boolean(anchorElUser)}
+                            open={Boolean(anchorUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">{setting}</Typography>
+                            {loggedIn ? 
+                            <>
+                                <MenuItem onClick={handleCloseWatchlist}>
+                                    <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Watchlist</Typography>
                                 </MenuItem>
-                            ))}
+                                <MenuItem onClick={handleCloseLogout}>
+                                    <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Log out</Typography>
+                                </MenuItem>
+                            </> : 
+                            <MenuItem onClick={handleCloseLogin}>
+                                <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Log in</Typography>
+                            </MenuItem> 
+                            }
                         </Menu>
                     </Box>
                 </Toolbar>
