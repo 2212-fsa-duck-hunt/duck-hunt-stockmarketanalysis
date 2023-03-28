@@ -1,19 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Lora&family=Poppins:wght@400;800&display=swap');
 
-* {
+/* * {
     font-family: 'DotGothic16';
-}
+} */
 
 body {
     /* color: white; */
-    background: #11071B;
+    /* background: #11071B; */
     width: 100vw;
     height: 100vh;
     overflow: none;
 
 }
 
-.chart {
+/* .chart {
+    font-family: 'DotGothic16';
     width: 100%;
     height: 100%;
     display: flex;
@@ -22,14 +23,14 @@ body {
     align-items: center;
     overflow: hidden;
     margin: 0;
-}
+} */
 
 .stock {
     font-family: 'DotGothic16';
     width: 100%;
     font-size: 13vmin;
     text-align: center;
-    color: white;
+    /* color: white; */
     left: 120%;
     /* animation: scroll 10s infinite linear; */
 }
@@ -47,10 +48,7 @@ body {
 
 
 #candlestick {
-    font-family: 'DotGothic16';
     width: 100%;
     height: 150%;
-    font-size: 15vmin;
     color: black;
-
 }

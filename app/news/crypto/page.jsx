@@ -36,7 +36,7 @@
 //         return (
 //             <div>
 //                 <section className="sec">
-//                     <h3 id> Crypto News </h3>
+//                     <h3> Crypto News </h3>
 //                     {data.map(crypto => {
 //                         if (crypto.results.length > 0) {
 //                             return (

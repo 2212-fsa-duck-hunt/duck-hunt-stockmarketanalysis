@@ -31,14 +31,20 @@ export default function Utilities() {
     }, []);
 
     if (!data) {
-        return <div> im loading .__.</div>
+        return (
+            <div>
+                <section className="sec1">
+                    <h3> Utilities </h3>
+                </section>
+            </div>
+        )
     } else {
         return (
             <div>
                 <section className="sec">
-                    <h3 id> Utilities </h3>
+                    <h3> Utilities </h3>
                     {data.map(stock =>
-                        <div className='newsbox'>
+                        <div key={stock.request_id} className='newsbox'>
                             <img className="picture" src={stock.results[0].image_url} />
                             <div className="description"> {stock.results[0].description}</div>
                             {/* <Button className="readmore"> Read More</Button> */}
