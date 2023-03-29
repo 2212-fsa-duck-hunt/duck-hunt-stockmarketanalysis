@@ -73,7 +73,6 @@ function Navbar() {
     const handleCloseLogout = () => {
         setAnchorUser(null);
         userSignOut();
-
     }
 
     const userSignOut = () => {
@@ -89,6 +88,13 @@ function Navbar() {
 
     const handleCloseUserMenu = () => {
         setAnchorUser(null);
+    };
+
+    const handleEnter = (event) => {
+        if (event.key === "Enter") {
+        router.push(`/stocks/${event.target.value}`);
+        event.target.value = "";
+        }
     };
 
     const Search = styled('div')(({ theme }) => ({
@@ -277,15 +283,11 @@ function Navbar() {
                             About
                         </Button>
                     </Box>
-                    <Search sx={{ margin: 4 }}>
+                    <Search sx={{ margin: 4 }} onKeyDown={handleEnter}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                            fontFamily="Poppins"
-                        />
+                        <StyledInputBase placeholder="Search…" fontFamily="Poppins" />
                     </Search>
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
