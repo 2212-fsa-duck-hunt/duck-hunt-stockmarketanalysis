@@ -34,8 +34,8 @@ export default function DataTable() {
   const router = useRouter();
 
  useEffect(() => {
-   getWatchlist();
-   fetchData();
+  getWatchlist();
+  fetchData();
  }, [watchlist]);
 
  useEffect(() => {
@@ -56,7 +56,11 @@ export default function DataTable() {
      const watchlistRef = doc(db, "watchlist", user.uid);
      getDoc(watchlistRef)
        .then((e) => {
-         setWatchlistSymbols(e.data().symbols);
+          if (e.data()) {
+            setWatchlistSymbols(e.data().symbols);
+          } else {
+            return;
+          }
        })
        .catch((err) => {
          console.log(err);
@@ -108,9 +112,11 @@ export default function DataTable() {
            };
            tempWatchlist.push(stock);
          }
+
+          setWatchlist(tempWatchlist);
+          setIsLoading(false);
+
        }
-       setWatchlist(tempWatchlist);
-       setIsLoading(false);
      });
  };
 
