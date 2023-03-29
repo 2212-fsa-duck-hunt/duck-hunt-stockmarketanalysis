@@ -28,7 +28,7 @@ const db = getFirestore(app);
 
 
 
-let watchlistSymbols = [];
+
 
 
 
@@ -46,13 +46,13 @@ export default function DataTable() {
       fetchData();
       getWatchlist();
     }
-  }, [watchlist]);
+  }, [user]);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (loggedInUser) => {
       if (loggedInUser) {
         //do your logged in user crap here
-        console.log("Logged in ", loggedInUser);
+        console.log("Logged in ");
         setLoggedIn(true);
         setUser(loggedInUser);
         
@@ -63,38 +63,35 @@ export default function DataTable() {
   }, [user]);
 
   const getWatchlist = () => {
-    try {
-      console.log('watchlist-------', watchlist);
-      if (user.uid) {
-        const watchlistRef = doc(db, "watchlist", user.uid);
-        getDoc(watchlistRef)
-        .then((e) => {
-          setWatchlistSymbols(e.data().symbols)
-        })
-      }
-    } catch (err) {
-      console.log(err);
+    if (user.uid) {
+      const watchlistRef = doc(db, "watchlist", user.uid);
+      getDoc(watchlistRef)
+      .then((e) => {
+          setWatchlistSymbols(e.data().symbols);
+      }).catch((err) => {
+        console.log(err);
+      })
+    } else {
+      console.log("User not found");
     }
   };
 
   const fetchData = () => {
-
     let tempWatchlist = [];
-
     //date conversion to yyyy-mm-dd and also if time is before stock market closes, use yesterday's data
     let yourDate = new Date();
     if (yourDate.getHours() > 13) {
       yourDate.toISOString().split("T")[0];
+      //convert from UTC to PST
       const offset = yourDate.getTimezoneOffset();
       yourDate = new Date(yourDate.getTime() - offset * 60 * 1000);
-      console.log("today-----", yourDate);
     } else {
       let yesterday = new Date(yourDate);
       yesterday.setDate(yesterday.getDate() - 1);
       yesterday.toISOString().split("T")[0];
+      //convert from UTC to PST
       const offset = yesterday.getTimezoneOffset();
       yourDate = new Date(yesterday.getTime() - offset * 60 * 1000);
-      console.log("yesterday-----", yourDate);
     }
     fetch(
       `https://api.polygon.io/v1/summaries?ticker.any_of=${watchlistSymbols.join()}&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
@@ -109,10 +106,8 @@ export default function DataTable() {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === 'OK') {
-          // console.log("data------", data);
           for (let i = 0; i < data.results.length; i++) {
             let stockInfo = data.results[i];
-            console.log("data.results[i]", data.results[i]);
             let stock = {
               id: i + 1,
               name: stockInfo.name,
@@ -126,7 +121,6 @@ export default function DataTable() {
             tempWatchlist.push(stock)
           }
         }
-        // console.log("tempWatchlist------", tempWatchlist);
         setWatchlist(tempWatchlist);
         setIsLoading(false);
       });
@@ -246,22 +240,12 @@ export default function DataTable() {
                           let newWatchlist = watchlist.filter(
                             (stock) => stock.id !== data.id
                           );
-                          console.log("new watch list -------", newWatchlist);
 
                           setWatchlist(newWatchlist);
                           let symbols = newWatchlist.map((e) => (e = e.symbol));
 
                           let tempWatchlistSymbols = symbols;
                           setWatchlistSymbols(tempWatchlistSymbols);
-                          console.log("symbols------", symbols);
-                          console.log(
-                            "tempwatchlistsymbols---------",
-                            tempWatchlistSymbols
-                          );
-                          console.log(
-                            "watchlistsymbols------",
-                            watchlistSymbols
-                          );
 
                           setDoc(watchlistRef, {
                             symbols: tempWatchlistSymbols,
