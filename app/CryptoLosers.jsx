@@ -37,6 +37,12 @@ export default function CryptoLosers() {
     setPage(newPage);
   };
 
+  const handleChangeRowsPerPage = (event) => {
+    const updatedChangeRowsPerPage = parseInt(event.target.value);
+    setRowsPerPage(updatedChangeRowsPerPage);
+    setPage(0);
+  };
+
   useEffect(() => {
     fetch(
       "https://api.polygon.io/v1/summaries?ticker.any_of=X:BTCUSD,X:ETHUSD,X:USDTUSD,X:USDCUSD,X:XRPUSD,X:ADAUSD,X:DOGEUSD,X:MATICUSD,X:SOLUSD,X:DOTUSD,X:LTCUSD,X:SHIBUSD,X:TRXUSD,X:AVAXUSD,X:DAIUSD,X:UNIUSD,X:NEARUSD,X:LINKUSD,X:ATOMUSD,X:CHZUSD,X:ETCUSD,X:XMRUSD,X:SANDUSD,X:ZECUSD,X:BCHUSD,X:XLMUSD,X:FILUSD,X:MASKUSD,X:MKRUSD,X:HBARUSD&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
@@ -190,10 +196,11 @@ export default function CryptoLosers() {
         <TablePagination
           component={"div"}
           count={sortedStock.length}
+          rowsPerPageOptions={[10, 25]}
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
-          // onChangeRowsPerPage={handleChangeRowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </TableContainer>
     </Box>
