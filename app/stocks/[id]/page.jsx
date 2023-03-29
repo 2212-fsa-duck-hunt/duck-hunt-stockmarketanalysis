@@ -86,7 +86,7 @@ const AppViz = ({ params }) => {
         </div>
       </div>
       // <div style={{ width: '70%', margin: '0 auto' }}>
-      //   {/* <StockVisualization /> */}
+      //   <StockVisualization /> 
       //   <StockChart symbol={symbol} />
       //   <LinearModelVisualization />
       // </div>
@@ -135,7 +135,7 @@ export default AppViz;
 //       </div>
 //     </div>
 //     // <div style={{ width: '70%', margin: '0 auto' }}>
-//     //   {/* <StockVisualization /> */}
+//     //    <StockVisualization /> 
 //     //   <StockChart symbol={symbol} />
 //     //   <LinearModelVisualization />
 //     // </div>

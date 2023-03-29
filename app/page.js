@@ -32,7 +32,7 @@ export default function Home() {
           <div className="headerbox">
             {/* <p id="abovetext"><strong>The Future of Prediction is Here. It's Polygon.io.</strong></p> */}
             <p id="text"> Duckhunt </p>
-            <p id="belowtext"> Build your finances with our commission-free visualization and analysis tool.</p>
+            <p id="belowtext"> Build your finances with our commission-free information hub and visualization and analysis tools.</p>
           </div>
         </section>
 
@@ -45,7 +45,7 @@ export default function Home() {
         </section> */}
 
         <div className="container">
-          <div className="marquee-wrapper" style={{ background: "linear-gradient(#782089, #214090);" }}>
+          <div className="marquee-wrapper">
             <div className="marquee">
               <div className="marquee-group"> <a href='/stocks/amazon' className="marquee-tag-wrapper">
                 <div className="marquee-tag-container"> <span className="marquee-tag">Amazon</span> </div>
@@ -132,19 +132,19 @@ export default function Home() {
           <section className="boxman">
             <div className="boxsection">
               <img src="https://cdn-icons-png.flaticon.com/512/2942/2942247.png" />
-              <h4> Comprehensive Stock/Crypto News</h4>
-              <span> Stay up to date with the latest, breaking news on the market.</span>
+              <h4> Comprehensive News</h4>
+              <span> Stay up to date with the latest, breaking news on the market. We bring financial and crypto news that is updated daily and organized according to diverse sectors. </span>
             </div>
             <div className="boxsection">
               <img src="https://cdn-icons-png.flaticon.com/512/1556/1556579.png" />
               <h4> Watchlist Functionality </h4>
-              <span> Keep track of your favorite stocks with our watchlist function. </span>
+              <span> Keep track of your favorite stocks with the watchlist function. Select up to 10 stocks to keep a closer eye on and decide when to buy/sell. </span>
             </div>
             <div className="boxsection">
               <img src="https://cdn-icons-png.flaticon.com/512/7038/7038131.png" />
 
               <h4> Data Made Easy </h4>
-              <span> Navigate through data visualization to make accurate predictions on your investments. </span>
+              <span> Navigate through data visualization to make accurate predictions on your investments. Duckhunt provides the accessibility to find all the information in one place. </span>
             </div>
           </section>
         </section>
