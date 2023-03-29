@@ -92,8 +92,8 @@ function Navbar() {
 
     const handleEnter = (event) => {
         if (event.key === "Enter") {
-        router.push(`/stocks/${event.target.value}`);
-        event.target.value = "";
+            router.push(`/stocks/${event.target.value}`);
+            event.target.value = "";
         }
     };
 
@@ -263,7 +263,7 @@ function Navbar() {
                                 <Link href="/news/consumerdiscretionary">
                                     Consumer Discretionary
                                 </Link>
-                                <Link href="/news/consumerstaples">ConsumerStaples</Link>
+                                <Link href="/news/consumerstaples">Consumer Staples</Link>
                                 <Link href="/news/financials">Financials</Link>
                                 <Link href="/news/healthcare">Healthcare</Link>
                                 <Link href="/news/industrials">Industrials</Link>
@@ -320,7 +320,7 @@ function Navbar() {
                                         <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Log out</Typography>
                                     </MenuItem>
                                 ]
-                                 :
+                                :
                                 <MenuItem onClick={handleCloseLogin}>
                                     <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Log in</Typography>
                                 </MenuItem>
