@@ -38,7 +38,7 @@ export default function Watchlist() {
   } else
   return (
     <div>
-        <h1 style={{ color: '#000000' }}> watchlist heh </h1>
+        <h1 style={{ color: '#000000' }}> Watchlist </h1>
         <DataTable />
     </div>
   )

@@ -185,7 +185,7 @@ export default function TopLosers() {
     onAuthStateChanged(auth, async (loggedInUser) => {
       if (loggedInUser) {
         //do your logged in user crap here
-        console.log("Logged in ", loggedInUser);
+        console.log("Logged in ");
         setLoggedIn(true);
         setUser(loggedInUser);
         if (user.uid) {
@@ -341,7 +341,7 @@ export default function TopLosers() {
                                 "watchlist",
                                 user.uid
                               );
-                              console.log("watchlistRef-------", watchlistRef);
+                              
 
                               currentWatchlist.push(data.ticker);
                               setDoc(watchlistRef, {

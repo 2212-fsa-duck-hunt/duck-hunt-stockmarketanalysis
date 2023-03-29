@@ -112,11 +112,9 @@ export default function DataTable() {
            };
            tempWatchlist.push(stock);
          }
-
-          setWatchlist(tempWatchlist);
-          setIsLoading(false);
-
        }
+       setWatchlist(tempWatchlist);
+       setIsLoading(false);
      });
  };
 
