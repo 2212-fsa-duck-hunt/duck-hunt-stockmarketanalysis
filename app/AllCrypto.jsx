@@ -108,7 +108,10 @@ export default function Crypto() {
               >
                 % Change
               </TableCell>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{ backgroundColor: "black", color: "white" }}
+                align="center"
+              >
                 Add To Watch List
               </TableCell>
             </TableRow>
@@ -157,7 +160,7 @@ export default function Crypto() {
                     <TableCell style={change()} align="right">
                       ({data.session.change_percent.toFixed(2)}%)
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       <Button
                         color="success"
                         variant="outlined"
