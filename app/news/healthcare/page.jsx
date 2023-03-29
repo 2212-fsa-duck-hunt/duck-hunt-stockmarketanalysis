@@ -10,8 +10,9 @@ const listOfStocks = require('../../listOfStocks.JSON');
 export default function Healthcare() {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const healthcareList = listOfStocks.filter((element) => { return element.Sector === 'Healthcare' });
+    const healthcareList = listOfStocks.filter((element) => { return element.Sector === 'Health Care' });
     const ilSymbols = healthcareList.map(element => element.Symbol);
+    console.log('ilSymbols', ilSymbols);
 
     useEffect(() => {
         setIsLoading(true);
@@ -46,7 +47,8 @@ export default function Healthcare() {
                     {data.map(stock =>
                         <div key={stock.request_id} className='newsbox'>
                             <h4><Link href={stock.results[0].article_url}>{stock.results[0].title}</Link>
-                            </h4>                            <img className="picture" src={stock.results[0].image_url} />
+                            </h4>
+                            <img className="picture" src={stock.results[0].image_url} />
                             <div className="description"> {stock.results[0].description}</div>
                         </div>
                     )}
