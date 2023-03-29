@@ -33,7 +33,7 @@ export default function News() {
     return (
       <div>
         <section className="sec">
-          <h3> News </h3>
+          <h3> Global News </h3>
           <div>
             {data.map((singledata) => {
               return (

@@ -20,8 +20,6 @@ export default function Home() {
 
   const router = useRouter();
 
-  // document.getElementById('video').playbackRate = 0.75;
-
   return (
     <main>
       <div className="lol">
@@ -30,7 +28,6 @@ export default function Home() {
             <source src="herocover9.mp4" type="video/mp4"></source>
           </video>
           <div className="headerbox">
-            {/* <p id="abovetext"><strong>The Future of Prediction is Here. It's Polygon.io.</strong></p> */}
             <p id="text"> Duckhunt </p>
             <p id="belowtext"> Build your finances with our commission-free information hub and visualization and analysis tools.</p>
           </div>

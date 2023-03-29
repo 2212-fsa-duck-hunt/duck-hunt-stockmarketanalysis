@@ -15,15 +15,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <nav>
+        <nav >
           {/* <AboveBar /> */}
           <Navbar />
         </nav>
         {children}
         <footer>
-          <div> Powered By Polygon.io </div>
+          <div style={{
+            color: "white", background: '#11071b', justifyContent: 'center', alignText: 'center', bottom: '0', position: 'fixed', borderTopRightRadius: '26px'
+          }}>
+            <div style={{ fontSize: '0.75rem', padding: '7px' }}>
+              Powered By Polygon.io
+            </div>
+          </div>
         </footer>
-      </body>
-    </html>
+      </body >
+    </html >
   );
 }
