@@ -247,10 +247,6 @@ function Navbar() {
                             </div>
                         </div>
 
-
-
-
-
                         <div className="dropdown">
                             <Button
                                 onClick={handleCloseNavMenuNews}
@@ -258,7 +254,7 @@ function Navbar() {
                             > News
                             </Button>
                             <div className="dropdown-content">
-                                <Link href="/news">General</Link>
+                                <Link href="/news">Global</Link>
                                 <Link href="/news/communicationservices">Communication Services</Link>
                                 <Link href="/news/consumerdiscretionary">
                                     Consumer Discretionary

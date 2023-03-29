@@ -336,6 +336,9 @@ export default function SP500() {
                                   console.log(
                                     "Document has been added successfully"
                                   );
+                                  const date = new Date();
+                                  console.log("what is the date?", date.getTime());
+                                  //date is : 1680109172946
                                 })
                                 .catch((error) => {
                                   console.log(error);
@@ -360,7 +363,7 @@ export default function SP500() {
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
-          // onChangeRowsPerPage={handleChangeRowsPerPage}
+        // onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </TableContainer>
     </Box>
