@@ -77,7 +77,7 @@ const AppViz = ({ params }) => {
     return (
       <div className="chart">
         <div className="stock">
-          {symbol} {stock.price.toFixed(2)}
+          {symbol} {stock.price}
           {emojis[direction]}
         </div>
         <div id="candlestick" style={{ width: '70%', margin: '0 auto' }}>
