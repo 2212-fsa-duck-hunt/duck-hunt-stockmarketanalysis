@@ -267,7 +267,10 @@ export default function SP500() {
               >
                 % Change
               </TableCell>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{ backgroundColor: "black", color: "white" }}
+                align="center"
+              >
                 Add To Watch List
               </TableCell>
             </TableRow>
@@ -308,7 +311,7 @@ export default function SP500() {
                     <TableCell style={change()} align="right">
                       ({data.session.change_percent.toFixed(2)}%)
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       <Button
                         component="button"
                         variant="outlined"
@@ -343,7 +346,10 @@ export default function SP500() {
                                     "Document has been added successfully"
                                   );
                                   const date = new Date();
-                                  console.log("what is the date?", date.getTime());
+                                  console.log(
+                                    "what is the date?",
+                                    date.getTime()
+                                  );
                                   //date is : 1680109172946
                                 })
                                 .catch((error) => {

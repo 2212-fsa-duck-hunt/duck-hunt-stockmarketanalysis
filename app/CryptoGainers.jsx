@@ -115,7 +115,10 @@ export default function CryptoGainers() {
               >
                 % Change
               </TableCell>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{ backgroundColor: "black", color: "white" }}
+                align="center"
+              >
                 Add To Watch List
               </TableCell>
             </TableRow>
@@ -161,7 +164,7 @@ export default function CryptoGainers() {
                     <TableCell style={change()} align="right">
                       ({data.session.change_percent.toFixed(2)}%)
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       <Button
                         component="button"
                         variant="outlined"
