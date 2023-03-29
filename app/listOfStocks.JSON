@@ -1055,6 +1055,11 @@
     "Symbol": "IT"
   },
   {
+    "Name": "Gamestop",
+    "Sector": "Consumer Discretionary",
+    "Symbol": "GME"
+  },
+  {
     "Name": "Generac Holdings",
     "Sector": "Industrials",
     "Symbol": "GNRC"
