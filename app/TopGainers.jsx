@@ -52,6 +52,12 @@ export default function TopGainers() {
     setPage(newPage);
   };
 
+  const handleChangeRowsPerPage = (event) => {
+    const updatedChangeRowsPerPage = parseInt(event.target.value);
+    setRowsPerPage(updatedChangeRowsPerPage);
+    setPage(0);
+  };
+
   useEffect(() => {
     fetch(
       "https://api.polygon.io/v1/summaries?ticker.any_of=MMM,AOS,ABT,ABBV,ABMD,ACN,ATVI,ADM,ADBE,AAP,AMD,AES,AFL,A,APD,AKAM,ALK,ALB,ARE,ALGN,ALLE,LNT,ALL,GOOGL,GOOG,MO,AMZN,AMCR,AEE,AAL,AEP,AXP,AIG,AMT,AWK,AMP,ABC,AME,AMGN,APH,ADI,ANSS,ELV,AON,APA,AAPL,AMAT,APTV,ANET,AJG&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
@@ -362,10 +368,11 @@ export default function TopGainers() {
         <TablePagination
           component={"div"}
           count={sortedStock.length}
+          rowsPerPageOptions={[10, 25]}
           page={page}
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
-          // onChangeRowsPerPage={handleChangeRowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </TableContainer>
     </Box>
