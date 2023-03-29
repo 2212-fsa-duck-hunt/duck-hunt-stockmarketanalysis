@@ -73,7 +73,6 @@ function Navbar() {
     const handleCloseLogout = () => {
         setAnchorUser(null);
         userSignOut();
-
     }
 
     const userSignOut = () => {
@@ -89,6 +88,13 @@ function Navbar() {
 
     const handleCloseUserMenu = () => {
         setAnchorUser(null);
+    };
+
+    const handleEnter = (event) => {
+        if (event.key === "Enter") {
+        router.push(`/stocks/${event.target.value}`);
+        event.target.value = "";
+        }
     };
 
     const Search = styled('div')(({ theme }) => ({
@@ -150,7 +156,6 @@ function Navbar() {
         <AppBar position="static" style={{ background: '#11071B' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters >
-                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
                         noWrap
@@ -206,12 +211,11 @@ function Navbar() {
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
-                        variant="h5"
+                        variant="h6"
                         noWrap
                         component="a"
-                        href=""
+                        href="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -223,7 +227,7 @@ function Navbar() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        Duckhunt
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -279,15 +283,11 @@ function Navbar() {
                             About
                         </Button>
                     </Box>
-                    <Search sx={{ margin: 4 }}>
+                    <Search sx={{ margin: 4 }} onKeyDown={handleEnter}>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                            fontFamily="Poppins"
-                        />
+                        <StyledInputBase placeholder="Search…" fontFamily="Poppins" />
                     </Search>
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
@@ -312,14 +312,15 @@ function Navbar() {
                             onClose={handleCloseUserMenu}
                         >
                             {loggedIn ?
-                                <>
-                                    <MenuItem onClick={handleCloseWatchlist}>
+                                [
+                                    <MenuItem key="1" onClick={handleCloseWatchlist}>
                                         <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Watchlist</Typography>
-                                    </MenuItem>
-                                    <MenuItem onClick={handleCloseLogout}>
+                                    </MenuItem>,
+                                    <MenuItem key="2" onClick={handleCloseLogout}>
                                         <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Log out</Typography>
                                     </MenuItem>
-                                </> :
+                                ]
+                                 :
                                 <MenuItem onClick={handleCloseLogin}>
                                     <Typography textAlign="center" fontFamily="Poppins" fontWeight="100">Log in</Typography>
                                 </MenuItem>

@@ -19,18 +19,10 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import './styles.css'
-
-
+import "./styles.css";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-
-
-let watchlistSymbols = [];
-
-
 
 export default function DataTable() {
   const [watchlist, setWatchlist] = useState([]);
@@ -40,22 +32,21 @@ export default function DataTable() {
   const [watchlistSymbols, setWatchlistSymbols] = useState([]);
 
   const router = useRouter();
-  
+
   useEffect(() => {
     if (!watchlist.length) {
       fetchData();
       getWatchlist();
     }
-  }, [watchlist]);
+  }, [user]);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (loggedInUser) => {
       if (loggedInUser) {
         //do your logged in user crap here
-        console.log("Logged in ", loggedInUser);
+        console.log("Logged in ");
         setLoggedIn(true);
         setUser(loggedInUser);
-        
       } else {
         console.log("Logged out");
       }
@@ -63,38 +54,36 @@ export default function DataTable() {
   }, [user]);
 
   const getWatchlist = () => {
-    try {
-      console.log('watchlist-------', watchlist);
-      if (user.uid) {
-        const watchlistRef = doc(db, "watchlist", user.uid);
-        getDoc(watchlistRef)
+    if (user.uid) {
+      const watchlistRef = doc(db, "watchlist", user.uid);
+      getDoc(watchlistRef)
         .then((e) => {
-          setWatchlistSymbols(e.data().symbols)
+          setWatchlistSymbols(e.data().symbols);
         })
-      }
-    } catch (err) {
-      console.log(err);
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      console.log("User not found");
     }
   };
 
   const fetchData = () => {
-
     let tempWatchlist = [];
-
     //date conversion to yyyy-mm-dd and also if time is before stock market closes, use yesterday's data
     let yourDate = new Date();
     if (yourDate.getHours() > 13) {
       yourDate.toISOString().split("T")[0];
+      //convert from UTC to PST
       const offset = yourDate.getTimezoneOffset();
       yourDate = new Date(yourDate.getTime() - offset * 60 * 1000);
-      console.log("today-----", yourDate);
     } else {
       let yesterday = new Date(yourDate);
       yesterday.setDate(yesterday.getDate() - 1);
       yesterday.toISOString().split("T")[0];
+      //convert from UTC to PST
       const offset = yesterday.getTimezoneOffset();
       yourDate = new Date(yesterday.getTime() - offset * 60 * 1000);
-      console.log("yesterday-----", yourDate);
     }
     fetch(
       `https://api.polygon.io/v1/summaries?ticker.any_of=${watchlistSymbols.join()}&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
@@ -108,11 +97,9 @@ export default function DataTable() {
     )
       .then((response) => response.json())
       .then((data) => {
-        if (data.status === 'OK') {
-          // console.log("data------", data);
+        if (data.status === "OK") {
           for (let i = 0; i < data.results.length; i++) {
             let stockInfo = data.results[i];
-            console.log("data.results[i]", data.results[i]);
             let stock = {
               id: i + 1,
               name: stockInfo.name,
@@ -123,169 +110,157 @@ export default function DataTable() {
               close: stockInfo.session.close,
               volume: stockInfo.session.volume,
             };
-            tempWatchlist.push(stock)
+            tempWatchlist.push(stock);
           }
         }
-        // console.log("tempWatchlist------", tempWatchlist);
         setWatchlist(tempWatchlist);
         setIsLoading(false);
       });
-    }
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-    return (
-      <Box>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }}>
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  ID
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                    Name
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Symbol
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Open
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  High
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Low
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Close
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Volume
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Remove from watchlist
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody className="table">
-              {watchlist.map((data) => {
-                return (
-                  <TableRow key={data.id}>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      {data.id}
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      <Link href={`/stocks/${data.symbol}`}>{data.name}</Link>
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      <Link href={`/stocks/${data.symbol}`}>{data.symbol}</Link>
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      {data.open}
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      {data.high}
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      {data.low}
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      {data.close}
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      {data.volume}
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      <Button
-                        color="error"
-                        variant="outlined"
-                        component="button"
-                        onClick={() => {
-                          const watchlistRef = doc(db, "watchlist", user.uid);
+  return (
+    <Box>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }}>
+          <TableHead>
+            <TableRow>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                ID
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Name
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Symbol
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Open
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                High
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Low
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Close
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Volume
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Remove from watchlist
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody className="table">
+            {watchlist.map((data) => {
+              return (
+                <TableRow key={data.id}>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    {data.id}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    <Link href={`/stocks/${data.symbol}`}>{data.name}</Link>
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    <Link href={`/stocks/${data.symbol}`}>{data.symbol}</Link>
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    {data.open}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    {data.high}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    {data.low}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    {data.close}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    {data.volume}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    <Button
+                      color="error"
+                      variant="outlined"
+                      component="button"
+                      onClick={() => {
+                        const watchlistRef = doc(db, "watchlist", user.uid);
 
-                          let newWatchlist = watchlist.filter(
-                            (stock) => stock.id !== data.id
-                          );
-                          console.log("new watch list -------", newWatchlist);
+                        let newWatchlist = watchlist.filter(
+                          (stock) => stock.id !== data.id
+                        );
 
-                          setWatchlist(newWatchlist);
-                          let symbols = newWatchlist.map((e) => (e = e.symbol));
+                        setWatchlist(newWatchlist);
+                        let symbols = newWatchlist.map((e) => (e = e.symbol));
 
-                          let tempWatchlistSymbols = symbols;
-                          setWatchlistSymbols(tempWatchlistSymbols);
-                          console.log("symbols------", symbols);
-                          console.log(
-                            "tempwatchlistsymbols---------",
-                            tempWatchlistSymbols
-                          );
-                          console.log(
-                            "watchlistsymbols------",
-                            watchlistSymbols
-                          );
+                        let tempWatchlistSymbols = symbols;
+                        setWatchlistSymbols(tempWatchlistSymbols);
 
-                          setDoc(watchlistRef, {
-                            symbols: tempWatchlistSymbols,
+                        setDoc(watchlistRef, {
+                          symbols: tempWatchlistSymbols,
+                        })
+                          .then(() => {
+                            console.log(
+                              "Document has been deleted successfully"
+                            );
                           })
-                            .then(() => {
-                              console.log(
-                                "Document has been deleted successfully"
-                              );
-                            })
-                            .catch((error) => {
-                              console.log(error);
-                            });
-                        }}
-                      >
-                        <RemoveIcon />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
-    );
+                          .catch((error) => {
+                            console.log(error);
+                          });
+                      }}
+                    >
+                      <RemoveIcon />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
+  );
 }
-
