@@ -62,7 +62,7 @@ const AppViz = ({ params }) => {
     });
   }, []);
 
-  if (stock === null) {
+  if (stock === null || stock.price === null) {
     return (
       <div className="chart">
         <div className="stock">
@@ -98,15 +98,15 @@ export default AppViz;
 
 
 // "use client"
-// import StockVisualization from '../../StockVisualization';
-// import StockChart from '../../StockChart';
-// import LinearModelVisualization from '../../LinearModelVisualization';
+// // import StockVisualization from '../../StockVisualization';
+// // import StockChart from '../../StockChart';
+// // import LinearModelVisualization from '../../LinearModelVisualization';
 // import { Buffer } from "buffer";
 // import protobuf from "protobufjs";
 // const listOfStocks = require('../../listOfStocks.JSON');
 // import { useState, useEffect } from 'react';
 // // import "../../../public/stocks.css";
-// import Michelle from '@/app/michelle/page';
+// import Michelle from "../../michelle/page.jsx";
 
 // const AppViz = ({ params }) => {
 //   //graphs info
@@ -120,7 +120,8 @@ export default AppViz;
 //     let value = params.id.toLowerCase();
 //     let index = listOfNames.indexOf(value);
 //     symbol = listOfSymbols[index];
-//   } else {s
+//   } else {
+//     s
 //     console.log('symbol/name not found')
 //   }
 
@@ -130,8 +131,8 @@ export default AppViz;
 //     <div>
 //       <Michelle symbol={symbol} />
 //       <div id="candlestick" style={{ width: '70%', margin: '0 auto' }}>
-//         <StockChart symbol={symbol} />
-//         <LinearModelVisualization />
+//         {/* <StockChart symbol={symbol} /> */}
+//         {/* <LinearModelVisualization /> */}
 //       </div>
 //     </div>
 //     // <div style={{ width: '70%', margin: '0 auto' }}>

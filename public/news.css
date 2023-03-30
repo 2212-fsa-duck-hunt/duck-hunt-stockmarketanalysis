@@ -63,9 +63,28 @@
 }
 
 .description {
-  max-height: 200px;
+  max-height: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* .description {
+  width: 300px;
+  max-height: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+} */
+
+
+.readmore {
+  font-size: 1em;
+  position: absolute;
+  bottom: 0;
+  color: white
 }
 
 .newsbox:last-child {

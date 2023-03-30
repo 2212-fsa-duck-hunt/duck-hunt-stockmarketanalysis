@@ -60,6 +60,8 @@ export default function DataTable() {
           if (e.data()) {
             console.log(e);
             setWatchlistSymbols(e.data().symbols);
+            // watchListDate = e.data().timestamp
+            // console.log('e.data().timestamp', e.data().timestamp)
           } else {
             return;
           }
@@ -124,11 +126,9 @@ export default function DataTable() {
       console.log(err);
      })
  };
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
   return (
     <Box>
       <TableContainer component={Paper}>
@@ -178,8 +178,14 @@ export default function DataTable() {
               <TableCell
                 style={{ backgroundColor: "#000000", color: "#ffffff" }}
               >
+                % Change
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
                 Remove from watchlist
               </TableCell>
+
             </TableRow>
           </TableHead>
           <TableBody className="table">
@@ -225,6 +231,11 @@ export default function DataTable() {
                     style={{ backgroundColor: "#212021", color: "#ffffff" }}
                   >
                     {data.volume}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    hey
                   </TableCell>
                   <TableCell
                     style={{ backgroundColor: "#212021", color: "#ffffff" }}

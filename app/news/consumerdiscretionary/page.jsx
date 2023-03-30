@@ -49,7 +49,9 @@ export default function ConsumerDiscretionary() {
                             <h4><Link href={stock.results[0].article_url}>{stock.results[0].title}</Link>
                             </h4>
                             <img className="picture" src={stock.results[0].image_url} />
-                            <div className="description"> {stock.results[0].description}</div>
+                            <div className="description">
+                                {stock.results[0].description}
+                            </div>
                         </div>
                     )}
                 </section>
