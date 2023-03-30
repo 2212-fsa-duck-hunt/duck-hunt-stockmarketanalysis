@@ -1,10 +1,35 @@
+
 .table a:visited {
   color: #c73bff;
   text-decoration: none
 }
 
 .table a:link {
-  color: #1ebefc;
+  color: #c73bff;
   text-decoration: none;
 }
 
+a {
+  color: #c73bff;
+  text-decoration: none;
+}
+
+.loadingText {
+  text-align: center;
+}
+
+.watchlistPage {
+  background: #11071A;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+#headerText {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.css-1ex1afd-MuiTableCell-root {
+  padding: 10px;
+}

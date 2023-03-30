@@ -58,7 +58,6 @@ export default function DataTable() {
       getDoc(watchlistRef)
         .then((e) => {
           if (e.data()) {
-            console.log(e);
             setWatchlistSymbols(e.data().symbols);
             // watchListDate = e.data().timestamp
             // console.log('e.data().timestamp', e.data().timestamp)
@@ -127,12 +126,26 @@ export default function DataTable() {
       })
   };
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <h2>Loading...</h2>
+      </div>
+    );
   }
   return (
     <Box>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }}>
+      <TableContainer
+        component={Paper}
+        sx={{ height: 800, backgroundColor: "inherit" }}
+      >
+        <Table
+          sx={{
+            minWidth: 450,
+            maxWidth: "80wh",
+            margin: "auto",
+            height: "max-content",
+          }}
+        >
           <TableHead>
             <TableRow>
               <TableCell
@@ -177,6 +190,7 @@ export default function DataTable() {
               </TableCell>
               <TableCell
                 style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                align="center"
               >
                 % Change
               </TableCell>
@@ -234,6 +248,7 @@ export default function DataTable() {
                   </TableCell>
                   <TableCell
                     style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    align="center"
                   >
                     <Michelle symbol={data.symbol} />
                     this is the name of the symbol {data.symbol}
@@ -245,6 +260,7 @@ export default function DataTable() {
                       color="error"
                       variant="outlined"
                       component="button"
+                      className="removeButton"
                       onClick={() => {
                         const watchlistRef = doc(db, "watchlist", user.uid);
 
