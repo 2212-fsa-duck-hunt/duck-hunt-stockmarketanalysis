@@ -23,6 +23,7 @@ import Link from "next/link";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 const listOfStocks = require("./listOfStocks.JSON");
+const listOfCrypto = require("./listOfCrypto.JSON");
 
 const pages = ["Stocks", "Crypto", "News", "About Polygon.io"];
 const settings = ["Profile", "Account", "Watchlist", "Logout"];
@@ -97,6 +98,8 @@ function Navbar() {
       const listOfNames = listOfStocks.map((element) => {
         return element.Name;
       });
+      const cryptoSymbols = Object.keys(listOfCrypto);
+      const cryptoNames = Object.values(listOfCrypto);
       if (listOfSymbols.includes(event.target.value.toUpperCase())) {
         router.push(`/stocks/${event.target.value}`);
       } else if (listOfNames.includes(event.target.value)) {
@@ -104,6 +107,13 @@ function Navbar() {
           return elem.Name === event.target.value;
         });
         router.push(`/stocks/${getTicker[0].Symbol}`);
+      } else if (cryptoSymbols.includes(event.target.value.toUpperCase())) {
+        router.push(`/crypto/${event.target.value}`);
+      } else if (cryptoNames.includes(event.target.value)) {
+        const getSymbol = Object.entries(listOfCrypto).filter((elem) => {
+          return elem.includes(event.target.value);
+        });
+        router.push(`/crypto/${getSymbol[0][0]}`);
       } else {
         alert("Please enter a valid ticker or name");
       }
