@@ -22,6 +22,7 @@ import Router, { useRouter } from "next/navigation";
 import Link from "next/link";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
+const listOfStocks = require("./listOfStocks.JSON");
 
 const pages = ["Stocks", "Crypto", "News", "About Polygon.io"];
 const settings = ["Profile", "Account", "Watchlist", "Logout"];
