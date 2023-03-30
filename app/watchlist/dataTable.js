@@ -34,8 +34,8 @@ export default function DataTable() {
   const router = useRouter();
 
  useEffect(() => {
-  getWatchlist();
-  fetchData();
+    getWatchlist();
+    fetchData();
  }, [watchlist]);
 
  useEffect(() => {
@@ -45,6 +45,7 @@ export default function DataTable() {
        console.log("Logged in ");
        setLoggedIn(true);
        setUser(loggedInUser);
+       
      } else {
        console.log("Logged out");
      }
@@ -52,11 +53,12 @@ export default function DataTable() {
  }, [user]);
 
  const getWatchlist = () => {
-   if (user.uid) {
+   if (user.uid && watchlist.length === 0) {
      const watchlistRef = doc(db, "watchlist", user.uid);
      getDoc(watchlistRef)
        .then((e) => {
           if (e.data()) {
+            console.log(e);
             setWatchlistSymbols(e.data().symbols);
           } else {
             return;
@@ -112,10 +114,15 @@ export default function DataTable() {
            };
            tempWatchlist.push(stock);
          }
+         if (watchlist !== tempWatchlist) {
+          setWatchlist(tempWatchlist);
+          setIsLoading(false);
+         }
+         
        }
-       setWatchlist(tempWatchlist);
-       setIsLoading(false);
-     });
+     }).catch((err) => {
+      console.log(err);
+     })
  };
 
   if (isLoading) {
