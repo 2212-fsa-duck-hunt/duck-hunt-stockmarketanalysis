@@ -338,19 +338,16 @@ export default function SP500() {
                               console.log("watchlistRef-------", watchlistRef);
 
                               currentWatchlist.push(data.ticker);
+                              const date = new Date();
+                              const timestampers = [data.ticker, date.getTime()];
                               setDoc(watchlistRef, {
                                 symbols: currentWatchlist,
-                              })
+                                timestamp: timestampers
+                              }, { merge: true })
                                 .then(() => {
                                   console.log(
                                     "Document has been added successfully"
                                   );
-                                  const date = new Date();
-                                  console.log(
-                                    "what is the date?",
-                                    date.getTime()
-                                  );
-                                  //date is : 1680109172946
                                 })
                                 .catch((error) => {
                                   console.log(error);

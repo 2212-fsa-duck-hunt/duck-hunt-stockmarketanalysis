@@ -6,7 +6,8 @@ import styles from './page.module.css';
 import { Box, Button, styled, Typography } from '@mui/material';
 import "../public/home.css"
 import { textAlign } from '@mui/system';
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -44,71 +45,71 @@ export default function Home() {
         <div className="container">
           <div className="marquee-wrapper">
             <div className="marquee">
-              <div className="marquee-group"> <a href='/stocks/amazon' className="marquee-tag-wrapper">
+              <div className="marquee-group"> <Link href='/stocks/amazon' className="marquee-tag-wrapper">
                 <div className="marquee-tag-container"> <span className="marquee-tag">Amazon</span> </div>
-              </a> <a href='/stocks/msft' className="marquee-tag-wrapper">
+              </Link> <Link href='/stocks/msft' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">MSFT</span> </div>
-                </a> <a href='/stocks/meta' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/meta' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"><span className="marquee-tag">META</span> </div>
-                </a> <a href='/stocks/aapl' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/aapl' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">AAPL</span> </div>
-                </a> <a href='/stocks/tsla' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/tsla' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">TSLA</span> </div>
-                </a> <a href='/stocks/googl' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/googl' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">GOOGL</span> </div>
-                </a> <a href='/stocks/nvda' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/nvda' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container">  <span className="marquee-tag">NVDA</span> </div>
-                </a> <a href='/stocks/unh' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/unh' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">UNH</span> </div>
-                </a> <a href='/stocks/NFLX' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/NFLX' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">NFLX</span> </div>
-                </a> <a href='/stocks/nke' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/nke' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container">  <span className="marquee-tag">NKE</span> </div>
-                </a> <a href='/stocks/jnj' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/jnj' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"><span className="marquee-tag">JNJ</span> </div>
-                </a>
-                <a href='/stocks/pypl' className="marquee-tag-wrapper">
+                </Link>
+                <Link href='/stocks/pypl' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"><span className="marquee-tag">PYPL</span> </div>
-                </a>
-                <a href='/stocks/jpm' className="marquee-tag-wrapper">
+                </Link>
+                <Link href='/stocks/jpm' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"><span className="marquee-tag">JPM</span> </div>
-                </a>
-                <a href='/stocks/v' className="marquee-tag-wrapper">
+                </Link>
+                <Link href='/stocks/v' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"><span className="marquee-tag">V</span> </div>
-                </a>
+                </Link>
               </div>
-              <div aria-hidden="true" className="marquee-group"> <a href='/stocks/amazon' className="marquee-tag-wrapper">
+              <div aria-hidden="true" className="marquee-group"> <Link href='/stocks/amazon' className="marquee-tag-wrapper">
                 <div className="marquee-tag-container"> <span className="marquee-tag">Amazon</span> </div>
-              </a> <a href='/stocks/msft' className="marquee-tag-wrapper">
+              </Link> <Link href='/stocks/msft' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container">  <span className="marquee-tag">MSFT</span> </div>
-                </a> <a href='/stocks/meta' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/meta' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">META</span> </div>
-                </a> <a href='/stocks/aapl' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/aapl' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">AAPL</span> </div>
-                </a> <a href='/stocks/tsla' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/tsla' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">TSLA</span> </div>
-                </a> <a href='/stocks/googl' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/googl' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">GOOGL</span> </div>
-                </a> <a href='/stocks/nvda' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/nvda' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container">  <span className="marquee-tag">NVDA</span> </div>
-                </a> <a href='/stocks/unh' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/unh' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">UNH</span> </div>
-                </a> <a href='/stocks/roku' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/roku' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">NFLX</span> </div>
-                </a> <a href='/stocks/NFLX' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/NFLX' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"> <span className="marquee-tag">NKE</span> </div>
-                </a> <a href='/stocks/jnj' className="marquee-tag-wrapper">
+                </Link> <Link href='/stocks/jnj' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container">  <span className="marquee-tag">JNJ</span> </div>
-                </a>
-                <a href='/stocks/pypl' className="marquee-tag-wrapper">
+                </Link>
+                <Link href='/stocks/pypl' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"><span className="marquee-tag">PYPL</span> </div>
-                </a>
-                <a href='/stocks/jpm' className="marquee-tag-wrapper">
+                </Link>
+                <Link href='/stocks/jpm' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"><span className="marquee-tag">JPM</span> </div>
-                </a>
-                <a href='/stocks/v' className="marquee-tag-wrapper">
+                </Link>
+                <Link href='/stocks/v' className="marquee-tag-wrapper">
                   <div className="marquee-tag-container"><span className="marquee-tag">V</span> </div>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
