@@ -20,6 +20,7 @@ import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import "./styles.css";
+import Michelle from "../michelle/page";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -30,7 +31,6 @@ export default function DataTable() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const [watchlistSymbols, setWatchlistSymbols] = useState([]);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -235,6 +235,7 @@ export default function DataTable() {
                   <TableCell
                     style={{ backgroundColor: "#212021", color: "#ffffff" }}
                   >
+                    <Michelle symbol={data.symbol} />
                     this is the name of the symbol {data.symbol}
                   </TableCell>
                   <TableCell
