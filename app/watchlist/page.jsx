@@ -28,8 +28,9 @@ export default function Watchlist() {
   if (!loggedIn) {
     return (
     <div className='watchlistPage'>
-      <h1 style={{ color: '#ffffff' }}>Not logged in</h1>
-      <h2 style={{ color: '#ffffff' }}>Login <a href='/login'>here</a> or sign up <a href='/signup'>here</a></h2>
+      <h1 style={{ color: '#ffffff' }} className="loadingText">Loading your watchlist</h1>
+      <h2 style={{ color: '#ffffff' }} className="loadingText">Not logged in?</h2>
+      <h3 style={{ color: '#ffffff' }} className="loadingText">Log in <a href='/login'>here</a> or sign up <a href='/signup'>here</a></h3>
     </div>
     )
   } else

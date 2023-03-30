@@ -9,6 +9,15 @@
   text-decoration: none;
 }
 
+a {
+  color: #c73bff;
+  text-decoration: none;
+}
+
+.loadingText {
+  text-align: center;
+}
+
 .watchlistPage {
   background: #11071A;
   min-height: 100vh;
