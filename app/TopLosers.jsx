@@ -331,7 +331,7 @@ export default function TopLosers() {
                             alert(`Watchlist already contains ${data.name}`);
                             return;
                           }
-                          if (currentWatchlist.length > 4) {
+                          if (currentWatchlist.length > 9) {
                             alert("Watchlist is full");
                             return;
                           } else {
