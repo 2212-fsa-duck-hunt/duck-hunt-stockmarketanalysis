@@ -185,14 +185,14 @@ export default function SP500() {
     onAuthStateChanged(auth, async (loggedInUser) => {
       if (loggedInUser) {
         //do your logged in user crap here
-        console.log("Logged in ", loggedInUser);
+        console.log("Logged in ");
         setLoggedIn(true);
         setUser(loggedInUser);
         if (user.uid) {
           const watchlistRef = doc(db, "watchlist", user.uid);
-          console.log("watchlistRef-------", watchlistRef);
+          
           getDoc(watchlistRef).then((e) => {
-            console.log(e.data());
+            
             if (e.data()) {
               currentWatchlist = e.data().symbols;
             }
@@ -335,7 +335,7 @@ export default function SP500() {
                                 "watchlist",
                                 user.uid
                               );
-                              console.log("watchlistRef-------", watchlistRef);
+                              
 
                               currentWatchlist.push(data.ticker);
                               const date = new Date();

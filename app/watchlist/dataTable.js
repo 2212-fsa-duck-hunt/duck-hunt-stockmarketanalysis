@@ -33,117 +33,102 @@ export default function DataTable() {
 
   const router = useRouter();
 
-  useEffect(() => {
+ useEffect(() => {
     getWatchlist();
     fetchData();
-  }, [watchlist]);
+ }, [watchlist]);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, async (loggedInUser) => {
-      if (loggedInUser) {
-        //do your logged in user crap here
-        console.log("Logged in ");
-        setLoggedIn(true);
-        setUser(loggedInUser);
-      } else {
-        console.log("Logged out");
-      }
-    });
-  }, [user]);
+ useEffect(() => {
+   onAuthStateChanged(auth, async (loggedInUser) => {
+     if (loggedInUser) {
+       //do your logged in user crap here
+       console.log("Logged in ");
+       setLoggedIn(true);
+       setUser(loggedInUser);
+       
+     } else {
+       console.log("Logged out");
+     }
+   });
+ }, [user]);
 
-  // let watchListDate;
-
-  const getWatchlist = () => {
-    if (user.uid) {
-      const watchlistRef = doc(db, "watchlist", user.uid);
-      getDoc(watchlistRef)
-        .then((e) => {
+ const getWatchlist = () => {
+   if (user.uid && watchlist.length === 0) {
+     const watchlistRef = doc(db, "watchlist", user.uid);
+     getDoc(watchlistRef)
+       .then((e) => {
           if (e.data()) {
+            console.log(e);
             setWatchlistSymbols(e.data().symbols);
             // watchListDate = e.data().timestamp
             // console.log('e.data().timestamp', e.data().timestamp)
           } else {
             return;
           }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
-  const fetchData = () => {
-    let tempWatchlist = [];
-    //date conversion to yyyy-mm-dd and also if time is before stock market closes, use yesterday's data
-    let yourDate = new Date();
-    if (yourDate.getHours() > 13) {
-      yourDate.toISOString().split("T")[0];
-      //convert from UTC to PST
-      const offset = yourDate.getTimezoneOffset();
-      yourDate = new Date(yourDate.getTime() - offset * 60 * 1000);
-    } else {
-      let yesterday = new Date(yourDate);
-      yesterday.setDate(yesterday.getDate() - 1);
-      yesterday.toISOString().split("T")[0];
-      //convert from UTC to PST
-      const offset = yesterday.getTimezoneOffset();
-      yourDate = new Date(yesterday.getTime() - offset * 60 * 1000);
-    }
-    fetch(
-      `https://api.polygon.io/v1/summaries?ticker.any_of=${watchlistSymbols.join()}&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
-      {
-        method: "GET",
-        headers: {
-          "X-Polygon-Edge-ID": "cool-big-id",
-          "X-Polygon-Edge-IP-Address": "8.8.4.4",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status === "OK") {
-          for (let i = 0; i < data.results.length; i++) {
-            let stockInfo = data.results[i];
-            let stock = {
-              id: i + 1,
-              name: stockInfo.name,
-              symbol: stockInfo.ticker,
-              open: stockInfo.session.open,
-              high: stockInfo.session.high,
-              low: stockInfo.session.low,
-              close: stockInfo.session.close,
-              volume: stockInfo.session.volume,
-            };
-            tempWatchlist.push(stock);
-          }
+       })
+       .catch((err) => {
+         console.log(err);
+       });
+   }
+ };
 
+ const fetchData = () => {
+   let tempWatchlist = [];
+   //date conversion to yyyy-mm-dd and also if time is before stock market closes, use yesterday's data
+   let yourDate = new Date();
+   if (yourDate.getHours() > 13) {
+     yourDate.toISOString().split("T")[0];
+     //convert from UTC to PST
+     const offset = yourDate.getTimezoneOffset();
+     yourDate = new Date(yourDate.getTime() - offset * 60 * 1000);
+   } else {
+     let yesterday = new Date(yourDate);
+     yesterday.setDate(yesterday.getDate() - 1);
+     yesterday.toISOString().split("T")[0];
+     //convert from UTC to PST
+     const offset = yesterday.getTimezoneOffset();
+     yourDate = new Date(yesterday.getTime() - offset * 60 * 1000);
+   }
+   fetch(
+     `https://api.polygon.io/v1/summaries?ticker.any_of=${watchlistSymbols.join()}&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
+     {
+       method: "GET",
+       headers: {
+         "X-Polygon-Edge-ID": "cool-big-id",
+         "X-Polygon-Edge-IP-Address": "8.8.4.4",
+       },
+     }
+   )
+     .then((response) => response.json())
+     .then((data) => {
+       if (data.status === "OK") {
+         for (let i = 0; i < data.results.length; i++) {
+           let stockInfo = data.results[i];
+           let stock = {
+             id: i + 1,
+             name: stockInfo.name,
+             symbol: stockInfo.ticker,
+             open: stockInfo.session.open,
+             high: stockInfo.session.high,
+             low: stockInfo.session.low,
+             close: stockInfo.session.close,
+             volume: stockInfo.session.volume,
+           };
+           tempWatchlist.push(stock);
+         }
+         if (watchlist !== tempWatchlist) {
           setWatchlist(tempWatchlist);
           setIsLoading(false);
-
-        }
-      });
-  };
-
-  //michelle time
-
-  // if (user.uid) {
-  //   const watchlistRef = doc(db, "watchlist", user.uid);
-  //   getDoc(watchlistRef)
-  //     .then((e) => {
-  //       if (e.data().timestamp) {
-  //         console.log('e.data().timestamp', e.data().timestamp)
-  //       } else {
-  //         return;
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-
+         }
+         
+       }
+     }).catch((err) => {
+      console.log(err);
+     })
+ };
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
   return (
     <Box>
       <TableContainer component={Paper}>
