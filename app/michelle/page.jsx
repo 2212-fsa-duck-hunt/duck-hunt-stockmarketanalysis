@@ -9,14 +9,14 @@ import "../../public/stocks.css";
 export default function Michelle(props) {
 
     const symbol = props.symbol;
-    function formatPrice(price) {
-        return `$${price.toFixed(2)}`
-    }
+    const open = props.open;
+    // function formatPrice(price) {
+    //     return `$${price.toFixed(2)}`
+    // }
 
     //   THIS IS FOR THE TICKER
     const [stock, setStock] = useState("Loading")
     const [direction, setDirection] = useState('');
-    const [data, setData] = useState(null);
     const emojis = {
         '': '',
         'up': '⬆️',
@@ -33,7 +33,7 @@ export default function Michelle(props) {
             ws.onopen = function open() {
                 console.log('connected');
                 ws.send(JSON.stringify({
-                    subscribe: ['GME']
+                    subscribe: [symbol]
                 }));
             };
 
@@ -52,15 +52,26 @@ export default function Michelle(props) {
     }, []);
 
 
+
+    // if (stock.price === null) {
+    //     return (
+    //         <div> Loading definitely need a better page for this </div>
+    //     )
+    // } else return (
+    //     <div className="chart">
+    //         <div className="stock">
+    //             GME: {stock.price}
+    //             {emojis[direction]}
+    //         </div>
+    //     </div>)
+
     if (stock.price === null) {
-        return (
-            <div> Loading definitely need a better page for this </div>
-        )
+        return 'Loading'
     } else return (
-        <div className="chart">
-            <div className="stock">
-                GME: {stock.price}
-                {emojis[direction]}
-            </div>
-        </div>)
+        <div>
+            {stock.price}
+        </div>
+
+    )
+
 } 
