@@ -129,17 +129,17 @@ export default function Home() {
           </div> */}
           <section className="boxman">
             <div className="boxsection">
-              <img src="https://cdn-icons-png.flaticon.com/512/2942/2942247.png" />
+              <img src="news2.png" style={{ color: 'white' }} />
               <h4> Comprehensive News</h4>
               <span> Stay up to date with the latest, breaking news on the market. We bring financial and crypto news that is updated daily and organized according to diverse sectors. </span>
             </div>
             <div className="boxsection">
-              <img src="https://cdn-icons-png.flaticon.com/512/1556/1556579.png" />
+              <img src="list1.png" />
               <h4> Watchlist Functionality </h4>
               <span> Keep track of your favorite stocks with the watchlist function. Select up to 10 stocks to keep a closer eye on and decide when to buy/sell. </span>
             </div>
             <div className="boxsection">
-              <img src="https://cdn-icons-png.flaticon.com/512/7038/7038131.png" />
+              <img src="candlestickchart.png" />
 
               <h4> Data Made Easy </h4>
               <span> Navigate through data visualization to make accurate predictions on your investments. Duckhunt provides the accessibility to find all the information in one place. </span>
