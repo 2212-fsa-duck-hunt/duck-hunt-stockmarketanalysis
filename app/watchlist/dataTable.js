@@ -35,17 +35,13 @@ export default function DataTable() {
 
   useEffect(() => {
     getWatchlist();
-    if (watchlistSymbols.length) {
-      fetchData();
-    }
-    
-  }, [watchlistSymbols]);
+    fetchData();
+  }, [watchlist]);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (loggedInUser) => {
       if (loggedInUser) {
         //do your logged in user crap here
-        console.log("Logged in ");
         setLoggedIn(true);
         setUser(loggedInUser);
 
@@ -90,7 +86,6 @@ export default function DataTable() {
     //   const offset = yesterday.getTimezoneOffset();
     //   yourDate = new Date(yesterday.getTime() - offset * 60 * 1000);
     // }
-    if (watchlist.length === 0) {
       let tempWatchlist = [];
       fetch(
         `https://api.polygon.io/v1/summaries?ticker.any_of=${watchlistSymbols.join()}&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
@@ -128,7 +123,6 @@ export default function DataTable() {
         .catch((err) => {
           console.log(err);
         });
-    }
   };
 
   

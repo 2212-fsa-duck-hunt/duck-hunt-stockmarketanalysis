@@ -167,7 +167,7 @@ function Navbar() {
     onAuthStateChanged(auth, async (loggedInUser) => {
       if (loggedInUser) {
         //do your logged in user crap here
-        console.log("Logged in ", loggedInUser);
+        console.log("Logged in ");
         setLoggedIn(true);
         setUser(loggedInUser);
       } else {
