@@ -299,7 +299,7 @@ export default function TopGainers() {
                     <TableCell>
                       <Link href={`/stocks/${data.ticker}`}>{data.ticker}</Link>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" style={{ verticalAlign: "70%" }}>
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
@@ -340,7 +340,6 @@ export default function TopGainers() {
                                 "watchlist",
                                 user.uid
                               );
-                              
 
                               currentWatchlist.push(data.ticker);
                               setDoc(watchlistRef, {

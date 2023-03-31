@@ -190,9 +190,8 @@ export default function SP500() {
         setUser(loggedInUser);
         if (user.uid) {
           const watchlistRef = doc(db, "watchlist", user.uid);
-          
+
           getDoc(watchlistRef).then((e) => {
-            
             if (e.data()) {
               currentWatchlist = e.data().symbols;
             }
@@ -294,7 +293,7 @@ export default function SP500() {
                     <TableCell>
                       <Link href={`/stocks/${data.ticker}`}>{data.ticker}</Link>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" style={{ verticalAlign: "70%" }}>
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
@@ -335,15 +334,21 @@ export default function SP500() {
                                 "watchlist",
                                 user.uid
                               );
-                              
 
                               currentWatchlist.push(data.ticker);
                               const date = new Date();
-                              const timestampers = [data.ticker, date.getTime()];
-                              setDoc(watchlistRef, {
-                                symbols: currentWatchlist,
-                                timestamp: timestampers
-                              }, { merge: true })
+                              const timestampers = [
+                                data.ticker,
+                                date.getTime(),
+                              ];
+                              setDoc(
+                                watchlistRef,
+                                {
+                                  symbols: currentWatchlist,
+                                  timestamp: timestampers,
+                                },
+                                { merge: true }
+                              )
                                 .then(() => {
                                   console.log(
                                     "Document has been added successfully"

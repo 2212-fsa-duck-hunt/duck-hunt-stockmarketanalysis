@@ -58,7 +58,7 @@ export default function Crypto() {
       .then((data) => setStock(data));
   }, []);
 
-  console.log("stock.results =======>", stock.results)
+  console.log("stock.results =======>", stock.results);
 
   if (!stock.status) {
     return (
@@ -75,7 +75,6 @@ export default function Crypto() {
   }
 
   return (
-
     <Box>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }}>
@@ -143,7 +142,7 @@ export default function Crypto() {
                         {data.ticker.slice(2, -3)}
                       </Link>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" style={{ verticalAlign: "70%" }}>
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (

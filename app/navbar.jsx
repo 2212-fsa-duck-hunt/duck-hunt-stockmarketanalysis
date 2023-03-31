@@ -20,6 +20,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import "../public/home.css";
 import Router, { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Alert, Snackbar, AlertTitle } from "@mui/material";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 const listOfStocks = require("./listOfStocks.JSON");
@@ -33,6 +34,7 @@ function Navbar() {
   const [anchorUser, setAnchorUser] = React.useState(null);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [user, setUser] = useState({});
+  const [error, setError] = useState(false);
   const router = useRouter();
 
   const handleOpenNavMenu = (event) => {
@@ -115,7 +117,9 @@ function Navbar() {
         });
         router.push(`/crypto/${getSymbol[0][0]}`);
       } else {
-        alert("Please enter a valid ticker or name");
+        // alert("Please enter a valid ticker or name");
+        console.log("return");
+        setError(true);
       }
       event.target.value = "";
     }
@@ -230,7 +234,9 @@ function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                    <Link href={`/${page.toLowerCase()}`}>{page}</Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -397,6 +403,16 @@ function Navbar() {
             </Menu>
           </Box>
         </Toolbar>
+        <Snackbar
+          open={error}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          autoHideDuration={4000}
+          onClose={() => setError(false)}
+        >
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>Please enter a valid company or ticker
+          </Alert>
+        </Snackbar>
       </Container>
     </AppBar>
   );
