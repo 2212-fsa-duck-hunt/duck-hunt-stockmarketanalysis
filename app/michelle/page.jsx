@@ -30,7 +30,8 @@ export default function Michelle(props) {
         .then((data) => setTimedPrice(data.results[0]['o']))
         .catch((err) => console.log("error", err))
 
-    console.log('timed price', timedPrice, symbol)
+
+
     const [stock, setStock] = useState("Loading")
     const [direction, setDirection] = useState('');
     const emojis = {
@@ -38,6 +39,9 @@ export default function Michelle(props) {
         'up': '⬆️',
         'down': '⬇️'
     }
+
+    console.log('timed price', timedPrice, symbol);
+    console.log('symbol', stock);
 
     useEffect(() => {
         const ws = new WebSocket('wss://streamer.finance.yahoo.com');

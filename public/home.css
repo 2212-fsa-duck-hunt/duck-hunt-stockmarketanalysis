@@ -157,7 +157,6 @@ body {
     text-transform: uppercase;
     text-shadow: 0 0 2px #065b70;
     position: relative;
-    background-image: linear-gradient(to right, #782089, #214090);
 }
 
 .ticker1 {
@@ -324,7 +323,6 @@ body {
     width: 100%;
     min-height: 7vh;
     background-color: rgb(17, 7, 27);
-    background-image: linear-gradient(to right, #782089, #214090);
 }
 
 .title {
