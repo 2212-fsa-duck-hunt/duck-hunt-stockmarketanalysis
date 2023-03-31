@@ -25,19 +25,21 @@ export default function Watchlist() {
     })
   }, [])
 
-  if (!loggedIn) {
-    return (
-    <div className='watchlistPage'>
-      <h1 style={{ color: '#ffffff' }} className="loadingText">Loading your watchlist</h1>
-      <h2 style={{ color: '#ffffff' }} className="loadingText">Not logged in?</h2>
-      <h3 style={{ color: '#ffffff' }} className="loadingText">Log in <a href='/login'>here</a> or sign up <a href='/signup'>here</a></h3>
-    </div>
-    )
-  } else
+
   return (
+    loggedIn ? 
     <div className='watchlistPage'>
-        <h1 id="headerText" style={{ color: '#ffffff', textAlign: 'center'}}>  Watchlist </h1>
-        <DataTable />
-    </div>
+      <h1 id="headerText" style={{ color: '#ffffff', textAlign: 'center'}}>  Watchlist </h1>
+      <DataTable />
+  </div> :
+  <div className='watchlistPage'>
+    <h1 style={{ color: '#ffffff' }} className="loadingText">Loading your watchlist</h1>
+    <h2 style={{ color: '#ffffff' }} className="loadingText">Not logged in?</h2>
+    <h3 style={{ color: '#ffffff' }} className="loadingText">Log in <a href='/login'>here</a> or sign up <a href='/signup'>here</a></h3>
+  </div>  
   )
+
+  
+  
+
 }
