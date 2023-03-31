@@ -16,7 +16,9 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { Badge } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import "../public/home.css";
 import Router, { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -66,6 +68,10 @@ function Navbar() {
 
   const handleCloseWatchlist = () => {
     setAnchorUser(null);
+    router.push("/watchlist");
+  };
+
+  const handleWatchlist = () => {
     router.push("/watchlist");
   };
 
@@ -346,6 +352,17 @@ function Navbar() {
             </SearchIconWrapper>
             <StyledInputBase placeholder="Search…" fontFamily="Poppins" />
           </Search>
+          <IconButton
+            onClick={handleWatchlist}
+            sx={{ marginRight: 2 }}
+            style={{ color: "white" }}
+          >
+            <img
+              src="bookmark.png"
+              style={{ height: "28px", width: "28px", color: "white" }}
+              className="alex"
+            />
+          </IconButton>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
