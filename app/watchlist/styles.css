@@ -9,6 +9,11 @@
   text-decoration: none;
 }
 
+.table a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 a {
   color: #c73bff;
   text-decoration: none;
@@ -16,6 +21,10 @@ a {
 
 .loadingText {
   text-align: center;
+}
+
+.removeButton {
+  align-content: center;
 }
 
 .watchlistPage {
@@ -30,6 +39,9 @@ a {
   margin-bottom: 0;
 }
 
-.css-1ex1afd-MuiTableCell-root {
-  padding: 10px;
+body {
+  margin: 0;
+  padding: 0;
 }
+
+

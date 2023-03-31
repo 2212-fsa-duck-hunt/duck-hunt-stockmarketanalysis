@@ -147,7 +147,7 @@ export default function CryptoLosers() {
                         {data.ticker.slice(2, -3)}
                       </Link>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" style={{ verticalAlign: "70%" }}>
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (

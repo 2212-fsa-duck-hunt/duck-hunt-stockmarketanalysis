@@ -31,6 +31,7 @@ export default function DataTable() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const [watchlistSymbols, setWatchlistSymbols] = useState([]);
+
   const [timestamper, setTimestamper] = useState('')
   const router = useRouter();
 
@@ -62,9 +63,6 @@ export default function DataTable() {
           });
       }
     };
-
-
-
     const fetchData = () => {
       let tempWatchlist = [];
       fetch(
@@ -110,7 +108,6 @@ export default function DataTable() {
     }
 
   }, [user.uid, watchlistSymbols]);
-
 
   if (!isLoading) {
     return (
@@ -278,5 +275,4 @@ export default function DataTable() {
       </Box>
     );
   }
-
 }

@@ -20,9 +20,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import "../public/home.css";
 import Router, { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Alert, Snackbar, AlertTitle } from "@mui/material";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 const listOfStocks = require("./listOfStocks.JSON");
+const listOfCrypto = require("./listOfCrypto.JSON");
 
 const pages = ["Stocks", "Crypto", "News", "About Polygon.io"];
 const settings = ["Profile", "Account", "Watchlist", "Logout"];
@@ -32,6 +34,7 @@ function Navbar() {
   const [anchorUser, setAnchorUser] = React.useState(null);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [user, setUser] = useState({});
+  const [error, setError] = useState(false);
   const router = useRouter();
 
   const handleOpenNavMenu = (event) => {
@@ -97,6 +100,8 @@ function Navbar() {
       const listOfNames = listOfStocks.map((element) => {
         return element.Name;
       });
+      const cryptoSymbols = Object.keys(listOfCrypto);
+      const cryptoNames = Object.values(listOfCrypto);
       if (listOfSymbols.includes(event.target.value.toUpperCase())) {
         router.push(`/stocks/${event.target.value}`);
       } else if (listOfNames.includes(event.target.value)) {
@@ -104,8 +109,17 @@ function Navbar() {
           return elem.Name === event.target.value;
         });
         router.push(`/stocks/${getTicker[0].Symbol}`);
+      } else if (cryptoSymbols.includes(event.target.value.toUpperCase())) {
+        router.push(`/crypto/${event.target.value}`);
+      } else if (cryptoNames.includes(event.target.value)) {
+        const getSymbol = Object.entries(listOfCrypto).filter((elem) => {
+          return elem.includes(event.target.value);
+        });
+        router.push(`/crypto/${getSymbol[0][0]}`);
       } else {
-        alert("Please enter a valid ticker or name");
+        // alert("Please enter a valid ticker or name");
+        console.log("return");
+        setError(true);
       }
       event.target.value = "";
     }
@@ -157,7 +171,7 @@ function Navbar() {
     onAuthStateChanged(auth, async (loggedInUser) => {
       if (loggedInUser) {
         //do your logged in user crap here
-        console.log("Logged in ", loggedInUser);
+        console.log("Logged in ");
         setLoggedIn(true);
         setUser(loggedInUser);
       } else {
@@ -220,7 +234,9 @@ function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                    <Link href={`/${page.toLowerCase()}`}>{page}</Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -387,6 +403,16 @@ function Navbar() {
             </Menu>
           </Box>
         </Toolbar>
+        <Snackbar
+          open={error}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          autoHideDuration={4000}
+          onClose={() => setError(false)}
+        >
+          <Alert severity="error">
+            <AlertTitle>Error</AlertTitle>Please enter a valid company or ticker
+          </Alert>
+        </Snackbar>
       </Container>
     </AppBar>
   );

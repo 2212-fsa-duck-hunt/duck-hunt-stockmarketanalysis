@@ -193,7 +193,6 @@ export default function SP500() {
           const watchlistRef = doc(db, "watchlist", user.uid);
 
           getDoc(watchlistRef).then((e) => {
-
             if (e.data()) {
               currentWatchlist = e.data().symbols;
             }
@@ -295,7 +294,7 @@ export default function SP500() {
                     <TableCell>
                       <Link href={`/stocks/${data.ticker}`}>{data.ticker}</Link>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" style={{ verticalAlign: "70%" }}>
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
