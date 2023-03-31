@@ -300,7 +300,7 @@ export default function TopLosers() {
                     <TableCell>
                       <Link href={`/stocks/${data.ticker}`}>{data.ticker}</Link>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right" style={{ verticalAlign: "70%" }}>
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
@@ -341,7 +341,6 @@ export default function TopLosers() {
                                 "watchlist",
                                 user.uid
                               );
-                              
 
                               currentWatchlist.push(data.ticker);
                               setDoc(watchlistRef, {
