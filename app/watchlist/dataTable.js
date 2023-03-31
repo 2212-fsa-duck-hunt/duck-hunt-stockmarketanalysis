@@ -32,6 +32,7 @@ export default function DataTable() {
   const [user, setUser] = useState({});
   const [watchlistSymbols, setWatchlistSymbols] = useState([]);
 
+  const [timestamper, setTimestamper] = useState('')
   const router = useRouter();
 
   useEffect(() => {
@@ -54,9 +55,7 @@ export default function DataTable() {
           .then((e) => {
             if (e.data() && watchlistSymbols[0] !== e.data().symbols[0]) {
               setWatchlistSymbols(e.data().symbols);
-              console.log(watchlistSymbols)
-              // watchListDate = e.data().timestamp
-              // console.log('e.data().timestamp', e.data().timestamp)
+              setTimestamper(e.data().timestamp)
             }
           })
           .catch((err) => {
@@ -64,43 +63,42 @@ export default function DataTable() {
           });
       }
     };
-
     const fetchData = () => {
       let tempWatchlist = [];
-        fetch(
-          `https://api.polygon.io/v1/summaries?ticker.any_of=${watchlistSymbols.join()}&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
-          {
-            method: "GET",
-            headers: {
-              "X-Polygon-Edge-ID": "cool-big-id",
-              "X-Polygon-Edge-IP-Address": "8.8.4.4",
-            },
-          }
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.status === "OK") {
-              for (let i = 0; i < data.results.length; i++) {
-                let stockInfo = data.results[i];
-                let stock = {
-                  id: i + 1,
-                  name: stockInfo.name,
-                  symbol: stockInfo.ticker,
-                  open: stockInfo.session.open,
-                  high: stockInfo.session.high,
-                  low: stockInfo.session.low,
-                  close: stockInfo.session.close,
-                  volume: stockInfo.session.volume,
-                };
-                tempWatchlist.push(stock);
-              }
-              setWatchlist(tempWatchlist);
-              setIsLoading(false);
+      fetch(
+        `https://api.polygon.io/v1/summaries?ticker.any_of=${watchlistSymbols.join()}&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
+        {
+          method: "GET",
+          headers: {
+            "X-Polygon-Edge-ID": "cool-big-id",
+            "X-Polygon-Edge-IP-Address": "8.8.4.4",
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === "OK") {
+            for (let i = 0; i < data.results.length; i++) {
+              let stockInfo = data.results[i];
+              let stock = {
+                id: i + 1,
+                name: stockInfo.name,
+                symbol: stockInfo.ticker,
+                open: stockInfo.session.open,
+                high: stockInfo.session.high,
+                low: stockInfo.session.low,
+                close: stockInfo.session.close,
+                volume: stockInfo.session.volume,
+              };
+              tempWatchlist.push(stock);
             }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+            setWatchlist(tempWatchlist);
+            setIsLoading(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
     };
     getWatchlist();
@@ -108,10 +106,9 @@ export default function DataTable() {
     if (watchlistSymbols.length) {
       fetchData();
     }
-    
+
   }, [user.uid, watchlistSymbols]);
 
-  
   if (!isLoading) {
     return (
       <Box>
@@ -230,8 +227,7 @@ export default function DataTable() {
                       style={{ backgroundColor: "#212021", color: "#ffffff" }}
                       align="center"
                     >
-                      <Michelle symbol={data.symbol} />
-                      this is the name of the symbol {data.symbol}
+                      <Michelle symbol={data.symbol} timestamp={timestamper} />
                     </TableCell>
                     <TableCell
                       style={{ backgroundColor: "#212021", color: "#ffffff" }}
@@ -279,5 +275,4 @@ export default function DataTable() {
       </Box>
     );
   }
-  
 }

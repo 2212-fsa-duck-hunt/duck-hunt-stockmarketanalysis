@@ -7,14 +7,30 @@ import "../../public/stocks.css";
 
 //we dont have access to buffer in our environment, so a polyfill will give us buffer that we can use. it's like using fetch in node.
 export default function Michelle(props) {
-
     const symbol = props.symbol;
     const open = props.open;
-    // function formatPrice(price) {
-    //     return `$${price.toFixed(2)}`
-    // }
+    const timestampArray = props.timestamp;
 
-    //   THIS IS FOR THE TICKER
+    const selectedElementTimestamp = timestampArray.filter((element) => Object.keys(element)[0] === symbol);
+    const addedTime = selectedElementTimestamp[0][symbol];
+
+    const [timedPrice, setTimedPrice] = useState('');
+
+    fetch(
+        `https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/minute/${addedTime}/${addedTime + 1}?adjusted=true&sort=asc&limit=1&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
+        {
+            method: "GET",
+            headers: {
+                "X-Polygon-Edge-ID": "watchlist",
+                "X-Polygon-Edge-IP-Address": "8.8.8.8",
+            }
+        }
+    )
+        .then((res) => res.json())
+        .then((data) => setTimedPrice(data.results[0]['o']))
+        .catch((err) => console.log("error", err))
+
+    console.log('timed price', timedPrice, symbol)
     const [stock, setStock] = useState("Loading")
     const [direction, setDirection] = useState('');
     const emojis = {
@@ -22,6 +38,7 @@ export default function Michelle(props) {
         'up': '⬆️',
         'down': '⬇️'
     }
+
     useEffect(() => {
         const ws = new WebSocket('wss://streamer.finance.yahoo.com');
         const root = protobuf.load('./YPricingData.proto', (error, root) => {
@@ -51,25 +68,13 @@ export default function Michelle(props) {
         });
     }, []);
 
-
-
-    // if (stock.price === null) {
-    //     return (
-    //         <div> Loading definitely need a better page for this </div>
-    //     )
-    // } else return (
-    //     <div className="chart">
-    //         <div className="stock">
-    //             GME: {stock.price}
-    //             {emojis[direction]}
-    //         </div>
-    //     </div>)
-
-    if (stock.price === null) {
+    //timed price of ADBE 385.085
+    //stock price: 385.37
+    if (stock.price === null || !timedPrice) {
         return 'Loading'
     } else return (
         <div>
-            {stock.price}
+            {(((stock.price - timedPrice) / timedPrice) * 100).toFixed(2) + '%'}
         </div>
 
     )

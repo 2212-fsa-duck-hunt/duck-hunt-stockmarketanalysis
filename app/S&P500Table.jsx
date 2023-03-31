@@ -29,6 +29,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let currentWatchlist = [];
+let timestampers = [];
 
 export default function SP500() {
   const [page, setPage] = useState(0);
@@ -60,7 +61,7 @@ export default function SP500() {
 
   useEffect(() => {
     fetch(
-      "https://api.polygon.io/v1/summaries?ticker.any_of=MMM,AOS,ABT,ABBV,ABMD,ACN,ATVI,ADM,ADBE,AAP,AMD,AES,AFL,A,APD,AKAM,ALK,ALB,ARE,ALGN,ALLE,LNT,ALL,GOOGL,GOOG,MO,AMZN,AMCR,AEE,AAL,AEP,AXP,AIG,AMT,AWK,AMP,ABC,AME,AMGN,APH,ADI,ANSS,ELV,AON,APA,AAPL,AMAT,APTV,ANET,AJG&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
+      "https://api.polygon.io/v1/summaries?ticker.any_of=MMM,AOS,ABT,ABBV,ATEN,ACN,ATVI,ADM,ADBE,AAP,AMD,AES,AFL,A,APD,AKAM,ALK,ALB,ARE,ALGN,ALLE,LNT,ALL,GOOGL,GOOG,MO,AMZN,AMCR,AEE,AAL,AEP,AXP,AIG,AMT,AWK,AMP,ABC,AME,AMGN,APH,ADI,ANSS,ELV,AON,APA,AAPL,AMAT,APTV,ANET,AJG&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj",
       {
         method: "GET",
         headers: {
@@ -337,18 +338,13 @@ export default function SP500() {
 
                               currentWatchlist.push(data.ticker);
                               const date = new Date();
-                              const timestampers = [
-                                data.ticker,
-                                date.getTime(),
-                              ];
-                              setDoc(
-                                watchlistRef,
-                                {
-                                  symbols: currentWatchlist,
-                                  timestamp: timestampers,
-                                },
-                                { merge: true }
-                              )
+                              let obj = {};
+                              obj[data.ticker] = date.getTime();
+                              timestampers.push(obj);
+                              setDoc(watchlistRef, {
+                                symbols: currentWatchlist,
+                                timestamp: timestampers
+                              })
                                 .then(() => {
                                   console.log(
                                     "Document has been added successfully"
