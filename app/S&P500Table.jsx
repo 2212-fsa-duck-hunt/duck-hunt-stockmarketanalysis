@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
@@ -48,7 +47,6 @@ export default function SP500() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
-  const router = useRouter();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -234,7 +232,7 @@ export default function SP500() {
 
   return (
     <Box>
-      <TableContainer component={Paper}>
+      <TableContainer>
         <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }}>
           <TableHead>
             <TableRow>
@@ -376,6 +374,7 @@ export default function SP500() {
           rowsPerPageOptions={[10, 25]}
           rowsPerPage={rowsPerPage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          sx={{ maxWidth: 1700 }}
         />
       </TableContainer>
     </Box>

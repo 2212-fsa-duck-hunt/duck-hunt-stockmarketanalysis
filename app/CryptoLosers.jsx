@@ -81,7 +81,7 @@ export default function CryptoLosers() {
 
   return (
     <Box>
-      <TableContainer component={Paper}>
+      <TableContainer>
         <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }}>
           <TableHead>
             <TableRow>
@@ -133,7 +133,6 @@ export default function CryptoLosers() {
                     return { color: "red" };
                   }
                 };
-                let dollarUSLocale = Intl.NumberFormat("en-US");
 
                 return (
                   <TableRow hover key={data.name}>
@@ -153,10 +152,18 @@ export default function CryptoLosers() {
                       ) : (
                         <ArrowDropUpIcon color="success" />
                       )}
-                      ${dollarUSLocale.format(data.price.toFixed(2))}
+                      $
+                      {data.price.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                     </TableCell>
                     <TableCell align="right">
-                      ${data.session.previous_close.toFixed(2)}
+                      $
+                      {data.session.previous_close.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                     </TableCell>
                     <TableCell style={change()} align="right">
                       ${data.session.change.toFixed(2)}
@@ -204,6 +211,7 @@ export default function CryptoLosers() {
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          sx={{ maxWidth: 1700 }}
         />
       </TableContainer>
     </Box>
