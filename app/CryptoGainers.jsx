@@ -136,7 +136,7 @@ export default function CryptoGainers() {
                 let dollarUSLocale = Intl.NumberFormat("en-US");
 
                 return (
-                  <TableRow key={data.name}>
+                  <TableRow hover key={data.name}>
                     <TableCell>
                       <Link href={`/stocks/${data.ticker}`}>
                         {data.name.slice(0, -23)}
