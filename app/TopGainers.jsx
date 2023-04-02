@@ -238,7 +238,7 @@ export default function TopGainers() {
 
   return (
     <Box>
-      <TableContainer component={Paper}>
+      <TableContainer>
         <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }}>
           <TableHead>
             <TableRow>
@@ -374,6 +374,7 @@ export default function TopGainers() {
           onPageChange={handleChangePage}
           rowsPerPage={rowsPerPage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          sx={{ maxWidth: 1700 }}
         />
       </TableContainer>
     </Box>
