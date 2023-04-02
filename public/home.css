@@ -85,7 +85,7 @@ body {
     padding: 100px;
     justify-content: center;
     align-items: center;
-    height: 600px;
+    height: 800px;
 }
 
 .sec h2 {
@@ -108,21 +108,26 @@ body {
     font-family: "Poppins";
 }
 
+
 /* scroller information */
 .scroller {
-    height: 3.6em;
-    line-height: 3.6em;
+    height: 1.15em;
+    line-height: 1.15em;
     position: relative;
+    font-size: 34px;
     overflow: hidden;
-    font-weight: 300;
     color: #fff;
+    width: 100%;
 }
 
-.scroller>h2>span {
+.scroller>span {
     position: absolute;
-    top: 0;
     animation: slide 10s infinite;
-    font-weight: bold;
+    display: block;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+
 }
 
 @keyframes slide {
@@ -172,51 +177,26 @@ body {
     animation-delay: 15s;
 }
 
-@keyframes tickerframes1 {
-    0% {
-        transform: translateX(100%);
-        -webkit-transform: translateX(100%);
-    }
-
-    100% {
-        transform: translateX(-100%);
-        -webkit-transform: translateX(-100%);
-    }
-}
-
-@keyframes tickerframes2 {
-    0% {
-        transform: translateX(0%);
-        -webkit-transform: translateX(0%);
-    }
-
-    100% {
-        transform: translateX(-200%);
-        -webkit-transform: translateX(-200%);
-    }
-}
-
-@-webkit-keyframes tickerframes1 {
-    0% {
-        -webkit-transform: translateX(100%);
-    }
-
-    100% {
-        -webkit-transform: translateX(-100%);
-    }
-}
-
-@-webkit-keyframes tickerframes2 {
-    0% {
-        -webkit-transform: translateX(0%);
-    }
-
-    100% {
-        -webkit-transform: translateX(-200%);
-    }
-}
-
 /* box with stuff */
+
+.borderbox {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 100px;
+}
+
+.boxheader {
+    font-size: 34px;
+    margin: 50px
+}
+
+#boxheaderheader {
+    margin: 20px;
+}
+
 .boxman {
     position: relative;
     display: flex;
@@ -229,19 +209,28 @@ body {
     margin: 0;
 }
 
-
-.boxsection {
+.boxman>div {
     width: 300px;
-    color: white;
+    color: #7A83CC;
     height: 200px;
-    margin: 56px 44px 0;
+    margin: 56px 54px 0;
     position: relative;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-.boxsection img {
+.boxman>div>h4 {
+    font-size: 24px;
+    display: block;
+    color: white;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.boxman>div>img {
     width: 48px;
     height: 48px;
 }
@@ -304,7 +293,7 @@ body {
     --gray-600: hsl(218, 17%, 35%);
     --gray-700: hsl(304, 23%, 23%);
     /* --gray-800: HSL(220, 26%, 14%); */
-    --gray-800: #AD182C;
+    --gray-800: #676CAB;
     --gray-900: hsl(230, 21%, 11%);
     --gap: 2rem;
     --duration: 30s;
