@@ -12,7 +12,6 @@ export default function Healthcare() {
     const [isLoading, setIsLoading] = useState(false);
     const healthcareList = listOfStocks.filter((element) => { return element.Sector === 'Health Care' });
     const ilSymbols = healthcareList.map(element => element.Symbol);
-    console.log('ilSymbols', ilSymbols);
 
     useEffect(() => {
         setIsLoading(true);

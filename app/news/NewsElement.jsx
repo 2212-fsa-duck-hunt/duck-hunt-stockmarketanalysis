@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function NewsElement(props) {
-    console.log("props", props)
     const link = props.data.url
     const title = props.data.title;
     const description = props.data.description;

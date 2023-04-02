@@ -42,9 +42,6 @@ export default function Michelle(props) {
         'down': '⬇️'
     }
 
-    console.log('timed price', timedPrice, symbol);
-    console.log('symbol', stock);
-
     useEffect(() => {
         const ws = new WebSocket('wss://streamer.finance.yahoo.com');
         const root = protobuf.load('./YPricingData.proto', (error, root) => {
