@@ -27,10 +27,12 @@ export default function Michelle(props) {
         }
     )
         .then((res) => res.json())
-        .then((data) => setTimedPrice(data.results[0]['o']))
+        .then((data) => {
+            if (data.results) {
+                setTimedPrice(data.results[0]['o'])
+            }
+        })
         .catch((err) => console.log("error", err))
-
-
 
     const [stock, setStock] = useState("Loading")
     const [direction, setDirection] = useState('');
