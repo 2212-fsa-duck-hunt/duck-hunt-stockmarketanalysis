@@ -293,7 +293,7 @@ export default function TopLosers() {
                 };
 
                 return (
-                  <TableRow key={data.name}>
+                  <TableRow hover key={data.name}>
                     <TableCell>
                       <Link href={`/stocks/${data.ticker}`}>{data.name}</Link>
                     </TableCell>

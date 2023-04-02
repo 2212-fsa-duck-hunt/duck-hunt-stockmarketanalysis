@@ -241,7 +241,12 @@ function Navbar() {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <Link href={`/${page.toLowerCase()}`}>{page}</Link>
+                    <Link
+                      href={`/${page.toLowerCase()}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      {page}
+                    </Link>
                   </Typography>
                 </MenuItem>
               ))}

@@ -131,7 +131,7 @@ export default function Crypto() {
                 let dollarUSLocale = Intl.NumberFormat("en-US");
 
                 return (
-                  <TableRow key={data.name}>
+                  <TableRow hover key={data.name}>
                     <TableCell>
                       <Link href={`/crypto/${data.ticker.slice(2, -3)}`}>
                         {data.name.slice(0, -23)}
