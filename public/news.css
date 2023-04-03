@@ -79,12 +79,11 @@
   -webkit-box-orient: vertical;
 } */
 
-
 .readmore {
   font-size: 1em;
   position: absolute;
   bottom: 0;
-  color: white
+  color: white;
 }
 
 .newsbox:last-child {
@@ -108,4 +107,8 @@
 .picture {
   width: 300px;
   height: 200px;
+}
+
+.navigation {
+  background-color: #11071b !important;
 }

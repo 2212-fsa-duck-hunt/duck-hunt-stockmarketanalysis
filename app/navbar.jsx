@@ -187,7 +187,11 @@ function Navbar() {
   }, [user]);
 
   return (
-    <AppBar position="static" style={{ background: "#11071B" }}>
+    <AppBar
+      position="static"
+      style={{ background: "#11071B" }}
+      className="navigation"
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
