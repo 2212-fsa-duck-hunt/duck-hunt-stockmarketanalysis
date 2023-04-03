@@ -20,7 +20,8 @@ import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import "./styles.css";
-import Michelle from "../michelle/page";
+import Michelle from "../michelle.jsx"
+// import Michelle from "../michelle/page";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
