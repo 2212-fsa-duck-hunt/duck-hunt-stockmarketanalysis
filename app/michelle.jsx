@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import protobuf from "protobufjs";
 import { Buffer } from "buffer";
-import "../../public/stocks.css";
+import "../public/stocks.css";
 
 //we dont have access to buffer in our environment, so a polyfill will give us buffer that we can use. it's like using fetch in node.
 export default function Michelle(props) {
