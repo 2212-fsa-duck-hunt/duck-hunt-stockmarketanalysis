@@ -1,7 +1,6 @@
-
 .table a:visited {
   color: #c73bff;
-  text-decoration: none
+  text-decoration: none;
 }
 
 .table a:link {
@@ -28,7 +27,7 @@ a {
 }
 
 .watchlistPage {
-  background: #11071A;
+  background: #11071a;
   min-height: 100vh;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -44,4 +43,6 @@ body {
   padding: 0;
 }
 
-
+.navigation {
+  background-color: #11071b !important;
+}
