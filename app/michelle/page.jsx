@@ -11,29 +11,30 @@ export default function Michelle(props) {
     const open = props.open;
     const timestampArray = props.timestamp;
 
-    const selectedElementTimestamp = timestampArray.filter((element) => Object.keys(element)[0] === symbol);
-    const addedTime = selectedElementTimestamp[0][symbol];
+    if (timestampArray.length) {
+        const selectedElementTimestamp = timestampArray.filter((element) => Object.keys(element)[0] === symbol);
+        const addedTime = selectedElementTimestamp[0][symbol];
+        fetch(
+            `https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/minute/${addedTime}/${addedTime + 1}?adjusted=true&sort=asc&limit=1&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
+            {
+                method: "GET",
+                headers: {
+                    "X-Polygon-Edge-ID": "watchlist",
+                    "X-Polygon-Edge-IP-Address": "8.8.8.8",
+                }
+            }
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.results) {
+                    setTimedPrice(data.results[0]['o'])
+                }
+            })
+            .catch((err) => console.log("error", err))
+    }
+
 
     const [timedPrice, setTimedPrice] = useState('');
-
-    fetch(
-        `https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/minute/${addedTime}/${addedTime + 1}?adjusted=true&sort=asc&limit=1&apiKey=p3DDXEob7V6iRw5653VW9k_bEkGXG6hj`,
-        {
-            method: "GET",
-            headers: {
-                "X-Polygon-Edge-ID": "watchlist",
-                "X-Polygon-Edge-IP-Address": "8.8.8.8",
-            }
-        }
-    )
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.results) {
-                setTimedPrice(data.results[0]['o'])
-            }
-        })
-        .catch((err) => console.log("error", err))
-
     const [stock, setStock] = useState("Loading")
     const [direction, setDirection] = useState('');
     const emojis = {
