@@ -1,10 +1,10 @@
 .table a:visited {
-  color: #c73bff;
+  color: #1f2033;
   text-decoration: none;
 }
 
 .table a:link {
-  color: #c73bff;
+  color: #1f2033;
   text-decoration: none;
 }
 
@@ -14,7 +14,7 @@
 }
 
 a {
-  color: #c73bff;
+  color: #1f2033;
   text-decoration: none;
 }
 
@@ -27,15 +27,15 @@ a {
 }
 
 .watchlistPage {
-  background: #11071a;
+  background: #e0e2ef;
   min-height: 100vh;
   overflow-x: hidden;
   overflow-y: hidden;
 }
 
 #headerText {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 1;
+  margin-bottom: 1;
 }
 
 body {
@@ -44,5 +44,5 @@ body {
 }
 
 .navigation {
-  background-color: #11071b !important;
+  background-color: #343757 !important;
 }

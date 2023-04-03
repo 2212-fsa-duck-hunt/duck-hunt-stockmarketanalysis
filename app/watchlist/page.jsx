@@ -27,13 +27,13 @@ export default function Watchlist() {
   return (
     loggedIn ? 
     <div className='watchlistPage'>
-      <h1 id="headerText" style={{ color: '#ffffff', textAlign: 'center'}}>  Watchlist </h1>
+      <h1 id="headerText" style={{ color: '#1f2033', textAlign: 'center'}}>  Watchlist </h1>
       <DataTable />
   </div> :
   <div className='watchlistPage'>
-    <h1 style={{ color: '#ffffff' }} className="loadingText">Loading your watchlist</h1>
-    <h2 style={{ color: '#ffffff' }} className="loadingText">Not logged in?</h2>
-    <h3 style={{ color: '#ffffff' }} className="loadingText">Log in <a href='/login'>here</a> or sign up <a href='/signup'>here</a></h3>
+    <h1 style={{ color: '#1f2033' }} className="loadingText">Loading your watchlist</h1>
+    <h2 style={{ color: '#1f2033' }} className="loadingText">Not logged in?</h2>
+    <h3 style={{ color: '#1f2033' }} className="loadingText">Log in <a href='/login'>here</a> or sign up <a href='/signup'>here</a></h3>
   </div>  
   )
 
