@@ -28,7 +28,7 @@ const db = getFirestore(app);
 
 export default function DataTable() {
   const [watchlist, setWatchlist] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isEmpty, setIsEmpty] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const [watchlistSymbols, setWatchlistSymbols] = useState([]);
@@ -56,7 +56,7 @@ export default function DataTable() {
           .then((e) => {
             if (e.data() && watchlistSymbols[0] !== e.data().symbols[0]) {
               setWatchlistSymbols(e.data().symbols);
-              setTimestamper(e.data().timestamp)
+              setTimestamper(e.data().timestamp);
             }
           })
           .catch((err) => {
@@ -94,24 +94,25 @@ export default function DataTable() {
               tempWatchlist.push(stock);
             }
             setWatchlist(tempWatchlist);
-            setIsLoading(false);
+            setIsEmpty(false);
           }
         })
         .catch((err) => {
           console.log(err);
         });
-
     };
     getWatchlist();
 
     if (watchlistSymbols.length) {
       fetchData();
     }
-
   }, [user.uid, watchlistSymbols]);
 
-  if (!isLoading) {
-    return (
+  return (
+    isEmpty ? 
+    <div style={{ color: '#ffffff', textAlign: 'center' }}>
+      <h3>Watchlist is empty</h3>
+    </div> :
       <Box>
         <TableContainer
           component={Paper}
@@ -275,5 +276,4 @@ export default function DataTable() {
         </TableContainer>
       </Box>
     );
-  }
 }
