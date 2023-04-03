@@ -245,38 +245,77 @@ export default function TopGainers() {
         <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }}>
           <TableHead>
             <TableRow>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{
+                  backgroundColor: "#9599c7",
+                  color: "white",
+                  textDecoration: "none",
+                  fontFamily: "Poppins",
+                }}
+              >
                 Company
               </TableCell>
-              <TableCell style={{ backgroundColor: "black", color: "white" }}>
+              <TableCell
+                style={{
+                  backgroundColor: "#9599c7",
+                  color: "white",
+                  textDecoration: "none",
+                  fontFamily: "Poppins",
+                }}
+              >
                 Ticker
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "black", color: "white" }}
+                style={{
+                  backgroundColor: "#9599c7",
+                  color: "white",
+                  textDecoration: "none",
+                  fontFamily: "Poppins",
+                }}
                 align="right"
               >
                 Price
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "black", color: "white" }}
+                style={{
+                  backgroundColor: "#9599c7",
+                  color: "white",
+                  textDecoration: "none",
+                  fontFamily: "Poppins",
+                }}
                 align="right"
               >
                 Previous Close
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "black", color: "white" }}
+                style={{
+                  backgroundColor: "#9599c7",
+                  color: "white",
+                  textDecoration: "none",
+                  fontFamily: "Poppins",
+                }}
                 align="right"
               >
                 Change
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "black", color: "white" }}
+                style={{
+                  backgroundColor: "#9599c7",
+                  color: "white",
+                  textDecoration: "none",
+                  fontFamily: "Poppins",
+                }}
                 align="right"
               >
                 % Change
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "black", color: "white" }}
+                style={{
+                  backgroundColor: "#9599c7",
+                  color: "white",
+                  textDecoration: "none",
+                  fontFamily: "Poppins",
+                }}
                 align="center"
               >
                 Add To Watch List
@@ -288,21 +327,47 @@ export default function TopGainers() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((data) => {
                 let change = () => {
-                  if (data.session.change > 0) return { color: "green" };
+                  if (data.session.change > 0)
+                    return {
+                      textDecoration: "none",
+                      fontFamily: "Poppins",
+                      color: "green",
+                    };
                   else {
-                    return { color: "red" };
+                    return {
+                      textDecoration: "none",
+                      fontFamily: "Poppins",
+                      color: "red",
+                    };
                   }
                 };
 
                 return (
                   <TableRow hover key={data.name}>
                     <TableCell>
-                      <Link href={`/stocks/${data.ticker}`}>{data.name}</Link>
+                      <Link
+                        href={`/stocks/${data.ticker}`}
+                        style={{ textDecoration: "none", color: "#343757" }}
+                      >
+                        {data.name}
+                      </Link>
                     </TableCell>
                     <TableCell>
-                      <Link href={`/stocks/${data.ticker}`}>{data.ticker}</Link>
+                      <Link
+                        href={`/stocks/${data.ticker}`}
+                        style={{ textDecoration: "none", color: "#343757" }}
+                      >
+                        {data.ticker}
+                      </Link>
                     </TableCell>
-                    <TableCell align="right" style={{ verticalAlign: "70%" }}>
+                    <TableCell
+                      align="right"
+                      style={{
+                        textDecoration: "none",
+                        fontFamily: "Poppins",
+                        verticalAlign: "70%",
+                      }}
+                    >
                       {data.session.change < 0 ? (
                         <ArrowDropDownIcon color="error" />
                       ) : (
@@ -310,7 +375,13 @@ export default function TopGainers() {
                       )}
                       ${data.price.toFixed(2)}
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell
+                      align="right"
+                      style={{
+                        textDecoration: "none",
+                        fontFamily: "Poppins",
+                      }}
+                    >
                       ${data.session.previous_close.toFixed(2)}
                     </TableCell>
                     <TableCell style={change()} align="right">
@@ -323,7 +394,7 @@ export default function TopGainers() {
                       <Button
                         component="button"
                         variant="outlined"
-                        color="success"
+                        sx={{ color: "#53588c", borderColor: "#53588c" }}
                         onClick={() => {
                           if (!loggedIn) {
                             // alert("Must be logged in to add to watchlist");
@@ -358,7 +429,7 @@ export default function TopGainers() {
                                 .catch((error) => {
                                   console.log(error);
                                 });
-                            } 
+                            }
                           }
                         }}
                       >
