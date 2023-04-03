@@ -227,7 +227,7 @@ export default function SP500() {
         justifyContent="center"
         flexDirection="column"
       >
-        <h1>Fetching the latest market data</h1>
+        <h1 style={{ color: "#343757" }}>Fetching the latest market data</h1>
         <CircularProgress />
       </Box>
     );
@@ -429,7 +429,7 @@ export default function SP500() {
                                 .catch((error) => {
                                   console.log(error);
                                 });
-                            } 
+                            }
                           }
                         }}
                       >

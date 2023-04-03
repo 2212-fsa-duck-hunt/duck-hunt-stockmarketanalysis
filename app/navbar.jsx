@@ -123,8 +123,6 @@ function Navbar() {
         });
         router.push(`/crypto/${getSymbol[0][0]}`);
       } else {
-        // alert("Please enter a valid ticker or name");
-        console.log("return");
         setError(true);
       }
       event.target.value = "";

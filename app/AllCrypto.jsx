@@ -68,7 +68,7 @@ export default function Crypto() {
         justifyContent="center"
         flexDirection="column"
       >
-        <h1>Fetching the latest market data</h1>
+        <h1 style={{ color: "#343757" }}>Fetching the latest market data</h1>
         <CircularProgress />
       </Box>
     );
