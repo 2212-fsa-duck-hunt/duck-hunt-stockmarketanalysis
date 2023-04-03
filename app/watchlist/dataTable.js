@@ -21,8 +21,6 @@ import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import "./styles.css";
-import Michelle from "../michelle.jsx"
-// import Michelle from "../michelle/page";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -226,12 +224,6 @@ export default function DataTable() {
                   >
                     {data.volume}
                   </TableCell>
-                  {/* <TableCell
-                    style={{ backgroundColor: "#e0e2ef", color: "#1f2033" }}
-                    align="center"
-                  >
-                    <Michelle symbol={data.symbol} timestamp={timestamper} />
-                  </TableCell> */}
                   <TableCell
                     style={{ backgroundColor: "#e0e2ef", color: "#1f2033" }}
                     align="center"
