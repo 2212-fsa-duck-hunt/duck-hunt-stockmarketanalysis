@@ -228,7 +228,7 @@ export default function DataTable() {
                       style={{ backgroundColor: "#212021", color: "#ffffff" }}
                       align="center"
                     >
-                      {/* <Michelle symbol={data.symbol} timestamp={timestamper} /> */}
+                      <Michelle symbol={data.symbol} timestamp={timestamper} />
                     </TableCell>
                     <TableCell
                       style={{ backgroundColor: "#212021", color: "#ffffff" }}
