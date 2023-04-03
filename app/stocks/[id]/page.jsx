@@ -11,16 +11,13 @@ import LinearRegression from "../../LinearRegression";
 import axios from 'axios';
 import Plot from 'react-plotly.js';
 
-
 const AppViz = ({ params }) => {
-  //graphs info
   const listOfSymbols = listOfStocks.map((element) => element.Symbol);
   const listOfNames = listOfStocks.map((element) => { return element.Name.split(' ').join('').toLowerCase() });
   let symbol = '';
   if (listOfSymbols.includes(params.id.toUpperCase())) {
     symbol = params.id.toUpperCase();
   } else if (listOfNames.includes(params.id.toLowerCase())) {
-    //amazon
     let value = params.id.toLowerCase();
     let index = listOfNames.indexOf(value);
     symbol = listOfSymbols[index];
@@ -28,10 +25,8 @@ const AppViz = ({ params }) => {
     console.log('symbol/name not found')
   }
 
-  //ticker info
   const [stock, setStock] = useState("Loading")
   const [direction, setDirection] = useState('');
-  // const [data, setData] = useState(null);
   const emojis = {
     '': '',
     'up': '⬆️',
@@ -65,37 +60,6 @@ const AppViz = ({ params }) => {
       };
     });
   }, []);
-
-  // if (stock === null || stock.price === null) {
-  //   return (
-  //     <div className="chart">
-  //       <div className="stock">
-  //       </div>
-  //       <div id="candlestick">
-  //         <StockChart symbol={symbol} />
-  //         <LinearModelVisualization />
-  //       </div>
-  //     </div>
-  //   )
-  // } else {
-  //   return (
-  //     <div className="chart">
-  //       <div className="stock">
-  //         {symbol} {stock.price}
-  //         {emojis[direction]}
-  //       </div>
-  //       <div id="candlestick" style={{ width: '70%', margin: '0 auto' }}>
-  //         <StockChart symbol={symbol} />
-  //         <LinearModelVisualization />
-  //       </div>
-  //       <div>
-  //         <h1> Predictions : </h1>
-  //         <LinearRegression symbol={symbol} />
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
 
   if (stock === null || stock.price === null) {
     return (

@@ -116,17 +116,6 @@ export default function Home() {
         </div>
 
         <section className="sec">
-          {/* <h2 id> This person is very cool: </h2>
-          <div className="scroller"><h2>
-            <span>
-              Michelle<br />
-              Alex<br />
-              Stevfen<br />
-              Ben
-            </span>
-          </h2>
-
-          </div> */}
           <section className="borderbox">
             <div className="boxheader" >
               <div id="boxheaderheader">

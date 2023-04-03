@@ -6,17 +6,16 @@ import { Buffer } from "buffer";
 import protobuf from "protobufjs";
 const listOfCrypto = require('../../listOfCrypto.JSON');
 import { useState, useEffect } from 'react';
-import "../../../public/stocks.css"
+import "../../../public/stocks.css";
+import LinearRegression from "../../LinearRegression"
 
 const CryptoViz = ({ params }) => {
-    //graphs info
     const cryptoSymbols = Object.keys(listOfCrypto);
     const listOfNames = Object.values(listOfCrypto).map((element) => { return element.split(' ').join('').toLowerCase() });
     let symbol = '';
     if (cryptoSymbols.includes(params.id.toUpperCase())) {
         symbol = params.id.toUpperCase();
     } else if (listOfNames.includes(params.id.toLowerCase())) {
-        //amazon
         let value = params.id.toLowerCase();
         let index = listOfNames.indexOf(value);
         symbol = cryptoSymbols[index];
@@ -24,10 +23,8 @@ const CryptoViz = ({ params }) => {
         console.log('symbol/name not found')
     }
 
-    //ticker info
     const [stock, setStock] = useState("Loading")
     const [direction, setDirection] = useState('');
-    // const [data, setData] = useState(null);
     const emojis = {
         '': '',
         'up': '⬆️',
@@ -75,16 +72,40 @@ const CryptoViz = ({ params }) => {
         )
     } else {
         return (
-            <div className="chart">
+            <div className="singlestockpage">
                 <div className="stock">
                     {symbol} {stock.price}
                     {emojis[direction]}
                 </div>
-                <div id="candlestick" style={{ width: '70%', margin: '0 auto' }}>
-                    <StockChart symbol={`X:${symbol}USD`} />
-                    <LinearModelVisualization />
-                </div>
-            </div>
+
+                <section class="container">
+                    <div class="slider-wrapper">
+                        <div class="slider">
+                            <section id="candlestick">
+                                <div id="cs">
+                                    <StockChart symbol={`X:${symbol}USD`} style={{ height: '100%', width: '100%', margin: '0 auto', fontFamily: 'Poppins' }} />
+                                </div>
+                            </section>
+                            <section id="linearmodelvisualization">
+                                <div id="lm">
+                                    <LinearModelVisualization style={{ height: '100%', width: '100%', margin: '0 auto' }} />
+                                </div>
+                            </section>
+                            <section id="linearregression">
+                                <div id="lr">
+                                    <LinearRegression symbol={`X:${symbol}USD`} style={{ height: '100%', width: '100%', margin: '0 auto' }} />
+                                </div>
+                            </section>
+
+                        </div>
+                        <div class="slider-nav">
+                            <a href="#candlestick"></a>
+                            <a href="#linearmodelvisualization"></a>
+                            <a href="#linearregression"></a>
+                        </div>
+                    </div>
+                </section>
+            </ div>
         );
     }
 };
