@@ -4,6 +4,7 @@ import CryptoGainers from "../CryptoGainers";
 import CryptoLosers from "../CryptoLosers";
 import Crypto from "../AllCrypto";
 import { Stack, Button } from "@mui/material";
+import "../stocks/styles.css";
 
 export default function AllCrypto() {
   const [tableView, setTableView] = useState("Crypto");
@@ -13,21 +14,33 @@ export default function AllCrypto() {
       <Stack spacing={7} direction="row" margin={5} justifyContent="center">
         <Button
           variant="outlined"
-          color="inherit"
+          style={{
+            textDecoration: "none",
+            fontFamily: "Poppins",
+          }}
+          sx={{ color: "#53588c", borderColor: "#53588c" }}
           onClick={() => setTableView("Crypto")}
         >
           Crypto
         </Button>
         <Button
           variant="outlined"
-          color="inherit"
+          style={{
+            textDecoration: "none",
+            fontFamily: "Poppins",
+          }}
+          sx={{ color: "#53588c", borderColor: "#53588c" }}
           onClick={() => setTableView("CryptoGainers")}
         >
           Gainers
         </Button>
         <Button
           variant="outlined"
-          color="inherit"
+          style={{
+            textDecoration: "none",
+            fontFamily: "Poppins",
+          }}
+          sx={{ color: "#53588c", borderColor: "#53588c" }}
           onClick={() => setTableView("CryptoLosers")}
         >
           Losers
