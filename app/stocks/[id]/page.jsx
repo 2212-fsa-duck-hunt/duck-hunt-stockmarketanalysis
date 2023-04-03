@@ -6,7 +6,11 @@ import { Buffer } from "buffer";
 import protobuf from "protobufjs";
 const listOfStocks = require('../../listOfStocks.JSON');
 import { useState, useEffect } from 'react';
-import "../../../public/stocks.css"
+import "../../../public/stocks.css";
+import LinearRegression from "../../LinearRegression";
+import axios from 'axios';
+import Plot from 'react-plotly.js';
+
 
 const AppViz = ({ params }) => {
   //graphs info
@@ -62,6 +66,37 @@ const AppViz = ({ params }) => {
     });
   }, []);
 
+  // if (stock === null || stock.price === null) {
+  //   return (
+  //     <div className="chart">
+  //       <div className="stock">
+  //       </div>
+  //       <div id="candlestick">
+  //         <StockChart symbol={symbol} />
+  //         <LinearModelVisualization />
+  //       </div>
+  //     </div>
+  //   )
+  // } else {
+  //   return (
+  //     <div className="chart">
+  //       <div className="stock">
+  //         {symbol} {stock.price}
+  //         {emojis[direction]}
+  //       </div>
+  //       <div id="candlestick" style={{ width: '70%', margin: '0 auto' }}>
+  //         <StockChart symbol={symbol} />
+  //         <LinearModelVisualization />
+  //       </div>
+  //       <div>
+  //         <h1> Predictions : </h1>
+  //         <LinearRegression symbol={symbol} />
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
+
   if (stock === null || stock.price === null) {
     return (
       <div className="chart">
@@ -75,72 +110,42 @@ const AppViz = ({ params }) => {
     )
   } else {
     return (
-      <div className="chart">
+      <div className="singlestockpage">
         <div className="stock">
           {symbol} {stock.price}
           {emojis[direction]}
         </div>
-        <div id="candlestick" style={{ width: '70%', margin: '0 auto' }}>
-          <StockChart symbol={symbol} />
-          <LinearModelVisualization />
-        </div>
-      </div>
-      // <div style={{ width: '70%', margin: '0 auto' }}>
-      //   <StockVisualization /> 
-      //   <StockChart symbol={symbol} />
-      //   <LinearModelVisualization />
-      // </div>
+
+        <section class="container">
+          <div class="slider-wrapper">
+            <div class="slider">
+              <section id="candlestick">
+                <div id="cs">
+                  <StockChart symbol={symbol} style={{ height: '100%', width: '100%', margin: '0 auto', fontFamily: 'Poppins' }} />
+                </div>
+              </section>
+              <section id="linearmodelvisualization">
+                <div id="lm">
+                  <LinearModelVisualization style={{ height: '100%', width: '100%', margin: '0 auto' }} />
+                </div>
+              </section>
+              <section id="linearregression">
+                <div id="lr">
+                  <LinearRegression symbol={symbol} style={{ height: '100%', width: '100%', margin: '0 auto' }} />
+                </div>
+              </section>
+
+            </div>
+            <div class="slider-nav">
+              <a href="#candlestick"></a>
+              <a href="#linearmodelvisualization"></a>
+              <a href="#linearregression"></a>
+            </div>
+          </div>
+        </section>
+      </ div>
     );
   }
 };
 
 export default AppViz;
-
-
-// "use client"
-// // import StockVisualization from '../../StockVisualization';
-// // import StockChart from '../../StockChart';
-// // import LinearModelVisualization from '../../LinearModelVisualization';
-// import { Buffer } from "buffer";
-// import protobuf from "protobufjs";
-// const listOfStocks = require('../../listOfStocks.JSON');
-// import { useState, useEffect } from 'react';
-// // import "../../../public/stocks.css";
-// import Michelle from "../../michelle/page.jsx";
-
-// const AppViz = ({ params }) => {
-//   //graphs info
-//   const listOfSymbols = listOfStocks.map((element) => element.Symbol);
-//   const listOfNames = listOfStocks.map((element) => { return element.Name.split(' ').join('').toLowerCase() });
-//   let symbol = '';
-//   if (listOfSymbols.includes(params.id.toUpperCase())) {
-//     symbol = params.id.toUpperCase();
-//   } else if (listOfNames.includes(params.id.toLowerCase())) {
-//     //amazon
-//     let value = params.id.toLowerCase();
-//     let index = listOfNames.indexOf(value);
-//     symbol = listOfSymbols[index];
-//   } else {
-//     s
-//     console.log('symbol/name not found')
-//   }
-
-//   console.log('symbol is:', symbol)
-
-//   return (
-//     <div>
-//       <Michelle symbol={symbol} />
-//       <div id="candlestick" style={{ width: '70%', margin: '0 auto' }}>
-//         {/* <StockChart symbol={symbol} /> */}
-//         {/* <LinearModelVisualization /> */}
-//       </div>
-//     </div>
-//     // <div style={{ width: '70%', margin: '0 auto' }}>
-//     //    <StockVisualization /> 
-//     //   <StockChart symbol={symbol} />
-//     //   <LinearModelVisualization />
-//     // </div>
-//   );
-// };
-
-// export default AppViz;

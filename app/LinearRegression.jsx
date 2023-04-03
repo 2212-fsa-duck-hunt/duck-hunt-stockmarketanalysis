@@ -28,20 +28,20 @@ const LinearRegression = (props) => {
           "X-Polygon-Edge-User-Agent": "my_ML"
         }
       });
-    
+
       return response.data;
     }
-    
+
     async function fetchData() {
       // Set your stock ticker symbol and timespan here
       const stocksTicker = symbol;
-    
+
       // Fetch the data using the provided API
       const apiData = await fetchStockData(stocksTicker);
-    
+
       setData(apiData.results);
     }
-    
+
 
     fetchData();
   }, []);
@@ -80,7 +80,6 @@ const LinearRegression = (props) => {
 
   return (
     <div>
-      <h1>Linear Regression Visualization</h1>
       {chartData.length > 0 && (
         <Plot
           data={[
@@ -109,12 +108,10 @@ const LinearRegression = (props) => {
             },
           ]}
           layout={{
-            width: 800,
-            height: 600,
             title: {
               text: 'Linear Regression Model',
               font: {
-                family: 'Arial, sans-serif',
+                family: 'Poppins',
                 size: 24,
                 color: 'black',
               },
@@ -123,7 +120,7 @@ const LinearRegression = (props) => {
               title: {
                 text: 'Date',
                 font: {
-                  family: 'Arial, sans-serif',
+                  family: 'Poppins',
                   size: 18,
                   color: 'black',
                 },
@@ -133,7 +130,7 @@ const LinearRegression = (props) => {
               title: {
                 text: 'Closing Price',
                 font: {
-                  family: 'Arial, sans-serif',
+                  family: 'Poppins',
                   size: 18,
                   color: 'black',
                 },
@@ -141,7 +138,7 @@ const LinearRegression = (props) => {
             },
             legend: {
               font: {
-                family: 'Arial, sans-serif',
+                family: 'Poppins',
                 size: 16,
                 color: 'black',
               },

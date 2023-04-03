@@ -99,7 +99,6 @@ const StockChart = (props) => {
   };
 
   const fetchPredictions = async () => {
-    console.log(chartData.series[0].data);
     const response = await axios.post('http://localhost:5000/predict', { dataset: chartData.series[0].data });
     setPredictedData(response.data);
   };
@@ -146,8 +145,6 @@ const StockChart = (props) => {
         options={chartData.options}
         series={chartData.series}
         type="candlestick"
-        width="100%"
-        height="450"
       />
     </div>
   );
