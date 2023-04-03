@@ -12,6 +12,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
+import { Alert, Snackbar, AlertTitle } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, firebaseConfig } from "../firebase";
@@ -32,6 +33,7 @@ export default function DataTable() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const [watchlistSymbols, setWatchlistSymbols] = useState([]);
+  const [successAlert, setSuccessAlert] = useState(false);
 
   const [timestamper, setTimestamper] = useState('')
   const router = useRouter();
@@ -51,7 +53,6 @@ export default function DataTable() {
     const getWatchlist = () => {
       if (user.uid) {
         const watchlistRef = doc(db, "watchlist", user.uid);
-        console.log(watchlistRef);
         getDoc(watchlistRef)
           .then((e) => {
             if (e.data() && watchlistSymbols[0] !== e.data().symbols[0]) {
@@ -108,172 +109,183 @@ export default function DataTable() {
     }
   }, [user.uid, watchlistSymbols]);
 
-  return (
-    isEmpty ? 
-    <div style={{ color: '#ffffff', textAlign: 'center' }}>
+  return isEmpty || !watchlist.length ? (
+    <div style={{ color: "#ffffff", textAlign: "center" }}>
       <h3>Watchlist is empty</h3>
-    </div> :
-      <Box>
-        <TableContainer
-          component={Paper}
-          sx={{ height: 800, backgroundColor: "inherit" }}
+    </div>
+  ) : (
+    <Box>
+      <TableContainer
+        component={Paper}
+        sx={{ height: 800, backgroundColor: "inherit" }}
+      >
+        <Table
+          sx={{
+            minWidth: 450,
+            maxWidth: 1500,
+            margin: "auto",
+            height: "max-content",
+          }}
         >
-          <Table
-            sx={{
-              minWidth: 450,
-              maxWidth: 1500,
-              margin: "auto",
-              height: "max-content",
-            }}
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  ID
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Name
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Symbol
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Open
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  High
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Low
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Close
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Volume
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                  align="center"
-                >
-                  % Change
-                </TableCell>
-                <TableCell
-                  style={{ backgroundColor: "#000000", color: "#ffffff" }}
-                >
-                  Remove from watchlist
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody className="table">
-              {watchlist.map((data) => {
-                return (
-                  <TableRow key={data.id}>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      {data.id}
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      <Link href={`/stocks/${data.symbol}`}>{data.name}</Link>
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      <Link href={`/stocks/${data.symbol}`}>{data.symbol}</Link>
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      ${data.open.toFixed(2)}
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      ${data.high.toFixed(2)}
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      ${data.low.toFixed(2)}
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      ${data.close.toFixed(2)}
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                    >
-                      {data.volume}
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                      align="center"
-                    >
-                      <Michelle symbol={data.symbol} timestamp={timestamper} />
-                    </TableCell>
-                    <TableCell
-                      style={{ backgroundColor: "#212021", color: "#ffffff" }}
-                      align="center"
-                    >
-                      <Button
-                        color="error"
-                        variant="outlined"
-                        component="button"
-                        onClick={() => {
-                          const watchlistRef = doc(db, "watchlist", user.uid);
+          <TableHead>
+            <TableRow>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                ID
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Name
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Symbol
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Open
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                High
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Low
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Close
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Volume
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                align="center"
+              >
+                % Change
+              </TableCell>
+              <TableCell
+                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              >
+                Remove from watchlist
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody className="table">
+            {watchlist.map((data) => {
+              return (
+                <TableRow key={data.id}>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    {data.id}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    <Link href={`/stocks/${data.symbol}`}>{data.name}</Link>
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    <Link href={`/stocks/${data.symbol}`}>{data.symbol}</Link>
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    ${data.open.toFixed(2)}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    ${data.high.toFixed(2)}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    ${data.low.toFixed(2)}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    ${data.close.toFixed(2)}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  >
+                    {data.volume}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    align="center"
+                  >
+                    {/* <Michelle symbol={data.symbol} timestamp={timestamper} /> */}
+                  </TableCell>
+                  <TableCell
+                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    align="center"
+                  >
+                    <Button
+                      color="error"
+                      variant="outlined"
+                      component="button"
+                      onClick={() => {
+                        const watchlistRef = doc(db, "watchlist", user.uid);
 
-                          let newWatchlist = watchlist.filter(
-                            (stock) => stock.id !== data.id
-                          );
+                        let newWatchlist = watchlist.filter(
+                          (stock) => stock.id !== data.id
+                        );
 
-                          setWatchlist(newWatchlist);
-                          let symbols = newWatchlist.map((e) => (e = e.symbol));
+                        setWatchlist(newWatchlist);
+                        let symbols = newWatchlist.map((e) => (e = e.symbol));
 
-                          let tempWatchlistSymbols = symbols;
-                          setWatchlistSymbols(tempWatchlistSymbols);
+                        let tempWatchlistSymbols = symbols;
+                        setWatchlistSymbols(tempWatchlistSymbols);
 
-                          setDoc(watchlistRef, {
-                            symbols: tempWatchlistSymbols,
+                        setDoc(watchlistRef, {
+                          symbols: tempWatchlistSymbols,
+                        })
+                          .then(() => {
+                            // console.log(
+                            //   "Document has been deleted successfully"
+                            // );
+                            setSuccessAlert(true);
                           })
-                            .then(() => {
-                              console.log(
-                                "Document has been deleted successfully"
-                              );
-                            })
-                            .catch((error) => {
-                              console.log(error);
-                            });
-                        }}
-                      >
-                        <RemoveIcon />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
-    );
+                          .catch((error) => {
+                            console.log(error);
+                          });
+                      }}
+                    >
+                      <RemoveIcon />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Snackbar
+        open={successAlert}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={4000}
+        onClose={() => setSuccessAlert(false)}
+      >
+        <Alert severity="success">
+          <AlertTitle>Success</AlertTitle> Deleted from watchlist
+        </Alert>
+      </Snackbar>
+    </Box>
+  );
 }

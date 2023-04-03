@@ -21,6 +21,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, firebaseConfig } from "./firebase";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { Alert, Snackbar, AlertTitle } from "@mui/material";
 
 import { useState, useEffect } from "react";
 
@@ -47,6 +48,10 @@ export default function SP500() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+
+  const [loginError, setLoginError] = useState(false);
+  const [duplicateError, setDuplicateError] = useState(false);
+  const [fullError, setFullError] = useState(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -184,8 +189,6 @@ export default function SP500() {
   useEffect(() => {
     onAuthStateChanged(auth, async (loggedInUser) => {
       if (loggedInUser) {
-        //do your logged in user crap here
-        console.log("Logged in ");
         setLoggedIn(true);
         setUser(loggedInUser);
         if (user.uid) {
@@ -317,15 +320,18 @@ export default function SP500() {
                         color="success"
                         onClick={() => {
                           if (!loggedIn) {
-                            alert("Must be logged in to add to watchlist");
+                            // alert("Must be logged in to add to watchlist");
+                            setLoginError(true);
                             return;
                           }
                           if (currentWatchlist.includes(data.ticker)) {
-                            alert(`Watchlist already contains ${data.name}`);
+                            // alert(`Watchlist already contains ${data.name}`);
+                            setDuplicateError(true);
                             return;
                           }
                           if (currentWatchlist.length > 9) {
-                            alert("Watchlist is full");
+                            // alert("Watchlist is full");
+                            setFullError(true);
                             return;
                           } else {
                             if (typeof window !== "undefined") {
@@ -352,9 +358,7 @@ export default function SP500() {
                                 .catch((error) => {
                                   console.log(error);
                                 });
-                            } else {
-                              alert("localStorage is undefined");
-                            }
+                            } 
                           }
                         }}
                       >
@@ -377,6 +381,36 @@ export default function SP500() {
           sx={{ maxWidth: 1700 }}
         />
       </TableContainer>
+      <Snackbar
+        open={loginError}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={4000}
+        onClose={() => setLoginError(false)}
+      >
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>Must be logged in to add to watchlist
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={duplicateError}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={4000}
+        onClose={() => setDuplicateError(false)}
+      >
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle> Watchlist cannot have duplicates
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={fullError}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={4000}
+        onClose={() => setFullError(false)}
+      >
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle> Watchlist is full
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

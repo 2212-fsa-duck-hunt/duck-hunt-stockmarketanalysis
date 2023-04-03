@@ -16,8 +16,6 @@ export default function Watchlist() {
   useEffect(() => {
     onAuthStateChanged(auth, async (user)=>{
       if(user){
-          //do your logged in user crap here
-          console.log("Logged in ")
           setLoggedIn(true);
       }else{
           console.log("Logged out");
