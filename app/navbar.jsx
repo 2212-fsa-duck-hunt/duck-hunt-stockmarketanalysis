@@ -28,7 +28,7 @@ import { auth } from "./firebase";
 const listOfStocks = require("./listOfStocks.JSON");
 const listOfCrypto = require("./listOfCrypto.JSON");
 
-const pages = ["Stocks", "Crypto", "News", "About"];
+const pages = ["Stocks", "Crypto", "News", "Contact"];
 const settings = ["Profile", "Account", "Watchlist", "Logout"];
 
 function Navbar() {
@@ -64,7 +64,7 @@ function Navbar() {
   };
   const handleCloseNavMenuAbout = () => {
     setAnchorNav(null);
-    router.push("/about");
+    router.push("/contact");
   };
 
   const handleCloseWatchlist = () => {
@@ -349,7 +349,7 @@ function Navbar() {
                 fontWeight: 100,
               }}
             >
-              About
+              Contact
             </Button>
           </Box>
           <Search sx={{ margin: 4 }} onKeyDown={handleEnter}>
