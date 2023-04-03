@@ -10,12 +10,15 @@ const LinearModelVisualization = () => {
 
   const chartOptions = {
     chart: {
-      type: 'bar',
-      height: '500',
-      width: '500',
+      type: 'bar'
     },
     title: {
       text: 'Linear Regression Model Coefficients',
+    },
+    font: {
+      family: 'Poppins',
+      size: 24,
+      color: 'black',
     },
     xaxis: {
       categories: ['Close', 'High', 'Low', 'Volume', 'VWAP'],
@@ -31,11 +34,9 @@ const LinearModelVisualization = () => {
 
   return (
     <div>
-      <div>
-        <p>Intercept: {intercept}</p>
-        <p>Mean Squared Error: {mse}</p>
-      </div>
       <Chart options={chartOptions} series={chartSeries} type="bar" />
+      {/* <p>Intercept: {intercept}</p>
+      <p>Mean Squared Error: {mse}</p> */}
     </div>
   );
 };
