@@ -110,7 +110,7 @@ export default function DataTable() {
   }, [user.uid, watchlistSymbols]);
 
   return isEmpty || !watchlist.length ? (
-    <div style={{ color: "#ffffff", textAlign: "center" }}>
+    <div style={{ color: "#1f2033", textAlign: "center" }}>
       <h3>Watchlist is empty</h3>
     </div>
   ) : (
@@ -130,53 +130,53 @@ export default function DataTable() {
           <TableHead>
             <TableRow>
               <TableCell
-                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
               >
                 ID
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
               >
                 Name
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
               >
                 Symbol
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
               >
                 Open
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
               >
                 High
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
               >
                 Low
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
               >
                 Close
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
               >
                 Volume
               </TableCell>
-              <TableCell
-                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+              {/* <TableCell
+                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
                 align="center"
               >
                 % Change
-              </TableCell>
+              </TableCell> */}
               <TableCell
-                style={{ backgroundColor: "#000000", color: "#ffffff" }}
+                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
               >
                 Remove from watchlist
               </TableCell>
@@ -187,53 +187,53 @@ export default function DataTable() {
               return (
                 <TableRow key={data.id}>
                   <TableCell
-                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    style={{ backgroundColor: "#e0e2ef", color: "#1f2033" }}
                   >
                     {data.id}
                   </TableCell>
                   <TableCell
-                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    style={{ backgroundColor: "#e0e2ef", color: "#1f2033" }}
                   >
                     <Link href={`/stocks/${data.symbol}`}>{data.name}</Link>
                   </TableCell>
                   <TableCell
-                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    style={{ backgroundColor: "#e0e2ef", color: "#1f2033" }}
                   >
                     <Link href={`/stocks/${data.symbol}`}>{data.symbol}</Link>
                   </TableCell>
                   <TableCell
-                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    style={{ backgroundColor: "#e0e2ef", color: "#1f2033" }}
                   >
                     ${data.open.toFixed(2)}
                   </TableCell>
                   <TableCell
-                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    style={{ backgroundColor: "#e0e2ef", color: "#1f2033" }}
                   >
                     ${data.high.toFixed(2)}
                   </TableCell>
                   <TableCell
-                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    style={{ backgroundColor: "#e0e2ef", color: "#1f2033" }}
                   >
                     ${data.low.toFixed(2)}
                   </TableCell>
                   <TableCell
-                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    style={{ backgroundColor: "#e0e2ef", color: "#1f2033" }}
                   >
                     ${data.close.toFixed(2)}
                   </TableCell>
                   <TableCell
-                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    style={{ backgroundColor: "#e0e2ef", color: "#1f2033" }}
                   >
                     {data.volume}
                   </TableCell>
-                  <TableCell
-                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                  {/* <TableCell
+                    style={{ backgroundColor: "#e0e2ef", color: "#1f2033" }}
                     align="center"
                   >
-                    {/* <Michelle symbol={data.symbol} timestamp={timestamper} /> */}
-                  </TableCell>
+                    <Michelle symbol={data.symbol} timestamp={timestamper} />
+                  </TableCell> */}
                   <TableCell
-                    style={{ backgroundColor: "#212021", color: "#ffffff" }}
+                    style={{ backgroundColor: "#e0e2ef", color: "#1f2033" }}
                     align="center"
                   >
                     <Button
