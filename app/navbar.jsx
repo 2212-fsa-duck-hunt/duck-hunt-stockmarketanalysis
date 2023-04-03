@@ -28,7 +28,7 @@ import { auth } from "./firebase";
 const listOfStocks = require("./listOfStocks.JSON");
 const listOfCrypto = require("./listOfCrypto.JSON");
 
-const pages = ["Stocks", "Crypto", "News", "About Polygon.io"];
+const pages = ["Stocks", "Crypto", "News", "About"];
 const settings = ["Profile", "Account", "Watchlist", "Logout"];
 
 function Navbar() {
@@ -64,6 +64,7 @@ function Navbar() {
   };
   const handleCloseNavMenuAbout = () => {
     setAnchorNav(null);
+    router.push("/about");
   };
 
   const handleCloseWatchlist = () => {
