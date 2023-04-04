@@ -226,7 +226,7 @@ export default function TopLosers() {
         justifyContent="center"
         flexDirection="column"
       >
-        <h1 style={{ color: "#343757" }}>Fetching the latest market data</h1>
+        <h1 style={{ color: "#292032" }}>Fetching the latest market data</h1>
         <CircularProgress />
       </Box>
     );
@@ -248,7 +248,7 @@ export default function TopLosers() {
             <TableRow>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -258,7 +258,7 @@ export default function TopLosers() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -268,7 +268,7 @@ export default function TopLosers() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -279,7 +279,7 @@ export default function TopLosers() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -290,7 +290,7 @@ export default function TopLosers() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -301,7 +301,7 @@ export default function TopLosers() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -312,7 +312,7 @@ export default function TopLosers() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -348,7 +348,7 @@ export default function TopLosers() {
                     <TableCell>
                       <Link
                         href={`/stocks/${data.ticker}`}
-                        style={{ textDecoration: "none", color: "#343757" }}
+                        style={{ textDecoration: "none", color: "#292032" }}
                       >
                         {data.name}
                       </Link>
@@ -356,7 +356,7 @@ export default function TopLosers() {
                     <TableCell>
                       <Link
                         href={`/stocks/${data.ticker}`}
-                        style={{ textDecoration: "none", color: "#343757" }}
+                        style={{ textDecoration: "none", color: "#292032" }}
                       >
                         {data.ticker}
                       </Link>

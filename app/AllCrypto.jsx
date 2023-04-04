@@ -68,7 +68,7 @@ export default function Crypto() {
         justifyContent="center"
         flexDirection="column"
       >
-        <h1 style={{ color: "#343757" }}>Fetching the latest market data</h1>
+        <h1 style={{ color: "#292032" }}>Fetching the latest market data</h1>
         <CircularProgress />
       </Box>
     );
@@ -82,7 +82,7 @@ export default function Crypto() {
             <TableRow>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -92,7 +92,7 @@ export default function Crypto() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -102,7 +102,7 @@ export default function Crypto() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -113,7 +113,7 @@ export default function Crypto() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -124,7 +124,7 @@ export default function Crypto() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -135,7 +135,7 @@ export default function Crypto() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -146,7 +146,7 @@ export default function Crypto() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -182,7 +182,7 @@ export default function Crypto() {
                     <TableCell>
                       <Link
                         href={`/crypto/${data.ticker.slice(2, -3)}`}
-                        style={{ textDecoration: "none", color: "#343757" }}
+                        style={{ textDecoration: "none", color: "#292032" }}
                       >
                         {data.name.slice(0, -23)}
                       </Link>
@@ -190,7 +190,7 @@ export default function Crypto() {
                     <TableCell>
                       <Link
                         href={`/crypto/${data.ticker.slice(2, -3)}`}
-                        style={{ textDecoration: "none", color: "#343757" }}
+                        style={{ textDecoration: "none", color: "#292032" }}
                       >
                         {data.ticker.slice(2, -3)}
                       </Link>

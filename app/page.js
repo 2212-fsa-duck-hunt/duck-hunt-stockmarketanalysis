@@ -126,23 +126,23 @@ export default function Home() {
                   investors <br />
                   advisors <br />
                   students <br />
-                  <div className="ducks" style={{ color: "#686EAF" }}> even ducks <br /> </div>
+                  <div className="ducks" style={{ color: "#CA53C2" }}> even ducks <br /> </div>
                 </span>
               </div>
             </div>
             <section className="boxman">
               <div id="div1">
-                <img src="news2.png" />
+                <img src="news3.png" />
                 <h4> Comprehensive News</h4>
                 <span> Stay up to date with the latest, breaking news on the market. We bring financial and crypto news that is updated daily and organized according to diverse sectors. </span>
               </div>
               <div id="div2">
-                <img src="list1.png" />
+                <img src="checklist.png" />
                 <h4> Watchlist Functionality </h4>
                 <span> Keep track of your favorite stocks with the watchlist function. Select up to 10 stocks to keep a closer eye on and decide when to buy/sell. </span>
               </div>
               <div id="div3">
-                <img src="candlestickchart.png" />
+                <img src="candlestick-chart.png" />
 
                 <h4> Data Made Easy </h4>
                 <span> Navigate through data visualization to make accurate predictions on your investments. Duckhunt provides the accessibility to find all the information in one place. </span>

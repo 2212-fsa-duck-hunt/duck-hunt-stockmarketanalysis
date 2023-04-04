@@ -27,7 +27,7 @@ a {
 }
 
 .watchlistPage {
-  background: #e0e2ef;
+  background: #f7f5f9;
   min-height: 100vh;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -41,8 +41,4 @@ a {
 body {
   margin: 0;
   padding: 0;
-}
-
-.navigation {
-  background-color: #343757 !important;
 }

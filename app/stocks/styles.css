@@ -1,14 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet');
 
 body {
-  background-color: #e0e2ef;
+  background-color: #f7f5f9;
   color: black;
 }
 
-.navigation {
-  background-color: #343757 !important;
-}
 
 .tablebody a {
-  color: #343757;
+  color: #292032;
 }

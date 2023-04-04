@@ -128,53 +128,53 @@ export default function DataTable() {
           <TableHead>
             <TableRow>
               <TableCell
-                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
+                style={{ backgroundColor: "#292032", color: "#ffffff" }}
               >
                 ID
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
+                style={{ backgroundColor: "#292032", color: "#ffffff" }}
               >
                 Name
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
+                style={{ backgroundColor: "#292032", color: "#ffffff" }}
               >
                 Symbol
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
+                style={{ backgroundColor: "#292032", color: "#ffffff" }}
               >
                 Open
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
+                style={{ backgroundColor: "#292032", color: "#ffffff" }}
               >
                 High
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
+                style={{ backgroundColor: "#292032", color: "#ffffff" }}
               >
                 Low
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
+                style={{ backgroundColor: "#292032", color: "#ffffff" }}
               >
                 Close
               </TableCell>
               <TableCell
-                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
+                style={{ backgroundColor: "#292032", color: "#ffffff" }}
               >
                 Volume
               </TableCell>
               {/* <TableCell
-                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
+                style={{ backgroundColor: "#292032", color: "#ffffff" }}
                 align="center"
               >
                 % Change
               </TableCell> */}
               <TableCell
-                style={{ backgroundColor: "#9599c7", color: "#ffffff" }}
+                style={{ backgroundColor: "#292032", color: "#ffffff" }}
               >
                 Remove from watchlist
               </TableCell>

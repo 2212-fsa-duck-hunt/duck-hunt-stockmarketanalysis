@@ -80,7 +80,7 @@ body {
 
 .sec {
   position: relative;
-  background: #11071b;
+  background: #11071A;
   padding: 100px;
   justify-content: center;
   align-items: center;
@@ -118,7 +118,7 @@ body {
   width: 100%;
 }
 
-.scroller > span {
+.scroller>span {
   position: absolute;
   animation: slide 10s infinite;
   display: block;
@@ -205,9 +205,9 @@ body {
   margin: 0;
 }
 
-.boxman > div {
+.boxman>div {
   width: 300px;
-  color: #7a83cc;
+  color: white;
   height: 200px;
   margin: 56px 54px 0;
   position: relative;
@@ -216,7 +216,7 @@ body {
   text-align: center;
 }
 
-.boxman > div > h4 {
+.boxman>div>h4 {
   font-size: 24px;
   display: block;
   color: white;
@@ -226,7 +226,7 @@ body {
   margin-inline-end: 0px;
 }
 
-.boxman > div > img {
+.boxman>div>img {
   width: 48px;
   height: 48px;
 }
@@ -286,19 +286,15 @@ body {
 :root {
   --gray-50: hsl(204, 45%, 98%);
   --gray-600: hsl(218, 17%, 35%);
-  --gray-700: hsl(304, 23%, 23%);
+  --gray-700: #4f214d;
   /* --gray-800: HSL(220, 26%, 14%); */
-  --gray-800: #676cab;
+  --gray-800: #CA53C2;
   --gray-900: hsl(230, 21%, 11%);
   --gap: 2rem;
   --duration: 30s;
   --scroll-start: 0;
   --scroll-end: calc(-100% - var(--gap));
 }
-
-/* body {
-    font-family: "Montserrat", system-ui, sans-serif;
-} */
 
 .container {
   display: grid;
@@ -346,6 +342,7 @@ body {
   font-weight: 500;
   padding: 0.625rem 1.5rem 0.625rem 0.625rem;
   background-color: var(--gray-700);
+  opacity: 0.95;
   border-radius: 9999px;
 }
 
@@ -382,8 +379,4 @@ body {
   .marquee-group {
     animation-play-state: paused;
   }
-}
-
-.navigation {
-  background-color: #11071b;
 }
