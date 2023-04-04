@@ -227,7 +227,7 @@ export default function SP500() {
         justifyContent="center"
         flexDirection="column"
       >
-        <h1 style={{ color: "#343757" }}>Fetching the latest market data</h1>
+        <h1 style={{ color: "#292032" }}>Fetching the latest market data</h1>
         <CircularProgress />
       </Box>
     );
@@ -241,7 +241,7 @@ export default function SP500() {
             <TableRow>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -251,7 +251,7 @@ export default function SP500() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -261,7 +261,7 @@ export default function SP500() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -272,7 +272,7 @@ export default function SP500() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -283,7 +283,7 @@ export default function SP500() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -294,7 +294,7 @@ export default function SP500() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -305,7 +305,7 @@ export default function SP500() {
               </TableCell>
               <TableCell
                 style={{
-                  backgroundColor: "#9599c7",
+                  backgroundColor: "#292032",
                   color: "white",
                   textDecoration: "none",
                   fontFamily: "Poppins",
@@ -341,7 +341,7 @@ export default function SP500() {
                     <TableCell>
                       <Link
                         href={`/stocks/${data.ticker}`}
-                        style={{ textDecoration: "none", color: "#343757" }}
+                        style={{ textDecoration: "none", color: "#292032" }}
                       >
                         {data.name}
                       </Link>
@@ -349,7 +349,7 @@ export default function SP500() {
                     <TableCell>
                       <Link
                         href={`/stocks/${data.ticker}`}
-                        style={{ textDecoration: "none", color: "#343757" }}
+                        style={{ textDecoration: "none", color: "#292032" }}
                       >
                         {data.ticker}
                       </Link>
