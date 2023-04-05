@@ -29,7 +29,7 @@ export default function About() {
           <a href="https://www.linkedin.com/in/yuhanmzou/" class="button">Connect</a>
         </div>
         <div class="profile-card">
-          <img src="bena.png" alt="image1" class="profile-icon" />
+          <img src="bena.jpg" alt="image1" class="profile-icon" />
           <div class="profile-name">Ben Agalliu</div>
           <div class="profile-position">Software Developer</div>
           <a href="https://www.linkedin.com/in/benjamin-agalliu/" class="button">Connect</a>

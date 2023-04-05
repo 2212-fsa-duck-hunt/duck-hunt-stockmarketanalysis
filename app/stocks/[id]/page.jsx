@@ -8,8 +8,7 @@ const listOfStocks = require('../../listOfStocks.JSON');
 import { useState, useEffect } from 'react';
 import "../../../public/stocks.css";
 import LinearRegression from "../../LinearRegression";
-import axios from 'axios';
-import Plot from 'react-plotly.js';
+
 
 const AppViz = ({ params }) => {
   const listOfSymbols = listOfStocks.map((element) => element.Symbol);
@@ -80,9 +79,9 @@ const AppViz = ({ params }) => {
           {emojis[direction]}
         </div>
 
-        <section class="container">
-          <div class="slider-wrapper">
-            <div class="slider">
+        <section className="container">
+          <div className="slider-wrapper">
+            <div className="slider">
               <section id="candlestick">
                 <div id="cs">
                   <StockChart symbol={symbol} style={{ height: '100%', width: '100%', margin: '0 auto', fontFamily: 'Poppins' }} />
@@ -100,7 +99,7 @@ const AppViz = ({ params }) => {
               </section>
 
             </div>
-            <div class="slider-nav">
+            <div className="slider-nav">
               <a href="#candlestick"></a>
               <a href="#linearmodelvisualization"></a>
               <a href="#linearregression"></a>
