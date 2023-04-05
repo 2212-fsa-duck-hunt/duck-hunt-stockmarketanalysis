@@ -1,0 +1,14 @@
+.table a:visited {
+    color: #1f2033;
+    text-decoration: none;
+}
+
+.table a:link {
+    color: #1f2033;
+    text-decoration: none;
+}
+
+.table a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
