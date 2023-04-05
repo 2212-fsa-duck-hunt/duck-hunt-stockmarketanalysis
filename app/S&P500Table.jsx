@@ -22,8 +22,8 @@ import { auth, firebaseConfig } from "./firebase";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { Alert, Snackbar, AlertTitle } from "@mui/material";
-
 import { useState, useEffect } from "react";
+import "../public/allstocks.css"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -221,22 +221,25 @@ export default function SP500() {
 
   if (allStocks.length < 500) {
     return (
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        flexDirection="column"
-      >
-        <h1 style={{ color: "#292032" }}>Fetching the latest market data</h1>
-        <CircularProgress />
-      </Box>
+      <div className="alexnobody" style={{ height: "100vh" }}>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          flexDirection="column"
+          style={{ width: "100%" }}
+        >
+          <span> <h1 style={{ color: "#292032" }}>Fetching the latest market data</h1> </span>
+          <CircularProgress />
+        </Box>
+      </div>
     );
   }
 
   return (
-    <Box>
+    <Box style={{ backgroundColor: "#f7f5f9" }}>
       <TableContainer>
-        <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }}>
+        <Table sx={{ minWidth: 450, maxWidth: 1500, margin: "auto" }} >
           <TableHead>
             <TableRow>
               <TableCell
@@ -337,11 +340,11 @@ export default function SP500() {
                 };
 
                 return (
-                  <TableRow hover key={data.name}>
+                  <TableRow hover key={data.name} className="table">
                     <TableCell>
                       <Link
                         href={`/stocks/${data.ticker}`}
-                        style={{ textDecoration: "none", color: "#292032" }}
+                        style={{ textDecoration: "none" }}
                       >
                         {data.name}
                       </Link>
@@ -349,7 +352,7 @@ export default function SP500() {
                     <TableCell>
                       <Link
                         href={`/stocks/${data.ticker}`}
-                        style={{ textDecoration: "none", color: "#292032" }}
+                        style={{ textDecoration: "none" }}
                       >
                         {data.ticker}
                       </Link>

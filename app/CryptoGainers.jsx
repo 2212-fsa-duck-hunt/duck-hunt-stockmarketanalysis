@@ -14,11 +14,10 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import Link from "next/link";
-
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-
 import { useState, useEffect } from "react";
+import "../public/allstocks.css"
 
 let tempWatchlist = [];
 
@@ -60,15 +59,18 @@ export default function CryptoGainers() {
 
   if (!stock.status) {
     return (
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        flexDirection="column"
-      >
-        <h1 style={{ color: "#292032" }}>Fetching the latest market data</h1>
-        <CircularProgress />
-      </Box>
+      <div className="alexnobody" style={{ height: "100vh" }}>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          flexDirection="column"
+          style={{ width: "100%" }}
+        >
+          <span> <h1 style={{ color: "#292032" }}>Fetching the latest market data</h1> </span>
+          <CircularProgress />
+        </Box>
+      </div>
     );
   }
 
@@ -183,11 +185,11 @@ export default function CryptoGainers() {
                 };
 
                 return (
-                  <TableRow hover key={data.name}>
+                  <TableRow hover key={data.name} className="table">
                     <TableCell>
                       <Link
                         href={`/stocks/${data.ticker}`}
-                        style={{ textDecoration: "none", color: "#292032" }}
+                        style={{ textDecoration: "none" }}
                       >
                         {data.name.slice(0, -23)}
                       </Link>
@@ -195,7 +197,7 @@ export default function CryptoGainers() {
                     <TableCell>
                       <Link
                         href={`/stocks/${data.ticker}`}
-                        style={{ textDecoration: "none", color: "#292032" }}
+                        style={{ textDecoration: "none" }}
                       >
                         {data.ticker.slice(2, -3)}
                       </Link>
