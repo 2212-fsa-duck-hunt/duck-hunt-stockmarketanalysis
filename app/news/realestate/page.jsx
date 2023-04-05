@@ -33,9 +33,8 @@ export default function RealEstate() {
     if (!data) {
         return (
             <div>
-                <section className="sec">
+                <section className="sec1">
                     <h3> Real Estate </h3>
-                    Currently loading!
                 </section>
             </div>
         )
